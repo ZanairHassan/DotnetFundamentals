@@ -2,6 +2,11 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/ArithmaticOperation/ArithmaticOperation/obj
 /.vs
-/ArithmaticOperation
+/TrainingTasks/VariablesAndDataTypes/bin/Debug/net10.0
+/TrainingTasks/VariablesAndDataTypes/obj
+/TrainingTasks/.vs/TrainingTasks.slnx
+/ArithmaticOperation/.vs
+/ArithmaticOperation/ArithmaticOperation/bin/Debug/net10.0
+/ArithmaticOperation/ArithmaticOperation/obj
+/TrainingTasks/.vs/ProjectEvaluation
