@@ -2,6 +2,24 @@
 
 Source Code Repository for Intern 1
 
+## 01 - Development Environment Setup
+- [ ] [I have completed the installation of all the required tools that are necessary for day to day tasks](visualstudioinsder)
+
+## 02 - First Console Application(ArithmaticOperation)
+- [] [The ArithmaticOperation Console app contains methods with which we can do addition, substraction, multipication, division, modulus, increment and decrement on the given number.]
+
+## 03 - Variables & Data Types
+-  [I have added a new solution in the repo with having a name TrainingTasks. In the solution i have added a project VariablesAndDataTypes.]
+	- i have added some practice methods to Understand variables, data types, operators, and casting me clearly.
+- [] [I have created a new project for calculation of different data types](Calculator)
+	- [ i use method overloading to perform calculation on integer, float and double data type]
+	
+## Collaborate with your team
+
+- [ ] [Create a new merge request](16-07-2026) 
+- [ ] [(01 - Development Environment Setup) and (02 - First Console Application) issue solved]
+- [ ] [Create a new merge request](17-07-2026)(on child branch 03---Variables-&-Data-Types-#01)
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
