@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Calculator/Calculator.csproj" Id="5f1771d4-1a52-44ee-b932-70fdfb186b38" />
+  <Project Path="ControlStatements/ControlStatements.csproj" Id="67fe3143-293a-48a7-96ca-e41ba7403c92" />
   <Project Path="VariablesAndDataTypes/VariablesAndDataTypes.csproj" Id="fa6a8b1b-ba28-48fd-b873-312509d47362" />
 </Solution>
