@@ -16,6 +16,9 @@ Source Code Repository for Intern 1
 
 ## 04 - Control Statements
 - [] [Build the number guesing game and practice methods i.e EvenOdd, PrimeNumber, Factorial, FindTable, LoginAuthentication](ControlStatements)
+
+## 05 - Methods
+- [] [Build grade calculator with simple if else and for loop](Methods)
 ## Collaborate with your team
 
 - [ ] [Create a new merge request](16-07-2026) 
