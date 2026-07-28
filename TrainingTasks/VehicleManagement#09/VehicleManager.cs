@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
+using UtilityLibrary;
 
 namespace VehicleManagement_09
 {
@@ -25,6 +26,7 @@ namespace VehicleManagement_09
                     {
                         vehicles.Add(vehicle);
                         Console.WriteLine("Vehicle Added Successfully.");
+                        Loggings.MessageLog("Vehicle Added Successfully.");
                     }
                 }
             }
@@ -47,6 +49,7 @@ namespace VehicleManagement_09
             {
                 vehicle.DisplayDetails();
             }
+            Loggings.MessageLog("The Records of vehicles fetched.");
         }
 
         public void SearchVehicleById(int id)

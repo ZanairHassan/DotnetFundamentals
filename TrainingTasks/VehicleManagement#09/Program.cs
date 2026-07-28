@@ -1,6 +1,5 @@
-﻿using VehicleManagement_09;
-
-Console.WriteLine("Hello, World!");
+﻿using UtilityLibrary;
+using VehicleManagement_09;
 
 VehicleManager manager = new VehicleManager();
 
@@ -8,6 +7,7 @@ while (true)
 {
     Console.Clear();
     Console.WriteLine("\n===== Vehicle Management System =====");
+    Loggings.MessageLog("===== Vehicle Management System =====");
     Console.WriteLine("1. Add Car");
     Console.WriteLine("2. Add Bike");
     Console.WriteLine("3. Add Truck");
@@ -33,6 +33,7 @@ while (true)
                 int doors = manager.ReadInt();
 
                 manager.AddVehicle(new Car(carDetails.Id, carDetails.Brand, carDetails.Model, doors));
+                Loggings.MessageLog("Car has addedd.");
 
                 break;
 
@@ -45,7 +46,7 @@ while (true)
                 bool hasGear = Convert.ToBoolean(Console.ReadLine());
 
                 manager.AddVehicle(new Bike(bikeDetails.Id, bikeDetails.Brand, bikeDetails.Model, hasGear));
-
+                Loggings.MessageLog("Bike has addedd.");
                 break;
             case 3:
 
@@ -54,8 +55,8 @@ while (true)
                 Console.Write("Enter Load Capacity (Tons):\t");
                 double capacity = manager.ReadDouble();
 
-                manager.AddVehicle(
-                    new Truck(truckDetails.Id, truckDetails.Brand, truckDetails.Model, capacity));
+                manager.AddVehicle(new Truck(truckDetails.Id, truckDetails.Brand, truckDetails.Model, capacity));
+                Loggings.MessageLog("Truck has addedd.");
 
                 break;
             case 4:
@@ -94,6 +95,7 @@ while (true)
                 break;
             case 8:
                 Console.WriteLine("The system has been closed successfully....");
+                Loggings.MessageLog("APP TERMINATED");
                 Console.ReadKey();
                 return;
 
