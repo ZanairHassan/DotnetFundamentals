@@ -3,28 +3,42 @@
 Source Code Repository for Intern 1
 
 ## 01 - Development Environment Setup
-- [ ] [I have completed the installation of all the required tools that are necessary for day to day tasks](visualstudioinsder)
+- I have completed the installation of all the required tools that are necessary for day to day tasks(visual studio insder 2026)
 
-## 02 - First Console Application(ArithmaticOperation)
-- [] [The ArithmaticOperation Console app contains methods with which we can do addition, substraction, multipication, division, modulus, increment and decrement on the given number.]
+## 02 - First Console Application
+- The ArithmaticOperation Console app contains methods with which we can do addition, substraction, multipication, division, modulus, increment and decrement on the given number (ArithmaticOperation).
 
 ## 03 - Variables & Data Types
--  [I have added a new solution in the repo with having a name TrainingTasks. In the solution i have added a project VariablesAndDataTypes.]
-	- i have added some practice methods to Understand variables, data types, operators, and casting me clearly.
-- [] [I have created a new project for calculation of different data types](Calculator)
-	- [ i use method overloading to perform calculation on integer, float and double data type]
+- I have added a new solution in the repo with having a name TrainingTasks. In the solution i have added a project VariablesAndDataTypes.
+- i have added some practice methods to Understand variables, data types, operators, and casting me clearly.
+- I have created a new project for calculation of different data types(Calculator).
+- I use method overloading to perform calculation on integer, float and double data type.
 
 ## 04 - Control Statements
-- [] [Build the number guesing game and practice methods i.e EvenOdd, PrimeNumber, Factorial, FindTable, LoginAuthentication](ControlStatements)
+- Build the number guesing game and practice methods i.e EvenOdd, PrimeNumber, Factorial, FindTable, LoginAuthentication (ControlStatements).
 
 ## 05 - Methods
-- [] [Build grade calculator with simple if else and for loop](Methods)
-## Collaborate with your team
+- Build grade calculator with simple if else and for loop (Methods).
 
-- [ ] [Create a new merge request](16-07-2026) 
-- [ ] [(01 - Development Environment Setup) and (02 - First Console Application) issue solved]
-- [ ] [Create a new merge request](17-07-2026)(on child branch 03---Variables-&-Data-Types-#01)
-- [ ] [Create a new merge request](20-07-2026)(on child branch 04---Control-Statements-#20-07-2026)
+## 06 - Arrays & Collections
+- Build Student Record with Collection and Dictionary.(ArrayCollection)
+- Explore and practice Collections.
+- Explore and practice Dictionary.
+
+## 18-07-classes-objects
+- Add a Save user method with which we can add and update the user at the same time (if entered id already existed then update that user otherwise created a new one).
+- Add a method to get all the users form the list.
+- Add a method to search a User from the list.
+- Add a method to found and then delete that User from the list.
+
+## Collaborate with team
+
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/3)(on child branch 03---Variables-&-Data-Types-#01 -#17-07-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/4)(on child branch 04---Control-Statements -#20-07-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/5)(on child branch 05---Methods -#21-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/6)(on child branch 06---Arrays-&-Collections -#22-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/7)(on child branch 18-07-classes-objects -#23-07-2026) 
 
 ## Getting started
 
