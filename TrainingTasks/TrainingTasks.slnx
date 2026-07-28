@@ -1,7 +1,12 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="MessageLog.txt" />
+  </Folder>
   <Project Path="ArrayCollection/ArrayCollection.csproj" Id="ee0de5f0-d038-44cf-82b1-5c0b5460f5b5" />
   <Project Path="Calculator/Calculator.csproj" Id="5f1771d4-1a52-44ee-b932-70fdfb186b38" />
+  <Project Path="ClassesObjects/ClassesObjects.csproj" Id="af818f94-4885-4647-abe4-307a52bbecdd" />
   <Project Path="ControlStatements/ControlStatements.csproj" Id="67fe3143-293a-48a7-96ca-e41ba7403c92" />
   <Project Path="Methods/Methods.csproj" Id="2d5977de-3d04-4e65-9a89-b8edc767aa60" />
+  <Project Path="UtilityLibrary/UtilityLibrary.csproj" Id="ab09227a-f63f-4729-a848-00caba8d8c93" />
   <Project Path="VariablesAndDataTypes/VariablesAndDataTypes.csproj" Id="fa6a8b1b-ba28-48fd-b873-312509d47362" />
 </Solution>
