@@ -6,10 +6,9 @@ namespace VehicleManagement_09
 {
     public class Bike : Vehicle
     {
-        public bool HasGear { get; set; }
+        public bool HasGear { get; private set; }
 
-        public Bike(int id, string brand, string model, bool hasGear)
-            : base(id, brand, model)
+        public Bike(int id, string brand, string model, bool hasGear) : base(id, brand, model)
         {
             HasGear = hasGear;
         }

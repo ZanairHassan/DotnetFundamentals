@@ -6,16 +6,25 @@ namespace VehicleManagement_09
 {
     public class Vehicle
     {
-        public int Id { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
+        public int Id { get; private set; }
+        public string Brand { get;private set; }
+        public string Model { get; private set; }
 
 
         public Vehicle(int id, string brand, string model)
         {
+            if (id <= 0)
+                throw new ArgumentException("ID must be greater than 0.");
+
+            if (string.IsNullOrWhiteSpace(brand))
+                throw new ArgumentException("Brand cannot be empty.");
+
+            if (string.IsNullOrWhiteSpace(model))
+                throw new ArgumentException("Model cannot be empty.");
+
             Id = id;
-            Brand = brand;
-            Model = model;
+            Brand = brand.Trim();
+            Model = model.Trim();
         }
 
         public virtual void DisplayDetails()

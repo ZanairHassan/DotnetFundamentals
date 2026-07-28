@@ -21,79 +21,51 @@ while (true)
 
     try
     {
-        int choice = Convert.ToInt32(Console.ReadLine());
+        int choice = manager.ReadInt();
 
         switch (choice)
         {
             case 1:
 
-                Console.Write("Enter ID:\t");
-                int carId = Convert.ToInt32(Console.ReadLine());
-
-                Console.Write("Enter Brand:\t");
-                string carBrand = Console.ReadLine();
-
-                Console.Write("Enter Model:\t");
-                string carModel = Console.ReadLine();
+                var carDetails = manager.ReadVehicleInformation();
 
                 Console.Write("Enter Number Of Doors:\t");
-                int doors = Convert.ToInt32(Console.ReadLine());
+                int doors = manager.ReadInt();
 
-                manager.AddVehicle(new Car(carId, carBrand, carModel, doors));
+                manager.AddVehicle(new Car(carDetails.Id, carDetails.Brand, carDetails.Model, doors));
 
                 break;
 
             case 2:
 
-                Console.Write("Enter ID: ");
-                int bikeId = Convert.ToInt32(Console.ReadLine());
+                var bikeDetails = manager.ReadVehicleInformation();
 
-                Console.Write("Enter Brand:\t");
-                string bikeBrand = Console.ReadLine();
-
-                Console.Write("Enter Model:\t");
-                string bikeModel = Console.ReadLine();
 
                 Console.Write("Has Gear (true/false):\t");
                 bool hasGear = Convert.ToBoolean(Console.ReadLine());
 
-                manager.AddVehicle(new Bike(bikeId, bikeBrand, bikeModel, hasGear));
+                manager.AddVehicle(new Bike(bikeDetails.Id, bikeDetails.Brand, bikeDetails.Model, hasGear));
 
                 break;
             case 3:
 
-                Console.Write("Enter ID:\t");
-                int truckId = Convert.ToInt32(Console.ReadLine());
-
-                Console.Write("Enter Brand:\t");
-                string truckBrand = Console.ReadLine();
-
-                Console.Write("Enter Model:\t");
-                string truckModel = Console.ReadLine();
+               var truckDetails=manager.ReadVehicleInformation();
 
                 Console.Write("Enter Load Capacity (Tons):\t");
-                double capacity = Convert.ToDouble(Console.ReadLine());
+                double capacity = manager.ReadDouble();
 
                 manager.AddVehicle(
-                    new Truck(truckId, truckBrand, truckModel, capacity));
+                    new Truck(truckDetails.Id, truckDetails.Brand, truckDetails.Model, capacity));
 
                 break;
             case 4:
 
-                Console.Write("Enter ID:\t");
-                int busId = Convert.ToInt32(Console.ReadLine());
-
-                Console.Write("Enter Brand:\t");
-                string busBrand = Console.ReadLine();
-
-                Console.Write("Enter Model:\t");
-                string busModel = Console.ReadLine();
+                var busDetails=manager.ReadVehicleInformation();
 
                 Console.Write("Enter Seating Capacity:\t");
-                int seats = Convert.ToInt32(Console.ReadLine());
+                int seats = manager.ReadInt();
 
-                manager.AddVehicle(
-                    new Bus(busId, busBrand, busModel, seats));
+                manager.AddVehicle(new Bus(busDetails.Id, busDetails.Brand, busDetails.Model, seats));
 
                 break;
 
@@ -106,7 +78,7 @@ while (true)
 
                 Console.Write("Enter Vehicle ID: ");
 
-                int id = Convert.ToInt32(Console.ReadLine());
+                int id = manager.ReadInt();
 
                 manager.SearchVehicleById(id);
 

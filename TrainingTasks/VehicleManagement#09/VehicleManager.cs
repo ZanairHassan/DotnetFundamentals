@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Text;
 
 namespace VehicleManagement_09
@@ -82,5 +83,35 @@ namespace VehicleManagement_09
                 Console.WriteLine("No vehicle found with this brand.");
             }
         }
+        public int ReadInt()
+        {
+            int result;
+            while (!int.TryParse(Console.ReadLine(), out result))
+                Console.Write("Invalid number, try again:\t");
+            return result;
+        }
+        public double ReadDouble()
+        {
+            double result;
+            while (!double.TryParse(Console.ReadLine(), out result))
+                Console.Write("Invalid figure, try again:\t");
+            return result;
+        }
+
+        public (int Id, string Brand, string Model) ReadVehicleInformation()
+        {
+            Console.Write("Enter ID:\t");
+            int id = ReadInt();
+
+            Console.Write("Enter Brand:\t");
+            string brand = Console.ReadLine();
+
+            Console.Write("Enter Model:\t");
+            string model = Console.ReadLine();
+
+            return (id, brand, model);
+        }
+
     }
 }
+

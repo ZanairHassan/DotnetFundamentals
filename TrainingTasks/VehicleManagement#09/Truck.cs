@@ -6,11 +6,12 @@ namespace VehicleManagement_09
 {
     public class Truck : Vehicle
     {
-        public double LoadCapacity { get; set; }
+        public double LoadCapacity { get; private set; }
 
-        public Truck(int id, string brand, string model, double loadCapacity)
-            : base(id, brand, model)
+        public Truck(int id, string brand, string model, double loadCapacity) : base(id, brand, model)
         {
+            if (loadCapacity <= 0)
+                throw new ArgumentException("loadCapacity must be greater than 0.");
             LoadCapacity = loadCapacity;
         }
 

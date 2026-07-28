@@ -6,11 +6,13 @@ namespace VehicleManagement_09
 {
     public class Bus : Vehicle
     {
-        public int SeatingCapacity { get; set; }
+        public int SeatingCapacity { get; private set; }
 
         public Bus(int id, string brand, string model, int seatingCapacity)
             : base(id, brand, model)
         {
+            if (seatingCapacity <= 0)
+                throw new ArgumentException("seatingCapacity must be greater than 0.");
             SeatingCapacity = seatingCapacity;
         }
 
