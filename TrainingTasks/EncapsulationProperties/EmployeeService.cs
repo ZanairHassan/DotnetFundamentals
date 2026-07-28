@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks.Dataflow;
 
@@ -25,7 +26,23 @@ namespace EncapsulationProperties
             Console.WriteLine($"Available   : {employee.IsAvailable}");
             Console.WriteLine("********************************");
         }
-
+        private void EmployeeProperties(Employee employee)
+        {
+            Console.Write("Enter Name:\t");
+            employee.Name = ReadUserName();
+            Console.Write("Enter Email:\t");
+            employee.Email = ReadEmail();
+            Console.Write("Enter Age:\t");
+            employee.Age = ReadInt();
+            Console.Write("Enter Salary:\t");
+            employee.Salary = ReadDouble();
+            Console.Write("Enter Department:\t");
+            employee.Department = Console.ReadLine();
+            Console.Write("Enter Designation:\t");
+            employee.Designation = Console.ReadLine();
+            Console.Write("Enter IsAvailable:\t");
+            employee.IsAvailable = ReadBoolean();
+        }
         public void AddEmployee()
         {
             try
@@ -40,20 +57,7 @@ namespace EncapsulationProperties
                     Console.Write("Please enter a different ID:\t");
                     employee.ID = ReadInt();
                 }
-                Console.Write("Enter Name:\t");
-                employee.Name = Console.ReadLine();
-                Console.Write("Enter Email:\t");
-                employee.Email = Console.ReadLine();
-                Console.Write("Enter Age:\t");
-                employee.Age = ReadInt();
-                Console.Write("Enter Salary:\t");
-                employee.Salary = ReadDouble();
-                Console.Write("Enter Department:\t");
-                employee.Department = Console.ReadLine();
-                Console.Write("Enter Designation:\t");
-                employee.Designation = Console.ReadLine();
-                Console.Write("Enter IsAvailable:\t");
-                employee.IsAvailable = ReadBoolean();
+                EmployeeProperties(employee);
                 _employees.Add(employee);
                 Console.WriteLine("Employee added successfully.");
             }
@@ -112,21 +116,7 @@ namespace EncapsulationProperties
                     Console.WriteLine("Employee not found.");
                     return;
                 }
-                Console.Write("Enter Name:\t");
-                employee.Name = Console.ReadLine();
-                Console.Write("Enter Email:\t");
-                employee.Email = Console.ReadLine();
-                Console.Write("Enter Age:\t");
-                employee.Age = ReadInt();
-                Console.Write("Enter Salary:\t");
-                employee.Salary = ReadDouble();
-                Console.Write("Enter Department:\t");
-                employee.Department = Console.ReadLine();
-                Console.Write("Enter Designation:\t");
-                employee.Designation = Console.ReadLine();
-                Console.Write("Enter IsAvailable:\t");
-                employee.IsAvailable = ReadBoolean();
-
+                EmployeeProperties(employee);
                 Console.WriteLine("Employee updated successfully.");
             }
             catch (Exception ex)
@@ -160,22 +150,63 @@ namespace EncapsulationProperties
         {
             bool result;
             while (!bool.TryParse(Console.ReadLine(), out result))
-                Console.Write("Invalid Case, try again");
+                Console.Write("Invalid Case, try again:\t");
             return result;
         }
         public int ReadInt()
         {
             int result;
             while (!int.TryParse(Console.ReadLine(), out result))
-                Console.Write("Invalid number, try again");
+                Console.Write("Invalid number, try again:\t");
             return result;
         }
         public double ReadDouble()
         {
             double result;
             while (!double.TryParse(Console.ReadLine(), out result))
-                Console.Write("Invalid number, try again");
+                Console.Write("Invalid number, try again:\t");
             return result;
+        }
+
+        public string ReadUserName()
+        {
+            while (true)
+            {
+                string? username = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(username))
+                    return username;
+
+                Console.WriteLine("Username cannot be empty.\n");
+            }
+        }
+
+        public string ReadEmail()
+        {
+            while (true)
+            {
+                string? email = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    Console.WriteLine("Email cannot be empty.\n");
+                    continue;
+                }
+
+                try
+                {
+                    MailAddress mail = new MailAddress(email);
+
+                    if (mail.Address == email)
+                        return email;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                Console.WriteLine("Invalid email address.\n");
+            }
         }
     }
 }
