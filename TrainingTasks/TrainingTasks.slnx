@@ -8,6 +8,7 @@
   <Project Path="ControlStatements/ControlStatements.csproj" Id="67fe3143-293a-48a7-96ca-e41ba7403c92" />
   <Project Path="EncapsulationProperties/EncapsulationProperties.csproj" Id="3d143e5d-9ae8-4e13-857c-2b952144f539" />
   <Project Path="Methods/Methods.csproj" Id="2d5977de-3d04-4e65-9a89-b8edc767aa60" />
+  <Project Path="StripePaymentSystem#10/StripePaymentSystem#10.csproj" />
   <Project Path="UtilityLibrary/UtilityLibrary.csproj" Id="ab09227a-f63f-4729-a848-00caba8d8c93" />
   <Project Path="VariablesAndDataTypes/VariablesAndDataTypes.csproj" Id="fa6a8b1b-ba28-48fd-b873-312509d47362" />
 </Solution>
