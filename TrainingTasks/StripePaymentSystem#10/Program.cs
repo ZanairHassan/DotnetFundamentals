@@ -11,10 +11,12 @@ using StripePaymentSystem_10.Services;
 using StripePaymentSystem_10.Services;
 
 var builder = Host.CreateApplicationBuilder(args);
+string projectPath = Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName;
 
-builder.Configuration.AddJsonFile("D:\\cmintern1\\TrainingTasks\\StripePaymentSystem#10\\Configuration\\appsettings.json",
-    optional: false,
-    reloadOnChange: true);
+string folderPath = Path.Combine(projectPath, "Configuration");
+string filePath = Path.Combine(folderPath, "appsettings.json");
+
+builder.Configuration.AddJsonFile(filePath, optional: false, reloadOnChange: true);
 
 builder.Services.Configure<StripeSettings>(
     builder.Configuration.GetSection("Stripe"));

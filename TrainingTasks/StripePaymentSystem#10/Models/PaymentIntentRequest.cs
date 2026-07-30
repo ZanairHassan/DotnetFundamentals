@@ -12,8 +12,6 @@ namespace StripePaymentSystem_10.Models
 
         public string Currency { get; set; } = "usd";
 
-        public string PaymentMethodId { get; set; } = string.Empty;
-
         public string Description { get; set; } = string.Empty;
     }
 }
