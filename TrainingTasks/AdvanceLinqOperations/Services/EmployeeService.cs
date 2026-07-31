@@ -168,7 +168,7 @@ namespace AdvanceLinqOperations.Services
         {
             return _employees
                 .OrderBy(employee => employee.JoiningDate)
-                .Last();
+                .LastOrDefault();
         }
 
         public Employee? GetLastEmployeeByCity(string city)
@@ -216,9 +216,7 @@ namespace AdvanceLinqOperations.Services
 
         public bool EmployeeExists(int employeeId)
         {
-            return _employees
-                .Select(employee => employee.Id)
-                .Contains(employeeId);
+            return _employees.Any(employee => employee.Id == employeeId);
         }
 
         #endregion
@@ -242,7 +240,16 @@ namespace AdvanceLinqOperations.Services
 
         public decimal GetAverageSalary()
         {
-            return _employees.Average(employee => employee.Salary);
+            try
+            {
+                var result = _employees.Average(employee => employee.Salary);
+                return result;
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("No employees found.");
+                return 0;
+            }
         }
 
         public decimal GetMinimumSalary()
@@ -257,9 +264,18 @@ namespace AdvanceLinqOperations.Services
 
         public string GetEmployeeNames()
         {
-            return _employees
-                .Select(employee => employee.FullName)
-                .Aggregate((current, next) => $"{current}, {next}");
+            if(_employees.Count() > 0)
+            {
+                return _employees
+               .Select(employee => employee.FullName)
+               .Aggregate((current, next) => $"{current}, {next}");
+            }
+            else
+            {
+                Console.WriteLine("No employee found.");
+                return "";
+            }
+           
         }
 
         #endregion
@@ -573,7 +589,7 @@ namespace AdvanceLinqOperations.Services
                 .GroupBy(employee => employee.DepartmentId)
                 .Select(group => group
                     .OrderByDescending(employee => employee.PerformanceRating)
-                    .First());
+                    .FirstOrDefault());
         }
 
         #endregion
@@ -606,7 +622,7 @@ namespace AdvanceLinqOperations.Services
                 .GroupBy(employee => employee.DepartmentId)
                 .Select(group => group
                     .OrderByDescending(employee => employee.Salary)
-                    .First());
+                    .FirstOrDefault());
         }
 
         #endregion

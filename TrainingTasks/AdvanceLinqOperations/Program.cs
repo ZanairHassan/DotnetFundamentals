@@ -4,19 +4,19 @@ using AdvanceLinqOperations.MenuOptions;
 using AdvanceLinqOperations.Models;
 using AdvanceLinqOperations.Services;
 
-List<Employee> listEp = EmployeeSeed.SeedEmployees();
+List<Employee> objEmployee = EmployeeSeed.SeedEmployees();
 
-List<Department> listDp = DepartmentSeed.SeedDepartments();
+List<Department> objDepartment = DepartmentSeed.SeedDepartments();
 
-EmployeeService empSobj = new EmployeeService(listEp, listDp);
+EmployeeService objEmployeeService = new EmployeeService(objEmployee, objDepartment);
 
-FilteringOptions objFilteringOptions = new FilteringOptions(empSobj);
+FilteringOptions objFilteringOptions = new FilteringOptions(objEmployeeService);
 
-GroupingOptions objGroupingOptions = new GroupingOptions(empSobj);
+GroupingOptions objGroupingOptions = new GroupingOptions(objEmployeeService);
 
-AggregationOptions objAggregationOptions = new AggregationOptions(empSobj);
+AggregationOptions objAggregationOptions = new AggregationOptions(objEmployeeService);
 
-RealWorldExampleOptions objRealWorldExampleOptions = new RealWorldExampleOptions(empSobj);
+RealWorldExampleOptions objRealWorldExampleOptions = new RealWorldExampleOptions(objEmployeeService);
 
 bool isRunning = true;
 
