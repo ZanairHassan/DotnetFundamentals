@@ -7,14 +7,18 @@ List<Student> students= objSeed.SeedStudents();
 StudentLinqService studentService=new StudentLinqService(students);
 while (true)
 {
-    studentService.Show();
+    BusinessClass.Show();
     var choice = Console.ReadLine();
 
     switch (choice)
     {
         case "1":
             Console.WriteLine("========== WHERE ==========\n");
-            foreach (var student in studentService.GetStudentsAgeGreaterThan24())
+            Console.Write("Enter Departmet\t");
+            string department= Console.ReadLine();
+            Console.Write("Enter Age\t");
+            int age = BusinessClass.ReadInt();
+            foreach (var student in studentService.GetStudentsByDepartment(department,age))
             {
                 Console.WriteLine($"{student.Name} | Age: {student.Age}");
             }
@@ -37,40 +41,22 @@ while (true)
             Console.WriteLine("\n========== FIRST OR DEFAULT ==========\n");
 
             var topper = studentService.GetTopper();
-            try
+            if (topper != null)
             {
-                if (topper != null)
-                {
-                    Console.WriteLine($"{topper.Name} scored {topper.Marks}");
-                }
-                else
-                {
-                    Console.WriteLine("No student found.");
-                }
+                Console.WriteLine($"{topper.Name} scored {topper.Marks}");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine("No student found.",ex.Message);
+                Console.WriteLine("No student found.");
             }
             break;
         case "5":
             Console.WriteLine("App Terminated");
-            studentService.Pause();
+            BusinessClass.Pause();
             return;
         default:
             Console.WriteLine("Invalid Option.");
             break;
     }
-    studentService.Pause();
+    BusinessClass.Pause();
 }
-
-
-
-
-
-
-
-
-
-
-
