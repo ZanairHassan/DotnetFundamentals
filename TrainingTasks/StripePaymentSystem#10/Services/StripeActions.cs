@@ -48,10 +48,19 @@ namespace StripePaymentSystem_10.Services
             {
                 Console.Write(message);
 
-                if (decimal.TryParse(Console.ReadLine(), out decimal value))
-                    return value;
+                if (!decimal.TryParse(Console.ReadLine(), out decimal value))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    continue;
+                }
 
-                Console.WriteLine("Invalid amount.");
+                if (value <= 0)
+                {
+                    Console.WriteLine("Amount must be greater than zero.");
+                    continue;
+                }
+
+                return value;
             }
         }
 

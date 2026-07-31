@@ -154,10 +154,11 @@ namespace StripePaymentSystem_10.Services
                         var customer =
                             await customerService.GetAsync(paymentIntent.CustomerId);
 
-                        customerName = customer.Name;
+                        customerName = customer.Name ?? string.Empty;
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Console.WriteLine($"Unable to get customer: {ex.Message}");
                     }
                 }
 
@@ -178,10 +179,11 @@ namespace StripePaymentSystem_10.Services
 
                         refunded = charge.Refunded;
 
-                        receiptUrl = charge.ReceiptUrl;
+                        receiptUrl = charge.ReceiptUrl ?? string.Empty;
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Console.WriteLine($"Unable to get charge: {ex.Message}");
                     }
                 }
 
