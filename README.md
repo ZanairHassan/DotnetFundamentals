@@ -31,6 +31,17 @@ Source Code Repository for Intern 1
 - Add a method to search a User from the list.
 - Add a method to found and then delete that User from the list.
 
+## 19-08-encapsulation-properties
+- Implement encapsulation in the employee services class.
+- Implement try catch in the curd methods of employee in employee service class.
+- Add properties validations to enter the user name and email.
+
+## 20-09-inheritance-polymorphism
+- Parent class vehicle has initialization constructor and virtually defined Display vehcle details method.
+- The virtually defined method is overridden in each category of vehicle that i have added in the system.
+- Vehicle manager class has the generic methods like AddVehecle, DisplayVehicles, SearchVehicleById, and SearchVehicleByBrand.
+- I have handled the operations in program class with switch statements by applying the try catch.
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -39,6 +50,8 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/5)(on child branch 05---Methods -#21-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/6)(on child branch 06---Arrays-&-Collections -#22-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/7)(on child branch 18-07-classes-objects -#23-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/8)(on child branch 19-08-encapsulation-properties -#24-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/9)(on child branch 20-09-inheritance-polymorphism -#27-07-2026) 
 
 ## Getting started
 
