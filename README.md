@@ -140,6 +140,46 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/13)(on child branch Update Readme -#03-08-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026) 
 
+
+## Project Structure
+```text
+cmintern1/
+
+├── 📁 ArithmaticOperation/
+
+├── 📁 TrainingTasks/
+│   ├── 📁 ControlStatements/          # Decision & Loop Statements
+│   ├── 📁 VariablesAndDataTypes/      # C# Fundamentals
+│   ├── 📁 CrudCalculator/             # CRUD Console Application
+│   ├── 📁 UtilityLibrary/             # Shared Helper Library
+│   ├── 📁 ArrayCollection/            # Arrays & Collections
+│   ├── 📁 Methods/                    # Methods & Parameters
+│   ├── 📁 ClassesObjects/             # OOP Fundamentals
+│   ├── 📁 EncapsulationProperties/    # Encapsulation & Properties
+│   ├── 📁 StripePaymentSystem#10/     # Stripe Payment Gateway Integration
+│   └── 📁 VehicleManagement#09/       # Vehicle Management System
+│   ├── 📁 LinqOperations/             # LINQ Basics
+│   ├── 📁 AdvanceLinqOperations/      # Advanced LINQ Practice
+│   ├── 📁 StudentManagementSystem/    # Complete Console CRUD Project
+│
+├── 📄 TrainingTasks.slnx              # Solution File
+
+├── 📁 MvcFeatures/
+│   ├── Controllers/          # MVC Controllers
+│   ├── Middlewares/          # Custom Middleware Components
+│   ├── Models/               # Domain Models
+│   ├── Views/                # Razor Views
+│   ├── wwwroot/              # Static Files (CSS, JS, Images)
+│   ├── Program.cs            # Application Entry Point
+│   ├── appsettings.json      # Configuration
+│   └── MvcFeatures.csproj
+│
+
+├── 📄 README.md
+└── 📄 .gitignore
+```
+
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
