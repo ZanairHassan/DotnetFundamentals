@@ -1,30 +1,8 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
 /.vs
-/TrainingTasks/VariablesAndDataTypes/bin/Debug/net10.0
-/TrainingTasks/VariablesAndDataTypes/obj
-/TrainingTasks/.vs/TrainingTasks.slnx
-/ArithmaticOperation/.vs
-/ArithmaticOperation/ArithmaticOperation/bin/Debug/net10.0
-/ArithmaticOperation/ArithmaticOperation/obj
-/TrainingTasks/.vs/ProjectEvaluation
-/TrainingTasks/Calculator/bin/Debug/net10.0
-/TrainingTasks/Calculator/obj
-/TrainingTasks/ControlStatements/obj
-/TrainingTasks/ControlStatements/bin/Debug/net10.0
-/TrainingTasks/Methods/bin/Debug/net10.0
-/TrainingTasks/Methods/obj
-/TrainingTasks/ArrayCollection/bin/Debug/net10.0
-/TrainingTasks/ArrayCollection/obj
-/TrainingTasks/EncapsulationProperties/bin/Debug/net10.0
-/TrainingTasks/EncapsulationProperties/obj
-/TrainingTasks/UtilityLibrary/bin/Debug/net10.0
-/TrainingTasks/UtilityLibrary/obj
-/TrainingTasks/VehicleManagement#09/bin/Debug/net10.0
-/TrainingTasks/VehicleManagement#09/obj
-/TrainingTasks/ClassesObjects/bin/Debug/net10.0
-/TrainingTasks/ClassesObjects/obj
-/TrainingTasks/StripePaymentSystem#10/bin/Debug/net10.0
-/TrainingTasks/StripePaymentSystem#10/obj
+bin/
+obj/
+ArithmaticOperation/
