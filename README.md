@@ -31,6 +31,99 @@ Source Code Repository for Intern 1
 - Add a method to search a User from the list.
 - Add a method to found and then delete that User from the list.
 
+## 19-08-encapsulation-properties
+- Implement encapsulation in the employee services class.
+- Implement try catch in the curd methods of employee in employee service class.
+- Add properties validations to enter the user name and email.
+
+## 20-09-inheritance-polymorphism
+- Parent class vehicle has initialization constructor and virtually defined Display vehcle details method.
+- The virtually defined method is overridden in each category of vehicle that i have added in the system.
+- Vehicle manager class has the generic methods like AddVehecle, DisplayVehicles, SearchVehicleById, and SearchVehicleByBrand.
+- I have handled the operations in program class with switch statements by applying the try catch.
+
+## 10 - Interfaces & Abstraction
+- Stripe payment system
+- create customer
+- add product
+- add price
+- add payment method
+- add payment intent (reviewed)
+- confirm payment
+- refund payment
+- list transactions
+
+## 11 - LINQ Basics
+- Explore Linq methods
+- Build Student details console using random generated student record.
+- Practice where, orderby, select, firstordefault.
+
+## 12 - Advanced LINQ
+- I have defined region for all possible linq operations
+- Build a employee record system using randomly seeded employee record.
+- Implement each linq operation with an example.
+- Detailed practice of filtering, grouping and aggregations and real World examples.
+
+## 13 - Git Workflow
+- Explore git commands, use git branching in the codebase.
+- Explore chery pick, how to resolve conflicts, push, pull and fetch.
+
+## 14 - Mini Project - Student Management System
+- Build Student management system.
+- BusinessLogic Layer [Added the StudentValidator, ResultCalculator and RegistrationManager].
+- Interface layer [Added the interfaces: IStudentService, ICourseService, IDepartmentService and IResultService].
+- Service Layer [Added the services in which i implement the Interface methods: StudentService, CourseService, DepartmentService and ResultService].
+- Menu Option layer [Added the menu classes : StudentOptions, CourseOptions, DepartmentOptions and ResultOptions].
+- Helper classes layer [Added the helper classes: ConsoleHelper, StudentDisplayHelper, CourseDisplayHelper, DepartmentDisplayHelper and ResultDisplayHelper].
+- Models
+- Strings [I have added the classes: Prompts, SuccessMessages and ErrorMessages].
+	- The working flow of the SMS as follow.
+		- The application provides four major modules:
+
+		#1 - Student ManagementRegister Student
+		- Update Student
+		- Delete Student
+		- Display All Students
+		- Display Student By Id
+		- Display Student By Registration Number
+		- Display Students By Department
+		- Display Active Students
+
+		#2 - Course Management
+		- Display All Courses
+		- Get Course By Id
+		- Get Course By Code
+		- Search Course
+		- Display Courses By Credit Hours
+		- Display Courses Ordered By Name
+		- Display Courses Ordered By Credit Hours
+
+		#3 - Department Management
+		- Display All Departments
+		- Get Department By Id
+		- Get Department By Code
+		- Search Department
+		- Display Departments Ordered By Name
+		- Display Departments Ordered By Code
+		- Display First Department
+		- Display Last Department
+
+		#4 - Result Management
+		- Display All Results
+		- Display Student Result
+		- Display Passed Students
+		- Display Failed Students
+		- Display Results Ordered By Percentage
+		- Display Top Student
+		- Display Lowest Student
+		- Display Class Average Percentage
+		- Display Pass Percentage
+		- Display Grade Distribution
+
+		#5 - Exit
+		- Exit
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -39,6 +132,53 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/5)(on child branch 05---Methods -#21-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/6)(on child branch 06---Arrays-&-Collections -#22-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/7)(on child branch 18-07-classes-objects -#23-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/8)(on child branch 19-08-encapsulation-properties -#24-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/9)(on child branch 20-09-inheritance-polymorphism -#27-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/10)(on child branch 21-10-interfaces-abstraction -#29-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/11)(on child branch 22-11-linq-basics -#30-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/12)(on child branch 23-12-advanced-linq -#31-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/13)(on child branch Update Readme -#03-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026) 
+
+
+## Project Structure
+```text
+cmintern1/
+
+├── 📁 ArithmaticOperation/
+
+├── 📁 TrainingTasks/
+│   ├── 📁 ControlStatements/          # Decision & Loop Statements
+│   ├── 📁 VariablesAndDataTypes/      # C# Fundamentals
+│   ├── 📁 CrudCalculator/             # CRUD Console Application
+│   ├── 📁 UtilityLibrary/             # Shared Helper Library
+│   ├── 📁 ArrayCollection/            # Arrays & Collections
+│   ├── 📁 Methods/                    # Methods & Parameters
+│   ├── 📁 ClassesObjects/             # OOP Fundamentals
+│   ├── 📁 EncapsulationProperties/    # Encapsulation & Properties
+│   ├── 📁 StripePaymentSystem#10/     # Stripe Payment Gateway Integration
+│   └── 📁 VehicleManagement#09/       # Vehicle Management System
+│   ├── 📁 LinqOperations/             # LINQ Basics
+│   ├── 📁 AdvanceLinqOperations/      # Advanced LINQ Practice
+│   ├── 📁 StudentManagementSystem/    # Complete Console CRUD Project
+│
+├── 📄 TrainingTasks.slnx              # Solution File
+
+├── 📁 MvcFeatures/
+│   ├── Controllers/          # MVC Controllers
+│   ├── Middlewares/          # Custom Middleware Components
+│   ├── Models/               # Domain Models
+│   ├── Views/                # Razor Views
+│   ├── wwwroot/              # Static Files (CSS, JS, Images)
+│   ├── Program.cs            # Application Entry Point
+│   ├── appsettings.json      # Configuration
+│   └── MvcFeatures.csproj
+│
+
+├── 📄 README.md
+└── 📄 .gitignore
+```
+
 
 ## Getting started
 

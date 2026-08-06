@@ -10,7 +10,7 @@ namespace UtilityLibrary
         public static void MessageLog(string message)
         {
             {
-                string projectPath = Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName;
+                string projectPath = Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.Parent!.FullName;
 
                 string folderPath = Path.Combine(projectPath, "Loggings");
                 string filePath = Path.Combine(folderPath, "MessageLog.txt");
