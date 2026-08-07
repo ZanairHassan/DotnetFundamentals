@@ -124,6 +124,20 @@ Source Code Repository for Intern 1
 		- Exit
 
 
+## 18. Configuration
+- Explore appsettings.JSON
+- How can we set up configuration variables
+- what is the criteria to setup a valiable in the configuaration
+- How can we use them in the program.cs class.
+
+## 19. Middleware
+- Explore the Middlewares in details
+- Categories of middlewares
+- Execution pattern of middlewares
+- How they behave when a user request for a action.
+- Build a logging middleware for practice.
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
