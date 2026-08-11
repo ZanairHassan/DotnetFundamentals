@@ -1,0 +1,65 @@
+﻿<h1>Personal Details</h1>
+
+@{
+    var Name = "Zanair Hassan";
+    var Field = "IT";
+    var Designation = "Dotnet Developer";
+    var Experience = 1.5;
+    var Email = "zanairghumman@gmail.com";
+    var Salary = 50000;
+}
+
+<div>
+    <dl class="row">
+
+        <dt class="col-sm-3">
+            Name
+        </dt>
+        <dd class="col-sm-9">
+            @Name
+        </dd>
+
+        <dt class="col-sm-3">
+            Field
+        </dt>
+        <dd class="col-sm-9">
+            @Field
+        </dd>
+
+        <dt class="col-sm-3">
+            Designation
+        </dt>
+        <dd class="col-sm-9">
+            @Designation
+        </dd>
+
+        <dt class="col-sm-3">
+            Experience
+        </dt>
+        <dd class="col-sm-9">
+            @Experience
+        </dd>
+
+        <dt class="col-sm-3">
+            Email
+        </dt>
+        <dd class="col-sm-9">
+            @Email
+        </dd>
+        <dt class="col-sm-3">
+            Salary
+        </dt>
+        <dd class="col-sm-9">
+            @Salary
+        </dd>
+
+    </dl>
+</div>
+@if (TempData["SuccessMessage"] is not null)
+{
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            alert("@TempData["SuccessMessage"]");
+        });
+    </script>
+}

@@ -34,8 +34,12 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Employee}/{action=Index}/{id?}")
+    pattern: "{controller=PracticeView}/{action=RenderIndex}/{id?}")
     .WithStaticAssets();
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Employee}/{action=Index}/{id?}")
+//    .WithStaticAssets();
 
 
 app.Run();
