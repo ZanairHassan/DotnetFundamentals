@@ -1,10 +1,20 @@
-﻿using ASP.NetFundamentals.Models;
+﻿using ASP.NetFundamentals.Configurations;
+using ASP.NetFundamentals.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace ASP.NetFundamentals.Controllers
 {
     public class PracticeViewController : Controller
     {
+        private readonly SecretKey _secretKey;
+        private readonly ILogger<PracticeViewController> _logger;
+
+        public PracticeViewController(IOptions<SecretKey> secretKey, ILogger<PracticeViewController> logger)
+        {
+            _secretKey = secretKey.Value;
+            _logger = logger;
+        }
         public IActionResult RenderIndex()
         {
             return View();
@@ -44,6 +54,13 @@ namespace ASP.NetFundamentals.Controllers
             TempData["SuccessMessage"] = "Personal Details Printed successfully.";
 
             return View();
+        }
+
+        public IActionResult LogSecretKey()
+        {
+            _logger.LogInformation("Application Token: {AppToken}", _secretKey.AppToken);
+
+            return Content("Secret key logged successfully.");
         }
     }
 }

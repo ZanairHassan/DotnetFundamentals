@@ -1,3 +1,4 @@
+using ASP.NetFundamentals.Configurations;
 using ASP.NetFundamentals.Interfaces;
 using ASP.NetFundamentals.Middlewares;
 using ASP.NetFundamentals.Services;
@@ -9,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<StudentStore>();
 
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+
+builder.Services.Configure<SecretKey>(
+    builder.Configuration.GetSection("SecretKey"));
 
 var app = builder.Build();
 
