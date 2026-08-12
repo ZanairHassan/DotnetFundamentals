@@ -123,12 +123,15 @@ Source Code Repository for Intern 1
 		#5 - Exit
 		- Exit
 
+## 15. Project setup
+- Add Default ASP.Net Core MVC Project into the Repository.
 
 ## 18. Configuration
 - Explore appsettings.JSON
 - How can we set up configuration variables
 - what is the criteria to setup a valiable in the configuaration
 - How can we use them in the program.cs class.
+- Add a controller method to log a configuration key by reegistering into program.cs file then accessing it by using that service into the controller
 
 ## 19. Middleware
 - Explore the Middlewares in details
@@ -137,6 +140,16 @@ Source Code Repository for Intern 1
 - How they behave when a user request for a action.
 - Build a logging middleware for practice.
 
+## 20. Controllers
+- Explore and build a functional Controllers.
+- Apply crud operations in the controller, add middleware for exception handling.
+
+## 21. Views
+- Explore and practice Views.
+- Render Data from the controller to view by:
+	- ViewData
+	- ViewBag
+	- TempData
 
 ## Collaborate with team
 
@@ -153,6 +166,11 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/12)(on child branch 23-12-advanced-linq -#31-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/13)(on child branch Update Readme -#03-08-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/16)(on child branch 26-15-project-setup -#06-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/20)(on child branch 29-18-Configuration -#11-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/17)(on child branch 30-19-middleware -#07-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/18)(on child branch 31-20-controllers -#10-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/19)(on child branch 32-21-views -#11-08-2026)
 
 
 ## Project Structure
@@ -179,10 +197,13 @@ cmintern1/
 ├── 📄 TrainingTasks.slnx              # Solution File
 
 ├── 📁 MvcFeatures/
+│   ├── Configurations/       # Class for communication with appsettings entity
 │   ├── Controllers/          # MVC Controllers
+│   ├── Interfaces/           # Dependency Handler interfaces
 │   ├── Middlewares/          # Custom Middleware Components
 │   ├── Models/               # Domain Models
 │   ├── Views/                # Razor Views
+│   ├── Services/             # Dependency Implementation classes
 │   ├── wwwroot/              # Static Files (CSS, JS, Images)
 │   ├── Program.cs            # Application Entry Point
 │   ├── appsettings.json      # Configuration
