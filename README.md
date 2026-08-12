@@ -143,6 +143,13 @@ Source Code Repository for Intern 1
 - Explore and build a functional Controllers.
 - Apply crud operations in the controller, add middleware for exception handling.
 
+## 21. Views
+- Explore and practice Views.
+- Render Data from the controller to view by:
+	- ViewData
+	- ViewBag
+	- TempData
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -161,6 +168,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/16)(on child branch 26-15-project-setup -#06-08-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/17)(on child branch 30-19-middleware -#07-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/18)(on child branch 31-20-controllers -#10-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/19)(on child branch 32-21-views -#11-08-2026)
 
 
 ## Project Structure
