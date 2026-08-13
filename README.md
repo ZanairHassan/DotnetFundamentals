@@ -156,6 +156,12 @@ Source Code Repository for Intern 1
 - Build developer crud to practice razor syntax in details.
 - Build an example for the DI Life Cycle by generating a random guid id.
 
+## 23. Layouts
+- Explore Layout synax, naming convention.
+- Learn about @RenderBody() and @RenderSection().
+- Create a Practice layout, update the header, navigation bar and footer of the project with in that layout.
+- Register the layout in the ViewStart file.
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -177,6 +183,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/18)(on child branch 31-20-controllers -#10-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/19)(on child branch 32-21-views -#11-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/21)(on child branch 33-22-Razor-syntax -#12-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/22)(on child branch 34-23-Layouts -#13-08-2026)
 
 
 ## Project Structure
