@@ -1,0 +1,28 @@
+﻿@model IReadOnlyList<ASP.NetFundamentals.Models.Student>
+
+<h1>Students</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.ID</td>
+                <td>@student.Name</td>
+                <td>@student.Address</td>
+                <td>@student.Age</td>
+                <td>@student.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
