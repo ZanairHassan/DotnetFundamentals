@@ -170,7 +170,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/11)(on child branch 22-11-linq-basics -#30-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/12)(on child branch 23-12-advanced-linq -#31-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/13)(on child branch Update Readme -#03-08-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/16)(on child branch 26-15-project-setup -#06-08-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/20)(on child branch 29-18-Configuration -#11-08-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/17)(on child branch 30-19-middleware -#07-08-2026)
