@@ -1,0 +1,17 @@
+﻿@if (TempData["SuccessMessage"] is not null)
+{
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            alert("@TempData["SuccessMessage"]");
+        });
+    </script>
+}
+
+@if (TempData["ErrorMessage"] is not null)
+{
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            alert("@TempData["ErrorMessage"]");
+        });
+    </script>
+}
