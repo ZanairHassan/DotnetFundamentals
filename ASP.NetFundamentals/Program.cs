@@ -40,6 +40,8 @@ app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseMiddleware<StudentMiddleware>();
 
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();
