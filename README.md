@@ -162,6 +162,16 @@ Source Code Repository for Intern 1
 - Create a Practice layout, update the header, navigation bar and footer of the project with in that layout.
 - Register the layout in the ViewStart file.
 
+## 24. Partial Views
+- Explore the partial views.
+- Build reuseable partial view i.e. _AlertMessage.cshtml and _Details.cshtml.
+
+## 25. Static Files
+- Explore wwwroot folder structure, and its static (styling and js related) files.
+- Add a texting css file, add a folder for the images.
+- use images from the images folder into the testing.css file to render them in the views.
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -184,6 +194,8 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/19)(on child branch 32-21-views -#11-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/21)(on child branch 33-22-Razor-syntax -#12-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/22)(on child branch 34-23-Layouts -#13-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/23)(on child branch 35-24-Partial-Views -#17-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/24)(on child branch 36-25-Static-files -#18-08-2026)
 
 
 ## Project Structure
@@ -217,7 +229,7 @@ cmintern1/
 │   ├── Models/               # Domain Models
 │   ├── Views/                # Razor Views
 │   ├── Services/             # Dependency Implementation classes
-│   ├── wwwroot/              # Static Files (CSS, JS, Images)
+│   ├── wwwroot/              # Static Files (CSS, JS, Images) Add the images folder in it.
 │   ├── Program.cs            # Application Entry Point
 │   ├── appsettings.json      # Configuration
 │   └── MvcFeatures.csproj
