@@ -1,3 +1,4 @@
+using ASP.NetFundamentals.Interfaces;
 using ASP.NetFundamentals.Middlewares;
 using ASP.NetFundamentals.Services;
 
@@ -7,11 +8,15 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<StudentStore>();
 
+builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    //app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
@@ -29,7 +34,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Student}/{action=Index}/{id?}")
+    pattern: "{controller=Employee}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

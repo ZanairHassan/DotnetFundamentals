@@ -139,6 +139,9 @@ Source Code Repository for Intern 1
 - How they behave when a user request for a action.
 - Build a logging middleware for practice.
 
+## 20. Controllers
+- Explore and build a functional Controllers.
+- Apply crud operations in the controller, add middleware for exception handling.
 
 ## Collaborate with team
 
@@ -154,9 +157,10 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/11)(on child branch 22-11-linq-basics -#30-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/12)(on child branch 23-12-advanced-linq -#31-07-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/13)(on child branch Update Readme -#03-08-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/16)(on child branch 26-15-project-setup -#06-08-2026) 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/17)(on child branch 30-19-middleware -#07-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/18)(on child branch 31-20-controllers -#10-08-2026) 
 
 
 ## Project Structure
@@ -184,9 +188,11 @@ cmintern1/
 
 ├── 📁 MvcFeatures/
 │   ├── Controllers/          # MVC Controllers
+│   ├── Interfaces/           # Dependency Handler interfaces
 │   ├── Middlewares/          # Custom Middleware Components
 │   ├── Models/               # Domain Models
 │   ├── Views/                # Razor Views
+│   ├── Services/             # Dependency Implementation classes
 │   ├── wwwroot/              # Static Files (CSS, JS, Images)
 │   ├── Program.cs            # Application Entry Point
 │   ├── appsettings.json      # Configuration
