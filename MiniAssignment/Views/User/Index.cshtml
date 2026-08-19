@@ -1,0 +1,113 @@
+﻿@model MiniAssignment.ViewModels.UserListVM
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>User Management</h1>
+        <p class="text-muted">
+            Manage application users.
+        </p>
+    </div>
+
+    <a asp-controller="User"
+       asp-action="Create"
+       class="btn btn-primary">
+        Create User
+    </a>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-4">
+                <strong>Total Users</strong>
+
+                <div class="fs-3">
+                    @Model.TotalUsers
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@if (!Model.Users.Any())
+{
+    <div class="alert alert-info">
+        No users found.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>
+                            @user.ID
+                        </td>
+
+                        <td>
+                            @user.FirstName @user.LastName
+                        </td>
+
+                        <td>
+                            @user.Email
+                        </td>
+
+                        <td>
+                            @user.PhoneNumber
+                        </td>
+
+                        <td>
+                            @if (user.IsActive)
+                            {
+                                <span class="badge bg-success">
+                                    Active
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    Inactive
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            <a asp-controller="User" asp-action="Details" asp-route-id="@user.ID" class="btn btn-sm btn-info">
+                                Details
+                            </a>
+                            <a asp-controller="User" asp-action="Edit" asp-route-id="@user.ID" class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+                            <a asp-controller="User" asp-action="Delete" asp-route-id="@user.ID" class="btn btn-sm btn-danger">
+                                Delete
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+}

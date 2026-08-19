@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - MiniAssignment
+    </title>
+
+    <script type="importmap"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/MiniAssignment.styles.css" asp-append-version="true" />
+
+</head>
+
+<body>
+
+    <div class="d-flex">
+
+        @await Html.PartialAsync("_Sidebar")
+
+        <div class="app-content flex-grow-1">
+
+            @if (TempData["SuccessMessage"] is not null)
+            {
+                <div class="container mt-3">
+
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                        @TempData["SuccessMessage"]
+
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+
+                    </div>
+
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] is not null)
+            {
+                <div class="container mt-3">
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                        @TempData["ErrorMessage"]
+
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+
+                    </div>
+
+                </div>
+            }
+
+
+            <main role="main"
+                  class="container py-4">
+
+                @RenderBody()
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true">
+    </script>
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false)
+
+</body>
+
+</html>
