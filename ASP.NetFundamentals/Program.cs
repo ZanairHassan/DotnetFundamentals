@@ -1,7 +1,9 @@
 using ASP.NetFundamentals.Configurations;
 using ASP.NetFundamentals.Interfaces;
+using ASP.NetFundamentals.Interfaces.ITestingDependencyLifeTime;
 using ASP.NetFundamentals.Middlewares;
 using ASP.NetFundamentals.Services;
+using ASP.NetFundamentals.Services.TestingDependencyLifeTime;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +13,21 @@ builder.Services.AddSingleton<StudentStore>();
 
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
 
-
 builder.Services
     .AddOptions<SecretKey>()
     .Bind(builder.Configuration.GetSection(SecretKey.SectionName))
     .Validate(options => !string.IsNullOrWhiteSpace(options.AppToken), "SecretKey:AppToken is required.")
     .ValidateOnStart();
+
+builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+
+builder.Services.AddSingleton<IDeveloperService, DeveloperService>();
+
+builder.Services.AddSingleton<ISingletonService, SingletonService>();
+
+builder.Services.AddScoped<IScopedService, ScopedService>();
+
+builder.Services.AddTransient<ITransientService, TransientService>();
 
 var app = builder.Build();
 
