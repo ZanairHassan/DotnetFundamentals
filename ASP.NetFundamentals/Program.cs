@@ -1,3 +1,4 @@
+using ASP.NetFundamentals.Configurations;
 using ASP.NetFundamentals.Interfaces;
 using ASP.NetFundamentals.Middlewares;
 using ASP.NetFundamentals.Services;
@@ -9,6 +10,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<StudentStore>();
 
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+
+
+builder.Services
+    .AddOptions<SecretKey>()
+    .Bind(builder.Configuration.GetSection(SecretKey.SectionName))
+    .Validate(options => !string.IsNullOrWhiteSpace(options.AppToken), "SecretKey:AppToken is required.")
+    .ValidateOnStart();
 
 var app = builder.Build();
 
