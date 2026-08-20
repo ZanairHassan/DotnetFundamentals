@@ -11,8 +11,12 @@ builder.Services.AddSingleton<StudentStore>();
 
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
 
-builder.Services.Configure<SecretKey>(
-    builder.Configuration.GetSection("SecretKey"));
+
+builder.Services
+    .AddOptions<SecretKey>()
+    .Bind(builder.Configuration.GetSection(SecretKey.SectionName))
+    .Validate(options => !string.IsNullOrWhiteSpace(options.AppToken), "SecretKey:AppToken is required.")
+    .ValidateOnStart();
 
 var app = builder.Build();
 
