@@ -1,0 +1,50 @@
+﻿<h1>Prctice for the ViewBag</h1>
+
+<div>
+    <dl class="row">
+
+        <dt class="col-sm-3">
+            Name
+        </dt>
+        <dd class="col-sm-9">
+            @ViewBag.Name
+        </dd>
+
+          <dt class="col-sm-3">
+            Email
+        </dt>
+        <dd class="col-sm-9">
+            @ViewBag.Email
+        </dd>
+
+        <dt class="col-sm-3">
+            Age
+        </dt>
+        <dd class="col-sm-9">
+            @ViewBag.Age
+        </dd>
+
+        <dt class="col-sm-3">
+            Designation
+        </dt>
+        <dd class="col-sm-9">
+            @ViewBag.Designation
+        </dd>
+
+        <dt class="col-sm-3">
+            Height
+        </dt>
+        <dd class="col-sm-9">
+            @ViewBag.Height
+        </dd>
+
+        </dl>
+</div>
+@if (ViewBag.SuccessMessage is not null)
+{
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            alert("@ViewBag.SuccessMessage");
+        });
+    </script>
+}
