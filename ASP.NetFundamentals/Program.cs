@@ -13,6 +13,14 @@ builder.Services.AddSingleton<StudentStore>();
 
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
 
+builder.Services
+    .AddOptions<SecretKey>()
+    .Bind(builder.Configuration.GetSection(SecretKey.SectionName))
+    .Validate(options => !string.IsNullOrWhiteSpace(options.AppToken), "SecretKey:AppToken is required.")
+    .ValidateOnStart();
+
+builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+
 builder.Services.AddSingleton<IDeveloperService, DeveloperService>();
 
 builder.Services.AddSingleton<ISingletonService, SingletonService>();
@@ -20,9 +28,6 @@ builder.Services.AddSingleton<ISingletonService, SingletonService>();
 builder.Services.AddScoped<IScopedService, ScopedService>();
 
 builder.Services.AddTransient<ITransientService, TransientService>();
-
-builder.Services.Configure<SecretKey>(
-    builder.Configuration.GetSection("SecretKey"));
 
 var app = builder.Build();
 
@@ -34,17 +39,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-
 app.UseMiddleware<RequestLoggingMiddleware>();
 
-app.UseMiddleware<StudentMiddleware>();
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseMiddleware<StudentMiddleware>();
 
 app.MapStaticAssets();
 
