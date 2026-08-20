@@ -162,6 +162,7 @@ Source Code Repository for Intern 1
 - Create a Practice layout, update the header, navigation bar and footer of the project with in that layout.
 - Register the layout in the ViewStart file.
 
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
