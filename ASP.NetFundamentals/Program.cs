@@ -24,15 +24,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-
 app.UseMiddleware<RequestLoggingMiddleware>();
 
-app.UseMiddleware<StudentMiddleware>();
+app.UseHttpsRedirection();
 
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseMiddleware<StudentMiddleware>();
 
 app.MapStaticAssets();
 
