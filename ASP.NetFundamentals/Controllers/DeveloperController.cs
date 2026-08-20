@@ -101,7 +101,9 @@ namespace ASP.NetFundamentals.Controllers
 
             if (developer is null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Developer has not found.";
+
+                return RedirectToAction(nameof(Index));
             }
 
             return View(developer);
@@ -114,7 +116,9 @@ namespace ASP.NetFundamentals.Controllers
 
             if (!deleted)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Developer has not been deleted.";
+
+                return RedirectToAction(nameof(Index));
             }
 
             TempData["SuccessMessage"] = "Developer deleted successfully.";

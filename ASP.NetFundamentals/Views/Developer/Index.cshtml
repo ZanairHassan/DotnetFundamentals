@@ -14,23 +14,9 @@
     </a>
 </div>
 
-@if (TempData["SuccessMessage"] is not null)
-{
-    <script>
-        window.addEventListener("DOMContentLoaded", function () {
-            alert("@TempData["SuccessMessage"]");
-        });
-    </script>
-}
 
-@if (TempData["ErrorMessage"] is not null)
-{
-    <script>
-        window.addEventListener("DOMContentLoaded", function () {
-            alert("@TempData["ErrorMessage"]");
-        });
-    </script>
-}
+
+<partial name="_AlertMessages" />
 
 <table class="table table-bordered table-striped">
     <thead>

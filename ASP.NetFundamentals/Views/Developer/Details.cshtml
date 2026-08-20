@@ -7,28 +7,7 @@
 <h1>Developer Details</h1>
 
 <div>
-    <dl class="row">
-        <dt class="col-sm-3">Name</dt>
-        <dd class="col-sm-9">@Model.Name</dd>
-
-        <dt class="col-sm-3">Email</dt>
-        <dd class="col-sm-9">@Model.Email</dd>
-
-        <dt class="col-sm-3">Field</dt>
-        <dd class="col-sm-9">@Model.Field</dd>
-
-        <dt class="col-sm-3">Age</dt>
-        <dd class="col-sm-9">@Model.Age</dd>
-
-        <dt class="col-sm-3">Role</dt>
-        <dd class="col-sm-9">@Model.Role</dd>
-
-        <dt class="col-sm-3">Experience</dt>
-        <dd class="col-sm-9">@Model.Experience years</dd>
-
-        <dt class="col-sm-3">Salary</dt>
-        <dd class="col-sm-9">@Model.Salary</dd>
-    </dl>
+    <partial name="_Details" model="Model" />
 </div>
 
 <a asp-action="Edit"
