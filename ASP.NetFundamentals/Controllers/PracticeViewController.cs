@@ -58,7 +58,12 @@ namespace ASP.NetFundamentals.Controllers
 
         public IActionResult LogSecretKey()
         {
-            _logger.LogInformation("Application Token: {AppToken}", _secretKey.AppToken);
+            var token = _secretKey.AppToken;
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return Content("Secret key is not configured.");
+            }
 
             return Content("Secret key logged successfully.");
         }
