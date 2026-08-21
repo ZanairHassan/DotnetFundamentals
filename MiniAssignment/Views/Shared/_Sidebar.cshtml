@@ -1,0 +1,48 @@
+﻿@{
+    var controllerName = ViewContext.RouteData.Values["controller"]?.ToString();
+
+    var actionName = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<aside class="bg-dark text-white p-3" style="width: 250px; min-height: 100vh;">
+
+    <h4 class="mb-4">
+        Mini Assignment
+    </h4>
+
+    <nav>
+
+        <ul class="nav flex-column">
+
+            <li class="nav-item mb-2">
+
+                <a asp-controller="Dashboard" asp-action="Index" class="nav-link text-white
+                    @(controllerName == "Dashboard" ? "active bg-primary" : "")">
+                    Dashboard
+                </a>
+
+            </li>
+
+            <li class="nav-item mb-2">
+
+                <a asp-controller="User" asp-action="Index" class="nav-link text-white
+                    @(controllerName == "User" && actionName == "Index" ? "active bg-primary" : "")">
+                    Users
+                </a>
+
+            </li>
+
+            <li class="nav-item mb-2">
+
+                <a asp-controller="User" asp-action="Create" class="nav-link text-white
+                    @(controllerName == "User" && actionName == "Create" ? "active bg-primary" : "")">
+                    Create User
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</aside>
