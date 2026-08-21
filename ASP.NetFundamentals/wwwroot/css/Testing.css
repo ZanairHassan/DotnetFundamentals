@@ -1,0 +1,39 @@
+﻿body {
+    background-color: lightblue;
+}
+
+h1 {
+    color: darkblue;
+    text-align:left;
+}
+h2 {
+    color: darkgreen;
+    text-align: left;
+}
+table th {
+    text-align: center;
+    vertical-align: middle;
+}
+table tr {
+    text-align: center;
+    vertical-align: middle;
+}
+body {
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+    body.developerDetails {
+        background-image: url('/images/bImageDev.jpg');
+    }
+
+    body.employeeDetails {
+        background-image: url('/images/BImageEmp.jfif');
+    }
+
+    body.StudentDetails {
+        background-image: url('/images/BImageStd.jfif');
+    }
