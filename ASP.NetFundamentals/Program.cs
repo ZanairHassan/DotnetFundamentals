@@ -1,4 +1,5 @@
 using ASP.NetFundamentals.Configurations;
+using ASP.NetFundamentals.Filters;
 using ASP.NetFundamentals.Interfaces;
 using ASP.NetFundamentals.Interfaces.ITestingDependencyLifeTime;
 using ASP.NetFundamentals.Middlewares;
@@ -7,11 +8,12 @@ using ASP.NetFundamentals.Services.TestingDependencyLifeTime;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+});
 
 builder.Services.AddSingleton<StudentStore>();
-
-builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
 
 builder.Services
     .AddOptions<SecretKey>()

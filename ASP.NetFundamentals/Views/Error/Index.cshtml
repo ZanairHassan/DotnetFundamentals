@@ -1,0 +1,31 @@
+﻿@model ASP.NetFundamentals.Models.ErrorModel
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="text-center mt-5">
+
+    <h1 class="display-4">
+        Something went wrong
+    </h1>
+
+    <p class="lead">
+        We're sorry, But an unexpected error occurred while processing your request.
+    </p>
+
+    @if (Model.ShowRequestId)
+    {
+        <p>
+            <strong>Request ID:</strong>
+            <code>@Model.RequestId</code>
+        </p>
+    }
+
+    <a asp-controller="PracticeView"
+       asp-action="RenderIndex"
+       class="btn btn-primary">
+        Return Home
+    </a>
+
+</div>

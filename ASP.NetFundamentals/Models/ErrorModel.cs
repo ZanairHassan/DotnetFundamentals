@@ -1,0 +1,11 @@
+﻿namespace ASP.NetFundamentals.Models
+{
+    public class ErrorModel
+    {
+        public string? RequestId { get; set; }
+
+        public int StatusCode { get; set; }
+
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    }
+}

@@ -34,11 +34,25 @@ namespace ASP.NetFundamentals.Middlewares
 
         private static async Task HandleExceptionAsync(HttpContext context)
         {
+            context.Response.Clear();
+
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
             context.Response.ContentType = "text/html";
 
-            await context.Response.WriteAsync("<h1>Something went wrong.</h1>");
+            await context.Response.WriteAsync(
+                """
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Internal Server Error</title>
+                </head>
+                <body>
+                    <h1>Something went wrong.</h1>
+                    <p>Please try again later.</p>
+                </body>
+                </html>
+                """);
         }
     }
 }
