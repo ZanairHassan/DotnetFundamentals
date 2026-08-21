@@ -171,6 +171,16 @@ Source Code Repository for Intern 1
 - Add a texting css file, add a folder for the images.
 - use images from the images folder into the testing.css file to render them in the views.
 
+## 26. Mini assignment
+- Create a new mvc project to implement the Users cruds using the repository based pattern without using database.
+- Create the interface and the service folder to implement the crud logic.
+- Store data with student seed class.
+- Add Sidepanal to switch through different modules i.e.
+	- Dashboard
+	- Users
+	- Create Users
+	- Get Active Users
+	- Get Inactive Users
 
 ## Collaborate with team
 
@@ -196,6 +206,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/22)(on child branch 34-23-Layouts -#13-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/23)(on child branch 35-24-Partial-Views -#17-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/24)(on child branch 36-25-Static-files -#18-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/25)(on child branch 37-26-Mini-Assignment -#19-08-2026)
 
 
 ## Project Structure
