@@ -2,6 +2,7 @@
 using ASP.NetFundamentals.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
 
 namespace ASP.NetFundamentals.Controllers
 {
@@ -65,6 +66,7 @@ namespace ASP.NetFundamentals.Controllers
                 return Content("Secret key is not configured.");
             }
 
+            _logger.LogInformation($"Request completed. The Secret Token: {token}");
             return Content("Secret key logged successfully.");
         }
     }
