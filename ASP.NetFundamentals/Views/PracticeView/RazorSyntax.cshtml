@@ -1,0 +1,82 @@
+﻿<p>Getting the values from the controller</p><br>
+<h3>Name: @ViewData["Name"]</h3>
+<h3>Age: @ViewData["Age"]</h3>
+<h3>Role: @ViewData["Role"]</h3>
+<h3>Date: @ViewData["Date"]</h3>
+
+@{
+    var Name = "Zanair Hassan";
+    var Field = "IT";
+    var Designation = "Dotnet Developer";
+    var Experience = 1.5;
+    var Email = "zanairghumman@gmail.com";
+    var Salary = 50000;
+}
+
+<h1>Personal Details</h1>
+
+<div>
+    <dl class="row">
+
+        <dt class="col-sm-3">
+            Name
+        </dt>
+        <dd class="col-sm-9">
+            @Name
+        </dd>
+
+        <dt class="col-sm-3">
+            Field
+        </dt>
+        <dd class="col-sm-9">
+            @Field
+        </dd>
+
+        <dt class="col-sm-3">
+            Designation
+        </dt>
+        <dd class="col-sm-9">
+            @Designation
+        </dd>
+
+        <dt class="col-sm-3">
+            Experience
+        </dt>
+        <dd class="col-sm-9">
+            @Experience
+        </dd>
+
+        <dt class="col-sm-3">
+            Email
+        </dt>
+        <dd class="col-sm-9">
+            @Email
+        </dd>
+        <dt class="col-sm-3">
+            Salary
+        </dt>
+        <dd class="col-sm-9">
+            @Salary
+        </dd>
+
+    </dl>
+</div>
+
+@if (Experience > 2)
+{
+    <h2>Career Details</h2><br>
+    <p>He is a Associate Software Engineer</p>
+}
+else
+{
+    <h2>Career Details</h2>
+    <p>He is a Junior Software Engineer</p>
+}
+@if (ViewData["SuccessMessage"] is not null)
+{
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            alert("@ViewData["SuccessMessage"]");
+        });
+    </script>
+}
