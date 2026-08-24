@@ -26,11 +26,9 @@ public static class UserSeedData
 
         for (int i = 1; i <= 20; i++)
         {
-            string firstName =
-                firstNames[random.Next(firstNames.Length)];
+            string firstName = firstNames[random.Next(firstNames.Length)];
 
-            string lastName =
-                lastNames[random.Next(lastNames.Length)];
+            string lastName = lastNames[random.Next(lastNames.Length)];
 
             users.Add(new User
             {
@@ -40,16 +38,11 @@ public static class UserSeedData
 
                 LastName = lastName,
 
-                Email =
-                    $"{firstName.ToLower()}.{lastName.ToLower()}{i}@example.com",
+                Email = $"{firstName.ToLower()}.{lastName.ToLower()}{i}@example.com",
 
-                PhoneNumber =
-                    $"03{random.Next(10, 100)}-{random.Next(1000000, 10000000)}",
+                PhoneNumber = $"03{random.Next(10, 100)}-{random.Next(1000000, 10000000)}",
 
-                DateOfBirth =
-                    DateTime.Today
-                        .AddYears(-random.Next(20, 50))
-                        .AddDays(-random.Next(365)),
+                DateOfBirth =DateTime.Today.AddYears(-random.Next(19, 45)).AddDays(-random.Next(365)),
 
                 IsActive = random.Next(2) == 1
             });

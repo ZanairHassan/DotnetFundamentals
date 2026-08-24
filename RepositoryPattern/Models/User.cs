@@ -16,7 +16,7 @@ namespace RepositoryPattern.Models
 
         [Required]
         [EmailAddress]
-        [StringLength(100)]
+        [StringLength(50)]
         public string Email { get; set; } = string.Empty;
 
         [Phone]
