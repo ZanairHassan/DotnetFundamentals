@@ -8,9 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Data\" />
-    <Folder Include="Services\" />
-    <Folder Include="Repositories\" />
+    <Folder Include="Middlewares\" />
   </ItemGroup>
 
 </Project>
