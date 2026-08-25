@@ -2,90 +2,54 @@
 using RepositoryPattern.Repositories.Interfaces;
 using RepositoryPattern.Services.Interfaces;
 
-namespace RepositoryPattern.Services
+namespace RepositoryPattern.Services;
+
+public class UserService : IUserService
 {
-    public class UserService : IUserService
+    private readonly IUnitOfWork _unitOfWork;
+
+    public UserService(IUnitOfWork unitOfWork)
     {
-        private readonly IUserRepository _userRepository;
+        _unitOfWork = unitOfWork;
+    }
 
-        public UserService(IUserRepository userRepository)
+    public async Task<IReadOnlyList<User>> GetAllAsync()
+    {
+        return await _unitOfWork.Users.GetAllAsync();
+    }
+
+    public async Task<User?> GetByIdAsync(int id)
+    {
+        return await _unitOfWork.Users.GetByIdAsync(id);
+    }
+
+    public async Task<User?> CreateAsync(User user)
+    {
+        Career? career = await _unitOfWork.Careers.GetByIdAsync(user.CareerId);
+
+        if (career is null)
         {
-            _userRepository = userRepository;
+            return null;
         }
 
-        public async Task<IReadOnlyList<User>> GetAllAsync()
+        return await _unitOfWork.Users.CreateAsync(user);
+    }
+
+    public async Task<User?> UpdateAsync(User user)
+    {
+        Career? career = await _unitOfWork.Careers
+            .GetByIdAsync(user.CareerId);
+
+        if (career is null)
         {
-            return await _userRepository.GetAllAsync();
+            return null;
         }
 
-        public async Task<User?> GetByIdAsync(int id)
-        {
-            if (id <= 0)
-            {
-                return null;
-            }
+        return await _unitOfWork.Users.UpdateAsync(user);
+    }
 
-            return await _userRepository.GetByIdAsync(id);
-        }
-
-        public async Task<User?> CreateAsync(User user)
-        {
-            bool emailExists = await EmailExistsAsync(user.Email);
-
-            if (emailExists)
-            {
-                return null;
-            }
-
-            return await _userRepository.AddAsync(user);
-        }
-
-        public async Task<User?> UpdateAsync(User user)
-        {
-            if (user.Id <= 0)
-            {
-                return null;
-            }
-
-            User? existingUser = await _userRepository.GetByIdAsync(user.Id);
-
-            if (existingUser is null)
-            {
-                return null;
-            }
-
-            bool emailExists = await EmailExistsForAnotherUserAsync(user.Email, user.Id);
-
-            if (emailExists)
-            {
-                return null;
-            }
-
-            return await _userRepository.UpdateAsync(user);
-        }
-
-        public async Task<bool> DeleteAsync(int id)
-        {
-            if (id <= 0)
-            {
-                return false;
-            }
-
-            return await _userRepository.DeleteAsync(id);
-        }
-
-        private async Task<bool> EmailExistsAsync(string email)
-        {
-            IReadOnlyList<User> users = await _userRepository.GetAllAsync();
-
-            return users.Any(user => user.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
-        }
-
-        private async Task<bool> EmailExistsForAnotherUserAsync(string email, int userId)
-        {
-            IReadOnlyList<User> users = await _userRepository.GetAllAsync();
-
-            return users.Any(user => user.Id != userId && user.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
-        }
+    public async Task<bool> DeleteAsync(int id)
+    {
+        return await _unitOfWork.Users.DeleteAsync(id);
     }
 }
