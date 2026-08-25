@@ -1,3 +1,4 @@
+using RepositoryPattern.Filters;
 using RepositoryPattern.Repositories;
 using RepositoryPattern.Repositories.Interfaces;
 using RepositoryPattern.Services;
@@ -5,8 +6,10 @@ using RepositoryPattern.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
-
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+});
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
@@ -16,7 +19,8 @@ var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    //app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 app.UseRouting();
 
