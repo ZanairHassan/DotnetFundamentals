@@ -13,5 +13,9 @@ namespace RepositoryPattern.Services.Interfaces
         Task<User?> UpdateAsync(User user);
 
         Task<bool> DeleteAsync(int id);
+
+        Task<bool> AssignCareerAsync(IReadOnlyCollection<int> userIds, int careerId);
+
+        Task<IReadOnlyList<Career>> GetCareersAsync();
     }
 }

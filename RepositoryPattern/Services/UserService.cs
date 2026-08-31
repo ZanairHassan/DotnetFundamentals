@@ -52,4 +52,42 @@ public class UserService : IUserService
     {
         return await _unitOfWork.Users.DeleteAsync(id);
     }
+
+    public async Task<bool> AssignCareerAsync(IReadOnlyCollection<int> userIds, int careerId)
+    {
+        Career? career = await _unitOfWork.Careers.GetByIdAsync(careerId);
+
+        if (career is null)
+        {
+            return false;
+        }
+
+        List<User> users = [];
+
+        foreach (int userId in userIds)
+        {
+            User? user = await _unitOfWork.Users.GetByIdAsync(userId);
+
+            if (user is null)
+            {
+                return false;
+            }
+
+            users.Add(user);
+        }
+
+        foreach (User user in users)
+        {
+            user.CareerId = careerId;
+
+            await _unitOfWork.Users.UpdateAsync(user);
+        }
+
+        return true;
+    }
+
+    public async Task<IReadOnlyList<Career>> GetCareersAsync()
+    {
+        return await _unitOfWork.Careers.GetAllAsync();
+    }
 }

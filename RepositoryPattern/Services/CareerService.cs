@@ -37,11 +37,15 @@ public class CareerService : ICareerService
     {
         IReadOnlyList<User> users = await _unitOfWork.Users.GetAllAsync();
 
-        bool isAssigned = users.Any(user => user.CareerId == id);
-
-        if (isAssigned)
+        var assignedUsers = users.Where(user => user.CareerId == id).ToList();
+        if (assignedUsers.Count > 0)
         {
-            return false;
+            foreach (var user in assignedUsers)
+            {
+                user.CareerId = 0;
+
+                await _unitOfWork.Users.UpdateAsync(user);
+            }
         }
 
         return await _unitOfWork.Careers.DeleteAsync(id);
