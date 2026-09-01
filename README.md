@@ -187,6 +187,13 @@ Source Code Repository for Intern 1
 - Add a new solution to the repo to implement the repository pattern.
 - create the repository for the user using the DI, add the exception filter class, the ui for the user crud.
 
+## 49. Weekly assignment
+- Implement the Unit of Work in the repository pattern project as i have...
+- Seed the Career through the career seed data class.
+- Added the service and repository for the Career.
+- Added the crud feature for the Careers.
+- Associate the careers to the users using the Unit of work i have associate the career to the different users and delete the career by validating the users.
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -213,6 +220,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/24)(on child branch 36-25-Static-files -#18-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/25)(on child branch 37-26-Mini-Assignment -#19-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -#24-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 60-49-Unit-of-Work -#31-08-2026)
 
 
 ## Project Structure
