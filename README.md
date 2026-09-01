@@ -220,7 +220,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/24)(on child branch 36-25-Static-files -#18-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/25)(on child branch 37-26-Mini-Assignment -#19-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -#24-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 60-49-Unit-of-Work -#31-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/27)(on child branch 60-49-Unit-of-Work -#31-08-2026)
 
 
 ## Project Structure
@@ -259,6 +259,23 @@ cmintern1/
 │   ├── appsettings.json      # Configuration
 │   └── MvcFeatures.csproj
 │
+├── 📁RepositoryPattern/
+│	├── 📁 Connected Services/       # Connected external services
+│	├── 📁 Dependencies/             # Project dependencies and NuGet packages
+│	├── 📁 Properties/               # Project configuration and launch settings
+│	├── 📁 wwwroot/                  # Static Files (CSS, JS, Images)
+│	├── 📁 Controllers/              # MVC Controllers
+│	├── 📁 Data/                     # Data Seeders
+│	├── 📁 Filters/                  # Custom MVC Filters
+│	├── 📁 Middlewares/              # Custom Middleware Components
+│	├── 📁 Models/                   # Domain Models
+│	├── 📁 Repositories/             # Repository Pattern Implementation
+│	├── 📁 Services/                 # Service Implementations
+│	├── 📁 ViewModels/               # View-Specific Models
+│	├── 📁 Views/                    # Razor Views
+│	├── 📄 appsettings.json          # Application Configuration
+│	└── 📄 Program.cs                # Application Entry Point
+├── 📄 RepositoryPattern.slnx              # Solution File
 
 ├── 📄 README.md
 └── 📄 .gitignore
