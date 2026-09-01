@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WeeklyAssignment.Filters;
 using WeeklyAssignment.Models;
 using WeeklyAssignment.Services.Interfaces;
 using WeeklyAssignment.ViewModels.Employees;
@@ -6,6 +7,7 @@ using WeeklyAssignment.ViewModels.Employees;
 namespace WeeklyAssignment.Controllers;
 
 [Route("employees")]
+[ServiceFilter(typeof(ActionExecutionLoggingFilter))]
 public class EmployeeController : Controller
 {
     private readonly IEmployeeService _employeeService;
