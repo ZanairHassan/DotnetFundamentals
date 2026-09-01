@@ -187,7 +187,7 @@ Source Code Repository for Intern 1
 - Add a new solution to the repo to implement the repository pattern.
 - create the repository for the user using the DI, add the exception filter class, the ui for the user crud.
 
-## 49. Weekly assignment
+## 49. Unit of Work (intro)
 - Implement the Unit of Work in the repository pattern project as i have...
 - Seed the Career through the career seed data class.
 - Added the service and repository for the Career.
