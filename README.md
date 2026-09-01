@@ -194,6 +194,13 @@ Source Code Repository for Intern 1
 - Added the crud feature for the Careers.
 - Associate the careers to the users using the Unit of work i have associate the career to the different users and delete the career by validating the users.
 
+## 50. Weekly Assignment
+- Implemented the Employee CRUD feature with dedicated ViewModels and Razor Views.
+- Implemented attribute-based routing for the Employee.
+- Implemented centralized exception handling using custom middleware.
+- Implemented an MVC Action Filter for logging controller action execution and performance.
+- Reviewed and structured the project architecture using Repository Pattern, Unit of Work, Services, Dependency Injection, and In-Memory Data Seeding.
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -221,6 +228,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/25)(on child branch 37-26-Mini-Assignment -#19-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -#24-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/27)(on child branch 60-49-Unit-of-Work -#31-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 61-50-Weekly-Assignment -#01-09-2026)
 
 
 ## Project Structure
@@ -276,6 +284,65 @@ cmintern1/
 │	├── 📄 appsettings.json          # Application Configuration
 │	└── 📄 Program.cs                # Application Entry Point
 ├── 📄 RepositoryPattern.slnx              # Solution File
+│
+├── 📁 WeeklyAssignment/
+│	├── 📁Connected Services/
+│	├── 📁 Dependencies/
+│	├── 📁 Properties/
+│	├── 📁 wwwroot/
+│	├── 📁 Controllers/
+│	│		├── EmployeeController.cs
+│	│		└── ErrorController.cs
+│	├──📁 Data/
+│	│		├── InMemoryDataStore.cs
+│	│		├── EmployeeSeedData.cs
+│	│		└── DesignationSeedData.cs
+│	├── 📁 Filters/
+│	│		└── ActionExecutionLoggingFilter.cs
+│	├── 📁 Middlewares/
+│	│		└── ExceptionHandlingMiddleware.cs
+│	├── 📁 Models/
+│	│		├── Employee.cs
+│	│		└── Designation.cs
+│	├── 📁 Repositories/		
+│	│		├──  📁	Interfaces/
+│	│		│		├── IEmployeeRepository.cs
+│	│		│		├── IDesignationRepository.cs
+│	│		│		└── IUnitOfWork.cs
+│	│		│
+│	│		└──  📁 Implementations/
+│	│				├── EmployeeRepository.cs
+│	│				├── DesignationRepository.cs
+│	│				└── UnitOfWork.cs
+│	├── 📁 Services/
+│	│		│
+│	│		├──  📁 Interfaces/
+│	│		│		└── IEmployeeService.cs
+│	│		│
+│	│		└──  📁 Implementations/
+│	│				└── EmployeeService.cs
+│	├── 📁 ViewModels/		
+│	│		└──  📁 Employees/
+│	│				├── EmployeeListVM.cs
+│	│				├── EmployeeCreateVM.cs
+│	│				├── EmployeeEditVM.cs
+│	│				└── EmployeeDetailsVM.cs
+│	├── 📁 Views/		
+│	│		├──  📁 Employee/
+│	│		│   ├── Index.cshtml
+│	│		│   ├── Details.cshtml
+│	│		│   ├── Create.cshtml
+│	│		│   ├── Edit.cshtml
+│	│		│   └── Delete.cshtml
+│	│		├──  📁 Error/
+│	│		│   └── Index.cshtml
+│	│		├──  📁 Shared/
+│	│		├── _ViewImports.cshtml
+│	│		└── _ViewStart.cshtml
+│	├── 📄 appsettings.json
+│	├── 📄 appsettings.Development.json
+│	├── 📄 Program.cs
+│	├── 📄 WeeklyAssignment.slnx
 
 ├── 📄 README.md
 └── 📄 .gitignore
