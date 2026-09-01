@@ -1,0 +1,95 @@
+﻿@model WeeklyAssignment.ViewModels.Employees.EmployeeEditVM
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="mb-4">
+    <h1>Edit Employee</h1>
+    <p class="text-muted">
+        Update employee information.
+    </p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input asp-for="Id" type="hidden" />
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label asp-for="Name" class="form-label"></label>
+
+                    <input asp-for="Name" class="form-control" />
+
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label"></label>
+
+                    <input asp-for="Email" class="form-control" />
+
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Salary" class="form-label"></label>
+
+                    <input asp-for="Salary" class="form-control" />
+
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="JoiningDate" class="form-label"></label>
+
+                    <input asp-for="JoiningDate" class="form-control" />
+
+                    <span asp-validation-for="JoiningDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="DesignationId" class="form-label"></label>
+
+                    <select asp-for="DesignationId" class="form-select">
+
+                        @foreach (var designation in Model.Designations)
+                        {
+                            <option value="@designation.Id">
+                                @designation.Name
+                            </option>
+                        }
+
+                    </select>
+
+                    <span asp-validation-for="DesignationId" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+
+                <button type="submit" class="btn btn-primary">
+                    Save Changes
+                </button>
+
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
