@@ -1,4 +1,8 @@
 using WeeklyAssignment.Data;
+using WeeklyAssignment.Repositories.Implementations;
+using WeeklyAssignment.Repositories.Interfaces;
+using WeeklyAssignment.Services.Implementations;
+using WeeklyAssignment.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<InMemoryDataStore>();
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+builder.Services.AddScoped<IDesignationRepository, DesignationRepository>();
+
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var app = builder.Build();
 
