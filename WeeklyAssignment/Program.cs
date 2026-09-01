@@ -11,9 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<InMemoryDataStore>();
 
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
-builder.Services.AddScoped<IDesignationRepository, DesignationRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
