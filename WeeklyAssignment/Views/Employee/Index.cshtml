@@ -13,8 +13,126 @@
     </div>
 
     <a asp-action="Create" class="btn btn-primary">
+        <i class="fa-solid fa-user-plus me-2"></i>
         Add Employee
     </a>
+</div>
+
+
+
+<div class="row g-4 mb-4">
+
+    <div class="col-12 col-sm-6 col-lg-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <p class="text-muted mb-2">Total Employees</p>
+
+                        <h2 class="mb-1">@Model.TotalEmployees</h2>
+
+                        <small class="text-muted">Employees in the system</small>
+
+                    </div>
+
+                    <div class="rounded-circle bg-primary bg-opacity-10
+                        text-primary d-flex align-items-center
+                        justify-content-center"
+                         style="width: 50px; height: 50px;">
+
+                        <span style="font-size: 22px;">
+                            👥
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mb-4">
+
+    <h4 class="mb-3">
+        Employees by Designation
+    </h4>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-5 g-4">
+
+        @foreach (var designation in Model.DesignationSummaries)
+        {
+            <div class="col">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+
+                            <div>
+
+                                <p class="text-muted small mb-1">@designation.Name</p>
+
+                                <h3 class="mb-0">@designation.EmployeeCount</h3>
+
+                            </div>
+
+                            <div class="rounded-circle bg-primary bg-opacity-10
+                                text-primary d-flex align-items-center
+                                justify-content-center"
+                                 style="width: 42px; height: 42px;">
+
+                                <span>
+                                    👤
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <small class="text-muted">
+                                Employees
+                            </small>
+
+                            <small class="fw-semibold">
+                                @designation.Percentage.ToString("0.0")%
+                            </small>
+
+                        </div>
+
+                        <div class="progress"
+                             role="progressbar"
+                             aria-valuenow="@designation.Percentage"
+                             aria-valuemin="0"
+                             aria-valuemax="100"
+                             style="height: 6px;">
+
+                            <div class="progress-bar"
+                                 style="width: @designation.Percentage%;">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
 </div>
 
 <form asp-action="Index" method="get" class="card shadow-sm mb-4">
@@ -83,9 +201,8 @@ else
                 <tbody>
                     @foreach (var employee in Model.Employees)
                     {
-                        var designation = Model.Designations.FirstOrDefault(d => d.Id == employee.DesignationId);
-
                         <tr>
+
                             <td>
                                 @employee.Name
                             </td>
@@ -103,23 +220,17 @@ else
                             </td>
 
                             <td>
-                                @(designation?.Name ?? "Unknown")
+                                @employee.DesignationName
                             </td>
 
                             <td class="text-end">
-                                <div class="btn-group">
+                                <div class="btn-group" role="group">
 
-                                    <a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-sm btn-outline-info">
-                                        Details
-                                    </a>
+                                    <a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-sm btn-info">Details</a>
 
-                                    <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-sm btn-outline-primary">
-                                        Edit
-                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-sm btn-warning">Edit</a>
 
-                                    <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-sm btn-outline-danger">
-                                        Delete
-                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-sm btn-danger">Delete</a>
 
                                 </div>
                             </td>

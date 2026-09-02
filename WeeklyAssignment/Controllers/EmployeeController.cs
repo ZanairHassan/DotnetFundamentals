@@ -20,16 +20,7 @@ public class EmployeeController : Controller
     [HttpGet("")]
     public IActionResult Index(string? searchTerm, int? designationId)
     {
-        var viewModel = new EmployeeListVM
-        {
-            Employees = _employeeService.Search(searchTerm, designationId),
-
-            Designations = _employeeService.GetDesignations(),
-
-            SearchTerm = searchTerm,
-
-            DesignationId = designationId
-        };
+        var viewModel = _employeeService.GetEmployeeList(searchTerm, designationId);
 
         return View(viewModel);
     }

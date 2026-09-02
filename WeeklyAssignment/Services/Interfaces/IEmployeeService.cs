@@ -1,14 +1,16 @@
 ﻿using WeeklyAssignment.Models;
+using WeeklyAssignment.ViewModels.Employees;
 
 namespace WeeklyAssignment.Services.Interfaces;
 
 public interface IEmployeeService
 {
+    EmployeeListVM GetEmployeeList(string? searchTerm, int? designationId);
     IEnumerable<Employee> GetAll();
 
     Employee? GetById(int id);
 
-    IEnumerable<Employee> Search(string? searchTerm, int? designationId);
+    //IEnumerable<Employee> Search(string? searchTerm, int? designationId);
 
     bool Create(Employee employee);
 
