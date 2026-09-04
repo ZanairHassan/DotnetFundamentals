@@ -201,6 +201,14 @@ Source Code Repository for Intern 1
 - Implemented an MVC Action Filter for logging controller action execution and performance.
 - Reviewed and structured the project architecture using Repository Pattern, Unit of Work, Services, Dependency Injection, and In-Memory Data Seeding.
 
+
+## 51. UI Improvements
+- Added the Statics detail summary for the Employee based on the designations.
+- Added a partial view to remove the duplicate code.
+- Add an icon for the Create Button at the Employee Index page.
+
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -229,6 +237,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -#24-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/27)(on child branch 60-49-Unit-of-Work -#31-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 61-50-Weekly-Assignment -#01-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 62-51-UI-Improvements -#02-09-2026)
 
 
 ## Project Structure
