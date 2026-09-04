@@ -207,6 +207,12 @@ Source Code Repository for Intern 1
 - Added a partial view to remove the duplicate code.
 - Add an icon for the Create Button at the Employee Index page.
 
+## 52. Bootstrap integration
+- In the dotnet core mvc project, bootstrap is integrated into the project by default when we create a MVC Web App project.
+- In order to use the bootstrap features into the presentation layer (views) we register it into the _Layout page as "<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />"
+- If want to manually integrate the bootstrap into the project then.... 
+   	 - right click onto the project and from the => add menu => select the client side libray,
+	 - then from cdnjs select any bootstrap feature that you what to integrate into the project.
 
 
 ## Collaborate with team
