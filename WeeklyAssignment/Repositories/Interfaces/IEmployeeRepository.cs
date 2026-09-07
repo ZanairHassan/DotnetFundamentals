@@ -10,7 +10,7 @@ public interface IEmployeeRepository
 
     void Add(Employee employee);
 
-    void Update(Employee employee);
+    bool Update(Employee employee);
 
     bool Delete(int id);
 
