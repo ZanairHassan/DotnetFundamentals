@@ -18,42 +18,11 @@ public class EmployeeController : Controller
     }
 
     #region Private Methods
-    private EmployeeDetailsVM? GetEmployeeDetailsViewModel(int id)
-    {
-        var employee = _employeeService.GetById(id);
-
-        if (employee is null)
-        {
-            return null;
-        }
-
-        var designation = _employeeService.GetDesignations()
-            .FirstOrDefault(d => d.Id == employee.DesignationId);
-
-        return new EmployeeDetailsVM
-        {
-            Employee = employee,
-            Designation = designation
-        };
-    }
-
-    private static Employee MapToEmployee(EmployeeCreateVM model)
+    private static Employee MapToEmployee(EmployeeInputVM model, int id = 0)
     {
         return new Employee
         {
-            Name = model.Name,
-            Email = model.Email,    
-            Salary = model.Salary,
-            JoiningDate = model.JoiningDate,
-            DesignationId = model.DesignationId
-        };
-    }
-
-    private static Employee MapToEmployee(EmployeeEditVM model)
-    {
-        return new Employee
-        {
-            Id = model.Id,
+            Id = id,
             Name = model.Name,
             Email = model.Email,
             Salary = model.Salary,
@@ -75,7 +44,7 @@ public class EmployeeController : Controller
     [HttpGet("{id:int}")]
     public IActionResult Details(int id)
     {
-        var viewModel = GetEmployeeDetailsViewModel(id);
+        var viewModel = _employeeService.GetEmployeeDetails(id);
 
         if (viewModel is null)
         {
@@ -149,9 +118,7 @@ public class EmployeeController : Controller
 
     [HttpPost("{id:int}/edit")]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(
-       int id,
-       EmployeeEditVM model)
+    public IActionResult Edit(int id, EmployeeEditVM model)
     {
         if (id != model.Id)
         {
@@ -165,8 +132,7 @@ public class EmployeeController : Controller
             return View(model);
         }
 
-        var employee = MapToEmployee(model);
-
+        var employee = MapToEmployee(model, id);
         if (!_employeeService.Update(employee))
         {
             if (!_employeeService.Exists(id))
@@ -189,7 +155,7 @@ public class EmployeeController : Controller
     [HttpGet("{id:int}/delete")]
     public IActionResult Delete(int id)
     {
-        var viewModel = GetEmployeeDetailsViewModel(id);
+        var viewModel = _employeeService.GetEmployeeDetails(id);
 
         if (viewModel is null)
         {
