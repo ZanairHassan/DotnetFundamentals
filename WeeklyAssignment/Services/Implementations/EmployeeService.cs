@@ -19,6 +19,24 @@ public class EmployeeService : IEmployeeService
         return _unitOfWork.Employees.GetById(id);
     }
 
+    public EmployeeDetailsVM? GetEmployeeDetails(int id)
+    {
+        var employee = _unitOfWork.Employees.GetById(id);
+
+        if (employee is null)
+        {
+            return null;
+        }
+
+        var designation = _unitOfWork.Designations.GetById(employee.DesignationId);
+
+        return new EmployeeDetailsVM
+        {
+            Employee = employee,
+            Designation = designation
+        };
+    }
+
     public bool Create(Employee employee)
     {
         if (_unitOfWork.Designations.GetById(employee.DesignationId) is null)
@@ -87,7 +105,7 @@ public class EmployeeService : IEmployeeService
             })
             .ToList();
 
-        var filteredEmployees = employees.AsEnumerable();
+        IEnumerable<Employee> filteredEmployees = employees;
 
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {

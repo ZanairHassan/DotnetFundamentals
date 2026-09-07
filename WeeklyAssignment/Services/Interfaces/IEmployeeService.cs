@@ -7,6 +7,8 @@ public interface IEmployeeService
 {
     EmployeeListVM GetEmployeeList(string? searchTerm, int? designationId);
 
+    EmployeeDetailsVM? GetEmployeeDetails(int id);
+
     Employee? GetById(int id);
 
     bool Create(Employee employee);
