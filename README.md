@@ -214,6 +214,11 @@ Source Code Repository for Intern 1
    	 - right click onto the project and from the => add menu => select the client side libray,
 	 - then from cdnjs select any bootstrap feature that you what to integrate into the project.
 
+## 53. Refactoring
+- Remove the duplicated code form the controller.
+- Add region into the controller to define the private methods there. then overload those methods into the controller actions to make code little clean.
+- Remove unused and irrelevant code from the Repositories and the service.
+
 
 ## Collaborate with team
 
@@ -243,7 +248,8 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -#24-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/27)(on child branch 60-49-Unit-of-Work -#31-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 61-50-Weekly-Assignment -#01-09-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 62-51-UI-Improvements -#02-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/31)(on child branch 62-51-UI-Improvements -#02-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/32)(on child branch 64-53-Refactoring -#04-09-2026)
 
 
 ## Project Structure
