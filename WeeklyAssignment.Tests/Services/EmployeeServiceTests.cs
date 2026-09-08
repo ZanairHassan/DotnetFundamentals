@@ -134,9 +134,7 @@ public class EmployeeServiceTests
             Name = "Software Engineer"
         };
 
-        _designationRepositoryMock
-            .Setup(repository => repository.GetById(1))
-            .Returns(designation);
+        _designationRepositoryMock.Setup(repository => repository.GetById(1)).Returns(designation);
 
         // Act
         var result = _employeeService.Create(employee);
@@ -144,9 +142,7 @@ public class EmployeeServiceTests
         // Assert
         Assert.True(result);
 
-        _employeeRepositoryMock.Verify(
-            repository => repository.Add(employee),
-            Times.Once);
+        _employeeRepositoryMock.Verify(repository => repository.Add(employee),Times.Once);
     }
 
     [Fact]
@@ -162,9 +158,7 @@ public class EmployeeServiceTests
             DesignationId = 999
         };
 
-        _designationRepositoryMock
-            .Setup(repository => repository.GetById(999))
-            .Returns((Designation?)null);
+        _designationRepositoryMock.Setup(repository => repository.GetById(999)).Returns((Designation?)null);
 
         // Act
         var result = _employeeService.Create(employee);
@@ -172,9 +166,7 @@ public class EmployeeServiceTests
         // Assert
         Assert.False(result);
 
-        _employeeRepositoryMock.Verify(
-            repository => repository.Add(It.IsAny<Employee>()),
-            Times.Never);
+        _employeeRepositoryMock.Verify(repository => repository.Add(It.IsAny<Employee>()),Times.Never);
     }
 
     #endregion
@@ -201,13 +193,9 @@ public class EmployeeServiceTests
             Name = "Software Engineer"
         };
 
-        _designationRepositoryMock
-            .Setup(repository => repository.GetById(1))
-            .Returns(designation);
+        _designationRepositoryMock.Setup(repository => repository.GetById(1)).Returns(designation);
 
-        _employeeRepositoryMock
-            .Setup(repository => repository.Update(employee))
-            .Returns(true);
+        _employeeRepositoryMock.Setup(repository => repository.Update(employee)).Returns(true);
 
         // Act
         var result = _employeeService.Update(employee);
@@ -215,9 +203,7 @@ public class EmployeeServiceTests
         // Assert
         Assert.True(result);
 
-        _employeeRepositoryMock.Verify(
-            repository => repository.Update(employee),
-            Times.Once);
+        _employeeRepositoryMock.Verify(repository => repository.Update(employee),Times.Once);
     }
 
     [Fact]
@@ -234,9 +220,7 @@ public class EmployeeServiceTests
             DesignationId = 999
         };
 
-        _designationRepositoryMock
-            .Setup(repository => repository.GetById(999))
-            .Returns((Designation?)null);
+        _designationRepositoryMock.Setup(repository => repository.GetById(999)).Returns((Designation?)null);
 
         // Act
         var result = _employeeService.Update(employee);
@@ -244,9 +228,7 @@ public class EmployeeServiceTests
         // Assert
         Assert.False(result);
 
-        _employeeRepositoryMock.Verify(
-            repository => repository.Update(It.IsAny<Employee>()),
-            Times.Never);
+        _employeeRepositoryMock.Verify(repository => repository.Update(It.IsAny<Employee>()),Times.Never);
     }
 
     #endregion
@@ -283,7 +265,83 @@ public class EmployeeServiceTests
         _employeeRepositoryMock.Verify(repository => repository.Delete(999),Times.Once);
     }
 
+    #endregion
 
+    #region Exists
+
+    [Fact]
+    public void Exists_WhenEmployeeExists_ReturnsTrue()
+    {
+        // Arrange
+        const int employeeId = 1;
+
+        _employeeRepositoryMock.Setup(repository => repository.Exists(employeeId)).Returns(true);
+
+        // Act
+        var result = _employeeService.Exists(employeeId);
+
+        // Assert
+        Assert.True(result);
+
+        _employeeRepositoryMock.Verify(repository => repository.Exists(employeeId),Times.Once);
+    }
+
+    [Fact]
+    public void Exists_WhenEmployeeDoesNotExist_ReturnsFalse()
+    {
+        // Arrange
+        const int employeeId = 999;
+
+        _employeeRepositoryMock.Setup(repository => repository.Exists(employeeId)).Returns(false);
+
+        // Act
+        var result = _employeeService.Exists(employeeId);
+
+        // Assert
+        Assert.False(result);
+
+        _employeeRepositoryMock.Verify(repository => repository.Exists(employeeId),Times.Once);
+    }
 
     #endregion
+
+    #region GetDesignations
+
+    [Fact]
+    public void GetDesignations_WhenDesignationsExist_ReturnsDesignations()
+    {
+        // Arrange
+        var designations = new List<Designation>
+    {
+        new Designation
+        {
+            Id = 1,
+            Name = "Developer"
+        },
+        new Designation
+        {
+            Id = 2,
+            Name = "Manager"
+        }
+    };
+
+        _designationRepositoryMock.Setup(repository => repository.GetAll()).Returns(designations);
+
+        // Act
+        var result = _employeeService.GetDesignations();
+
+        // Assert
+        Assert.NotNull(result);
+
+        var resultList = result.ToList();
+
+        Assert.Equal(2, resultList.Count);
+
+        Assert.Equal("Developer", resultList[0].Name);
+        Assert.Equal("Manager", resultList[1].Name);
+
+        _designationRepositoryMock.Verify(repository => repository.GetAll(),Times.Once);
+    }
+
+    #endregion 
 }
