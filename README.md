@@ -226,6 +226,11 @@ Source Code Repository for Intern 1
 - Update the Employee service method "GetEmployeeList".
 - For each purpose I have added a private method then reuse that into the main service method to get the employee details against the designation.
 
+## 55. Testing
+- Added a new XUnit project into the solution "WeeklyAssignment.Tests"
+- Added a test class for the EmployeeService class in the test project.
+- Added test cases for the EmployeeService class into the EmployeeServiceTests class.
+- Run these test to check whether they are failed or not.
 
 ## Collaborate with team
 
@@ -258,6 +263,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/31)(on child branch 62-51-UI-Improvements -02-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/32)(on child branch 64-53-Refactoring -04-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/33)(on child branch 65-54-Code-cleanup -07-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/34)(on child branch 66-55-Testing -08-09-2026)
 
 
 ## Project Structure
@@ -376,6 +382,12 @@ cmintern1/
 │	├── 📄 appsettings.json
 │	├── 📄 appsettings.Development.json
 │	├── 📄 Program.cs
+├── 📁 WeeklyAssignment.Tests/
+│	│		├──  📁 Dependencies/
+│	│		│		├── 📁 Projects/
+│	│		│		│	├── 📄 WeeklyAssignment
+│	│		├──  📁 Services/
+│	│		│			├──  EmployeeServiceTests.cs
 │	├── 📄 WeeklyAssignment.slnx
 
 ├── 📄 README.md
