@@ -219,6 +219,10 @@ Source Code Repository for Intern 1
 - Add region into the controller to define the private methods there. then overload those methods into the controller actions to make code little clean.
 - Remove unused and irrelevant code from the Repositories and the service.
 
+## 54. Code Cleanup
+- Clean-Up the duplicated code from the views, add a partial view for that.
+- Add a new view model for repeated properties into the create and edit vm.
+- Add a method "GetEmployeeDetails" to get the details related to employee and the designation. that make the controller short.
 
 ## Collaborate with team
 
@@ -250,6 +254,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 61-50-Weekly-Assignment -#01-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/31)(on child branch 62-51-UI-Improvements -#02-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/32)(on child branch 64-53-Refactoring -#04-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/33)(on child branch 65-54-Refactoring -#07-09-2026)
 
 
 ## Project Structure
