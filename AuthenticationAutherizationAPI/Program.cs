@@ -1,5 +1,7 @@
 using AuthenticationAutherizationAPI.Data;
 using AuthenticationAutherizationAPI.Models;
+using AuthenticationAutherizationAPI.Services.Implementations;
+using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +19,10 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DB_Connection")));
+
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IRoleService, RoleService>();
 
 var app = builder.Build();
 
