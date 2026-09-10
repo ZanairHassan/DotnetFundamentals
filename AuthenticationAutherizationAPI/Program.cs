@@ -20,10 +20,13 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DB_Connection")));
 
+#region Dependency Injection
+
 builder.Services.AddScoped<IUserService, UserService>();
-
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IClaimService, ClaimService>();
 
+#endregion
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
