@@ -25,6 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IClaimService, ClaimService>();
+builder.Services.AddScoped<ISignInService, SignInService>();
 
 #endregion
 var app = builder.Build();
