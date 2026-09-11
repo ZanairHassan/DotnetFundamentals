@@ -1,0 +1,74 @@
+﻿@model WeeklyAssignment.ViewModels.Employees.EmployeeDetailsVM
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>Employee Details</h1>
+        <p class="text-muted mb-0">
+            View employee information.
+        </p>
+    </div>
+
+    <div class="d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.Employee.Id" class="btn btn-primary">
+            Edit
+        </a>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Back
+        </a>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <dl class="row mb-0">
+
+            <dt class="col-sm-3">
+                Name
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Employee.Name
+            </dd>
+
+            <dt class="col-sm-3">
+                Email
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Employee.Email
+            </dd>
+
+            <dt class="col-sm-3">
+                Salary
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Employee.Salary.ToString("N0")
+            </dd>
+
+            <dt class="col-sm-3">
+                Joining Date
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Employee.JoiningDate.ToString("dd MMM yyyy")
+            </dd>
+
+            <dt class="col-sm-3">
+                Designation
+            </dt>
+
+            <dd class="col-sm-9">
+                @(Model.Designation?.Name ?? "Unknown")
+            </dd>
+
+        </dl>
+
+    </div>
+</div>
