@@ -182,6 +182,11 @@ Source Code Repository for Intern 1
 	- Get Active Users
 	- Get Inactive Users
 
+## 48. Repository Pattern
+- Explore repository pattern and its way of implementation.
+- Add a new solution to the repo to implement the repository pattern.
+- create the repository for the user using the DI, add the exception filter class, the ui for the user crud.
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -207,6 +212,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/23)(on child branch 35-24-Partial-Views -#17-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/24)(on child branch 36-25-Static-files -#18-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/25)(on child branch 37-26-Mini-Assignment -#19-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -#24-08-2026)
 
 
 ## Project Structure
