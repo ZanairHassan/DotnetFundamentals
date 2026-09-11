@@ -201,6 +201,20 @@ Source Code Repository for Intern 1
 - Implemented an MVC Action Filter for logging controller action execution and performance.
 - Reviewed and structured the project architecture using Repository Pattern, Unit of Work, Services, Dependency Injection, and In-Memory Data Seeding.
 
+
+## 51. UI Improvements
+- Added the Statics detail summary for the Employee based on the designations.
+- Added a partial view to remove the duplicate code.
+- Add an icon for the Create Button at the Employee Index page.
+
+## 52. Bootstrap integration
+- In the dotnet core mvc project, bootstrap is integrated into the project by default when we create a MVC Web App project.
+- In order to use the bootstrap features into the presentation layer (views) we register it into the _Layout page as "<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />"
+- If want to manually integrate the bootstrap into the project then.... 
+   	 - right click onto the project and from the => add menu => select the client side libray,
+	 - then from cdnjs select any bootstrap feature that you what to integrate into the project.
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
@@ -229,6 +243,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -#24-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/27)(on child branch 60-49-Unit-of-Work -#31-08-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 61-50-Weekly-Assignment -#01-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 62-51-UI-Improvements -#02-09-2026)
 
 
 ## Project Structure
