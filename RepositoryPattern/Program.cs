@@ -1,3 +1,4 @@
+using RepositoryPattern.Data;
 using RepositoryPattern.Filters;
 using RepositoryPattern.Repositories;
 using RepositoryPattern.Repositories.Interfaces;
@@ -10,9 +11,17 @@ builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<GlobalExceptionFilter>();
 });
-builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<InMemoryDataStore>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<ICareerRepository, CareerRepository>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<ICareerService, CareerService>();
 
 var app = builder.Build();
 

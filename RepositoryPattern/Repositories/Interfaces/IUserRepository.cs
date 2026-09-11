@@ -8,7 +8,7 @@ namespace RepositoryPattern.Repositories.Interfaces
 
         Task<User?> GetByIdAsync(int id);
 
-        Task<User> AddAsync(User user);
+        Task<User> CreateAsync(User user);
 
         Task<User?> UpdateAsync(User user);
 

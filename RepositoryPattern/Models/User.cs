@@ -27,5 +27,7 @@ namespace RepositoryPattern.Models
         public DateTime DateOfBirth { get; set; }
 
         public bool IsActive { get; set; }
+
+        public int CareerId { get; set; }
     }
 }

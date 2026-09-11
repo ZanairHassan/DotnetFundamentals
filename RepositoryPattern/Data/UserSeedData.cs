@@ -44,7 +44,9 @@ public static class UserSeedData
 
                 DateOfBirth =DateTime.Today.AddYears(-random.Next(19, 45)).AddDays(-random.Next(365)),
 
-                IsActive = random.Next(2) == 1
+                IsActive = random.Next(2) == 1,
+
+                CareerId = random.Next(1, 6)
             });
         }
 

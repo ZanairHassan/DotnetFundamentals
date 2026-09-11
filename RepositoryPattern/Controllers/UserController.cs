@@ -20,6 +20,8 @@ public class UserController : Controller
     {
         IReadOnlyList<User> users = await _userService.GetAllAsync();
 
+        IReadOnlyList<Career> careers = await _userService.GetCareersAsync();
+
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {
             users = users
@@ -33,6 +35,7 @@ public class UserController : Controller
         UserListVM viewModel = new()
         {
             Users = users,
+            Careers=careers,
             SearchTerm = searchTerm
         };
 
@@ -181,6 +184,32 @@ public class UserController : Controller
         }
 
         TempData["SuccessMessage"] = "User deleted successfully.";
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost("assigncareer")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AssignCareer(
+    UserCareerAssignmentVM model)
+    {
+        if (!ModelState.IsValid)
+        {
+            TempData["ErrorMessage"] = "Please select at least one user and a career.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        bool assigned = await _userService.AssignCareerAsync(model.SelectedUserIds, model.CareerId);
+
+        if (!assigned)
+        {
+            TempData["ErrorMessage"] = "The career could not be assigned. Please verify that the selected users and career exist.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        TempData["SuccessMessage"] = "Career assigned successfully.";
 
         return RedirectToAction(nameof(Index));
     }

@@ -9,9 +9,9 @@ namespace RepositoryPattern.Repositories
     {
         private readonly List<User> _users;
 
-        public UserRepository()
+        public UserRepository(InMemoryDataStore dataStore)
         {
-            _users = UserSeedData.GetUsers();
+            _users = dataStore.Users;
         }
 
         public Task<IReadOnlyList<User>> GetAllAsync()
@@ -28,7 +28,7 @@ namespace RepositoryPattern.Repositories
             return Task.FromResult(user);
         }
 
-        public Task<User> AddAsync(User user)
+        public Task<User> CreateAsync(User user)
         {
             int nextId = _users.Count == 0 ? 1 : _users.Max(user => user.Id) + 1;
 
