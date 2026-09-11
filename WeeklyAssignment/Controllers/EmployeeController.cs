@@ -17,6 +17,53 @@ public class EmployeeController : Controller
         _employeeService = employeeService;
     }
 
+    #region Private Methods
+    private EmployeeDetailsVM? GetEmployeeDetailsViewModel(int id)
+    {
+        var employee = _employeeService.GetById(id);
+
+        if (employee is null)
+        {
+            return null;
+        }
+
+        var designation = _employeeService.GetDesignations()
+            .FirstOrDefault(d => d.Id == employee.DesignationId);
+
+        return new EmployeeDetailsVM
+        {
+            Employee = employee,
+            Designation = designation
+        };
+    }
+
+    private static Employee MapToEmployee(EmployeeCreateVM model)
+    {
+        return new Employee
+        {
+            Name = model.Name,
+            Email = model.Email,    
+            Salary = model.Salary,
+            JoiningDate = model.JoiningDate,
+            DesignationId = model.DesignationId
+        };
+    }
+
+    private static Employee MapToEmployee(EmployeeEditVM model)
+    {
+        return new Employee
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Email = model.Email,
+            Salary = model.Salary,
+            JoiningDate = model.JoiningDate,
+            DesignationId = model.DesignationId
+        };
+    }
+
+    #endregion
+
     [HttpGet("")]
     public IActionResult Index(string? searchTerm, int? designationId)
     {
@@ -28,20 +75,12 @@ public class EmployeeController : Controller
     [HttpGet("{id:int}")]
     public IActionResult Details(int id)
     {
-        var employee = _employeeService.GetById(id);
+        var viewModel = GetEmployeeDetailsViewModel(id);
 
-        if (employee is null)
+        if (viewModel is null)
         {
             return NotFound();
         }
-
-        var designation = _employeeService.GetDesignations().FirstOrDefault(d => d.Id == employee.DesignationId);
-
-        var viewModel = new EmployeeDetailsVM
-        {
-            Employee = employee,
-            Designation = designation
-        };
 
         return View(viewModel);
     }
@@ -68,14 +107,7 @@ public class EmployeeController : Controller
             return View(model);
         }
 
-        var employee = new Employee
-        {
-            Name = model.Name,
-            Email = model.Email,
-            Salary = model.Salary,
-            JoiningDate = model.JoiningDate,
-            DesignationId = model.DesignationId
-        };
+        var employee = MapToEmployee(model);
 
         if (!_employeeService.Create(employee))
         {
@@ -118,8 +150,8 @@ public class EmployeeController : Controller
     [HttpPost("{id:int}/edit")]
     [ValidateAntiForgeryToken]
     public IActionResult Edit(
-        int id,
-        EmployeeEditVM model)
+       int id,
+       EmployeeEditVM model)
     {
         if (id != model.Id)
         {
@@ -133,15 +165,7 @@ public class EmployeeController : Controller
             return View(model);
         }
 
-        var employee = new Employee
-        {
-            Id = model.Id,
-            Name = model.Name,
-            Email = model.Email,
-            Salary = model.Salary,
-            JoiningDate = model.JoiningDate,
-            DesignationId = model.DesignationId
-        };
+        var employee = MapToEmployee(model);
 
         if (!_employeeService.Update(employee))
         {
@@ -165,20 +189,12 @@ public class EmployeeController : Controller
     [HttpGet("{id:int}/delete")]
     public IActionResult Delete(int id)
     {
-        var employee = _employeeService.GetById(id);
+        var viewModel = GetEmployeeDetailsViewModel(id);
 
-        if (employee is null)
+        if (viewModel is null)
         {
             return NotFound();
         }
-
-        var designation = _employeeService.GetDesignations().FirstOrDefault(d => d.Id == employee.DesignationId);
-
-        var viewModel = new EmployeeDetailsVM
-        {
-            Employee = employee,
-            Designation = designation
-        };
 
         return View(viewModel);
     }

@@ -28,13 +28,13 @@ public class EmployeeRepository : IEmployeeRepository
         _dataStore.Employees.Add(employee);
     }
 
-    public void Update(Employee employee)
+    public bool Update(Employee employee)
     {
         var existingEmployee = GetById(employee.Id);
 
         if (existingEmployee is null)
         {
-            return;
+            return false;
         }
 
         existingEmployee.Name = employee.Name;
@@ -42,6 +42,7 @@ public class EmployeeRepository : IEmployeeRepository
         existingEmployee.Salary = employee.Salary;
         existingEmployee.JoiningDate = employee.JoiningDate;
         existingEmployee.DesignationId = employee.DesignationId;
+        return true;
     }
 
     public bool Delete(int id)

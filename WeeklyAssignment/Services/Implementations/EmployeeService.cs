@@ -14,34 +14,10 @@ public class EmployeeService : IEmployeeService
         _unitOfWork = unitOfWork;
     }
 
-    public IEnumerable<Employee> GetAll()
-    {
-        return _unitOfWork.Employees.GetAll();
-    }
-
     public Employee? GetById(int id)
     {
         return _unitOfWork.Employees.GetById(id);
     }
-
-    //public IEnumerable<Employee> Search(string? searchTerm, int? designationId)
-    //{
-    //    IEnumerable<Employee> employees = _unitOfWork.Employees.GetAll();
-
-    //    if (!string.IsNullOrWhiteSpace(searchTerm))
-    //    {
-    //        employees = employees.Where(employee => employee.Name
-    //        .Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || employee.Email
-    //        .Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
-    //    }
-
-    //    if (designationId.HasValue)
-    //    {
-    //        employees = employees.Where(employee => employee.DesignationId == designationId.Value);
-    //    }
-
-    //    return employees;
-    //}
 
     public bool Create(Employee employee)
     {
@@ -57,28 +33,16 @@ public class EmployeeService : IEmployeeService
 
     public bool Update(Employee employee)
     {
-        if (!_unitOfWork.Employees.Exists(employee.Id))
-        {
-            return false;
-        }
-
         if (_unitOfWork.Designations.GetById(employee.DesignationId) is null)
         {
             return false;
         }
 
-        _unitOfWork.Employees.Update(employee);
-
-        return true;
+        return _unitOfWork.Employees.Update(employee);
     }
 
     public bool Delete(int id)
     {
-        if (!_unitOfWork.Employees.Exists(id))
-        {
-            return false;
-        }
-
         return _unitOfWork.Employees.Delete(id);
     }
 
@@ -90,11 +54,6 @@ public class EmployeeService : IEmployeeService
     public IEnumerable<Designation> GetDesignations()
     {
         return _unitOfWork.Designations.GetAll();
-    }
-
-    public bool DesignationExists(int designationId)
-    {
-        return _unitOfWork.Designations.GetById(designationId) is not null;
     }
 
     public EmployeeListVM GetEmployeeList(string? searchTerm, int? designationId)
@@ -140,7 +99,7 @@ public class EmployeeService : IEmployeeService
         if (designationId.HasValue)
         {
             filteredEmployees = filteredEmployees.Where(employee => employee.DesignationId == designationId.Value);
-        } 
+        }
 
         var designationLookup = designations.ToDictionary(designation => designation.Id, designation => designation.Name);
 
