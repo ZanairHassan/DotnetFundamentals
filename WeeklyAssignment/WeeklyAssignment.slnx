@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../WeeklyAssignment.Tests/WeeklyAssignment.Tests.csproj" Id="87569d31-7cb5-497a-a7e0-cbe96787b4ea" />
   <Project Path="WeeklyAssignment.csproj" />
 </Solution>
