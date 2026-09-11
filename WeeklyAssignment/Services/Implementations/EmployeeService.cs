@@ -19,6 +19,24 @@ public class EmployeeService : IEmployeeService
         return _unitOfWork.Employees.GetById(id);
     }
 
+    public EmployeeDetailsVM? GetEmployeeDetails(int id)
+    {
+        var employee = _unitOfWork.Employees.GetById(id);
+
+        if (employee is null)
+        {
+            return null;
+        }
+
+        var designation = _unitOfWork.Designations.GetById(employee.DesignationId);
+
+        return new EmployeeDetailsVM
+        {
+            Employee = employee,
+            Designation = designation
+        };
+    }
+
     public bool Create(Employee employee)
     {
         if (_unitOfWork.Designations.GetById(employee.DesignationId) is null)
@@ -62,15 +80,38 @@ public class EmployeeService : IEmployeeService
 
         var designations = _unitOfWork.Designations.GetAll().ToList();
 
-        var totalEmployees = employees.Count;
+        var designationSummaries = CreateDesignationSummaries(employees,designations);
 
-        var employeeCounts = employees
+        var filteredEmployees = FilterEmployees(employees, searchTerm, designationId);
+
+        var employeeList = MapToEmployeeList(filteredEmployees, designations);
+
+        return new EmployeeListVM
+        {
+            Employees = employeeList,
+            Designations = designations,
+            DesignationSummaries = designationSummaries,
+            SearchTerm = searchTerm,
+            DesignationId = designationId,
+            TotalEmployees = employees.Count
+        };
+    }
+
+    private static IEnumerable<DesignationSummaryVM> CreateDesignationSummaries(IEnumerable<Employee> employees, IEnumerable<Designation> designations)
+    {
+        var employeeList = employees.ToList();
+
+        var designationList = designations.ToList();
+
+        var totalEmployees = employeeList.Count;
+
+        var employeeCounts = employeeList
             .GroupBy(employee => employee.DesignationId)
             .ToDictionary(
                 group => group.Key,
                 group => group.Count());
 
-        var designationSummaries = designations
+        return designationList
             .Select(designation =>
             {
                 employeeCounts.TryGetValue(designation.Id, out var employeeCount);
@@ -86,14 +127,17 @@ public class EmployeeService : IEmployeeService
                 };
             })
             .ToList();
+    }
 
-        var filteredEmployees = employees.AsEnumerable();
+    private static IEnumerable<Employee> FilterEmployees(IEnumerable<Employee> employees, string? searchTerm, int? designationId)
+    {
+        IEnumerable<Employee> filteredEmployees = employees;
 
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {
             filteredEmployees = filteredEmployees.Where(employee => employee.Name
-            .Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || employee.Email
-            .Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+                .Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || employee.Email
+                .Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
         }
 
         if (designationId.HasValue)
@@ -101,9 +145,16 @@ public class EmployeeService : IEmployeeService
             filteredEmployees = filteredEmployees.Where(employee => employee.DesignationId == designationId.Value);
         }
 
-        var designationLookup = designations.ToDictionary(designation => designation.Id, designation => designation.Name);
+        return filteredEmployees;
+    }
 
-        var employeeList = filteredEmployees
+    private static IEnumerable<EmployeeListItemVM> MapToEmployeeList(IEnumerable<Employee> employees, IEnumerable<Designation> designations)
+    {
+        var designationLookup = designations.ToDictionary(
+            designation => designation.Id,
+            designation => designation.Name);
+
+        return employees
             .Select(employee => new EmployeeListItemVM
             {
                 Id = employee.Id,
@@ -114,20 +165,5 @@ public class EmployeeService : IEmployeeService
                 DesignationName = designationLookup.TryGetValue(employee.DesignationId, out var designationName) ? designationName : "Unknown"
             })
             .ToList();
-
-        return new EmployeeListVM
-        {
-            Employees = employeeList,
-
-            Designations = designations,
-
-            DesignationSummaries = designationSummaries,
-
-            SearchTerm = searchTerm,
-
-            DesignationId = designationId,
-
-            TotalEmployees = totalEmployees
-        };
     }
 }
