@@ -1,8 +1,9 @@
 ﻿using AuthenticationAutherizationAPI.DTOs.Authentication;
+using AuthenticationAutherizationAPI.Models;
 
 namespace AuthenticationAutherizationAPI.Services.Interfaces;
 
 public interface ISignInService
 {
-    Task<bool> ValidateCredentialsAsync(LoginRequest request);
+    Task<ApplicationUser?> ValidateCredentialsAsync(LoginRequest request);
 }

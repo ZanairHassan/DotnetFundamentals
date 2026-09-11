@@ -16,17 +16,22 @@ public class SignInService : ISignInService
         _signInManager = signInManager;
     }
 
-    public async Task<bool> ValidateCredentialsAsync(LoginRequest request)
+    public async Task<ApplicationUser?> ValidateCredentialsAsync(LoginRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
 
         if (user is null)
         {
-            return false;
+            return null;
         }
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: true);
 
-        return result.Succeeded;
+        if (!result.Succeeded)
+        {
+            return null;
+        }
+
+        return user;
     }
 }

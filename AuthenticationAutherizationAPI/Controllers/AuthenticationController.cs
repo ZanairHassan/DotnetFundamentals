@@ -9,28 +9,37 @@ namespace AuthenticationAutherizationAPI.Controllers;
 public class AuthenticationController : ControllerBase
 {
     private readonly ISignInService _signInService;
+    private readonly ITokenService _tokenService;
 
-    public AuthenticationController(ISignInService signInService)
+    public AuthenticationController(ISignInService signInService, ITokenService tokenService)
     {
         _signInService = signInService;
+        _tokenService = tokenService;
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var isValid = await _signInService.ValidateCredentialsAsync(request);
+        var user = await _signInService.ValidateCredentialsAsync(request);
 
-        if (!isValid)
+        if (user is null)
         {
             return Unauthorized(new
             {
-                Message = "Try Again, Invalid username or password."
+                Message = "Invalid username or password."
             });
         }
 
-        return Ok(new
+        var accessToken = await _tokenService.GenerateAccessTokenAsync(user);
+
+        var refreshToken = await _tokenService.GenerateAndStoreRefreshTokenAsync(user);
+
+        return Ok(new AuthenticationResponse
         {
-            Message = "Credentials are valid. Welcome Home Dear"
+            AccessToken = accessToken,
+            RefreshToken = refreshToken,
+            AccessTokenExpiresAtUtc = DateTime.UtcNow.AddMinutes(15),
+            RefreshTokenExpiresAtUtc = DateTime.UtcNow.AddDays(7)
         });
     }
 }
