@@ -232,6 +232,16 @@ Source Code Repository for Intern 1
 - Added test cases for the EmployeeService class into the EmployeeServiceTests class.
 - Run these test to check whether they are failed or not.
 
+## 63. IdentityUser & IdentityRole
+- Added a new Web Api Project
+- Inherit Identity tables for Application user and role.
+- Connect the sql database
+- Run first migration to add the identity tables into the database.
+- Added the services methods to get, create users and role.
+- Add a method to assign a role to a user.
+- Added the api controller for the users and roles to handle data added different dto's for users table and roles table.
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -16-07-2026)
@@ -264,6 +274,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/32)(on child branch 64-53-Refactoring -04-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/33)(on child branch 65-54-Code-cleanup -07-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/34)(on child branch 66-55-Testing -08-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/35)(on child branch 63-IdentityUser-IdentityRole -08-09-2026)
 
 
 ## Project Structure
