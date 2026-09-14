@@ -1,0 +1,244 @@
+﻿@model WeeklyAssignment.ViewModels.Employees.EmployeeListVM
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>Employee Management</h1>
+        <p class="text-muted mb-0">
+            Manage employees and their designations.
+        </p>
+    </div>
+
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa-solid fa-user-plus me-2"></i>
+        Add Employee
+    </a>
+</div>
+
+
+
+<div class="row g-4 mb-4">
+
+    <div class="col-12 col-sm-6 col-lg-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <p class="text-muted mb-2">Total Employees</p>
+
+                        <h2 class="mb-1">@Model.TotalEmployees</h2>
+
+                        <small class="text-muted">Employees in the system</small>
+
+                    </div>
+
+                    <div class="rounded-circle bg-primary bg-opacity-10
+                        text-primary d-flex align-items-center
+                        justify-content-center"
+                         style="width: 50px; height: 50px;">
+
+                        <span style="font-size: 22px;">
+                            👥
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mb-4">
+
+    <h4 class="mb-3">
+        Employees by Designation
+    </h4>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-5 g-4">
+
+        @foreach (var designation in Model.DesignationSummaries)
+        {
+            <div class="col">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+
+                            <div>
+
+                                <p class="text-muted small mb-1">@designation.Name</p>
+
+                                <h3 class="mb-0">@designation.EmployeeCount</h3>
+
+                            </div>
+
+                            <div class="rounded-circle bg-primary bg-opacity-10
+                                text-primary d-flex align-items-center
+                                justify-content-center"
+                                 style="width: 42px; height: 42px;">
+
+                                <span>
+                                    👤
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <small class="text-muted">
+                                Employees
+                            </small>
+
+                            <small class="fw-semibold">
+                                @designation.Percentage.ToString("0.0")%
+                            </small>
+
+                        </div>
+
+                        <div class="progress"
+                             role="progressbar"
+                             aria-valuenow="@designation.Percentage"
+                             aria-valuemin="0"
+                             aria-valuemax="100"
+                             style="height: 6px;">
+
+                            <div class="progress-bar"
+                                 style="width: @designation.Percentage%;">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<form asp-action="Index" method="get" class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+
+            <div class="col-md-5">
+                <label asp-for="SearchTerm" class="form-label">Search</label>
+
+                <input asp-for="SearchTerm" class="form-control" placeholder="Search by name or email..." />
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="DesignationId" class="form-label">Designation</label>
+
+                <select asp-for="DesignationId" class="form-select">
+
+                    <option value="">All Designations</option>
+
+                    @foreach (var designation in Model.Designations)
+                    {
+                        <option value="@designation.Id">
+                            @designation.Name
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    Clear
+                </a>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@if (!Model.Employees.Any())
+{
+    <div class="alert alert-info">
+        No employees were found.
+    </div>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Salary</th>
+                        <th>Joining Date</th>
+                        <th>Designation</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var employee in Model.Employees)
+                    {
+                        <tr>
+
+                            <td>
+                                @employee.Name
+                            </td>
+
+                            <td>
+                                @employee.Email
+                            </td>
+
+                            <td>
+                                @employee.Salary.ToString("N0")
+                            </td>
+
+                            <td>
+                                @employee.JoiningDate.ToString("dd MMM yyyy")
+                            </td>
+
+                            <td>
+                                @employee.DesignationName
+                            </td>
+
+                            <td class="text-end">
+                                <div class="btn-group" role="group">
+
+                                    <a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-sm btn-info">Details</a>
+
+                                    <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-sm btn-warning">Edit</a>
+
+                                    <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-sm btn-danger">Delete</a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+}
