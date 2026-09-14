@@ -182,31 +182,99 @@ Source Code Repository for Intern 1
 	- Get Active Users
 	- Get Inactive Users
 
+## 48. Repository Pattern
+- Explore repository pattern and its way of implementation.
+- Add a new solution to the repo to implement the repository pattern.
+- create the repository for the user using the DI, add the exception filter class, the ui for the user crud.
+
+## 49. Unit of Work (intro)
+- Implement the Unit of Work in the repository pattern project as i have...
+- Seed the Career through the career seed data class.
+- Added the service and repository for the Career.
+- Added the crud feature for the Careers.
+- Associate the careers to the users using the Unit of work i have associate the career to the different users and delete the career by validating the users.
+
+## 50. Weekly Assignment
+- Implemented the Employee CRUD feature with dedicated ViewModels and Razor Views.
+- Implemented attribute-based routing for the Employee.
+- Implemented centralized exception handling using custom middleware.
+- Implemented an MVC Action Filter for logging controller action execution and performance.
+- Reviewed and structured the project architecture using Repository Pattern, Unit of Work, Services, Dependency Injection, and In-Memory Data Seeding.
+
+
+## 51. UI Improvements
+- Added the Statics detail summary for the Employee based on the designations.
+- Added a partial view to remove the duplicate code.
+- Add an icon for the Create Button at the Employee Index page.
+
+## 52. Bootstrap integration
+- In the dotnet core mvc project, bootstrap is integrated into the project by default when we create a MVC Web App project.
+- In order to use the bootstrap features into the presentation layer (views) we register it into the _Layout page as "<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />"
+- If want to manually integrate the bootstrap into the project then.... 
+   	 - right click onto the project and from the => add menu => select the client side libray,
+	 - then from cdnjs select any bootstrap feature that you what to integrate into the project.
+
+## 53. Refactoring
+- Remove the duplicated code form the controller.
+- Add region into the controller to define the private methods there. then overload those methods into the controller actions to make code little clean.
+- Remove unused and irrelevant code from the Repositories and the service.
+
+## 54. Code Cleanup
+- Clean-Up the duplicated code from the views, add a partial view for that.
+- Add a new view model for repeated properties into the create and edit vm.
+- Add a method "GetEmployeeDetails" to get the details related to employee and the designation. that make the controller short.
+- Update the Employee service method "GetEmployeeList".
+- For each purpose I have added a private method then reuse that into the main service method to get the employee details against the designation.
+
+## 55. Testing
+- Added a new XUnit project into the solution "WeeklyAssignment.Tests"
+- Added a test class for the EmployeeService class in the test project.
+- Added test cases for the EmployeeService class into the EmployeeServiceTests class.
+- Run these test to check whether they are failed or not.
+
+## 63. IdentityUser & IdentityRole
+- Added a new Web Api Project
+- Inherit Identity tables for Application user and role.
+- Connect the sql database
+- Run first migration to add the identity tables into the database.
+- Added the services methods to get, create users and role.
+- Add a method to assign a role to a user.
+- Added the api controller for the users and roles to handle data added different dto's for users table and roles table.
+
+
 ## Collaborate with team
 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -#16-07-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/3)(on child branch 03---Variables-&-Data-Types-#01 -#17-07-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/4)(on child branch 04---Control-Statements -#20-07-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -16-07-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/3)(on child branch 03---Variables-&-Data-Types-#01 -17-07-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/4)(on child branch 04---Control-Statements -20-07-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/5)(on child branch 05---Methods -#21-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/6)(on child branch 06---Arrays-&-Collections -#22-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/7)(on child branch 18-07-classes-objects -#23-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/8)(on child branch 19-08-encapsulation-properties -#24-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/9)(on child branch 20-09-inheritance-polymorphism -#27-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/10)(on child branch 21-10-interfaces-abstraction -#29-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/11)(on child branch 22-11-linq-basics -#30-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/12)(on child branch 23-12-advanced-linq -#31-07-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/13)(on child branch Update Readme -#03-08-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -#04-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/16)(on child branch 26-15-project-setup -#06-08-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/20)(on child branch 29-18-Configuration -#11-08-2026) 
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/17)(on child branch 30-19-middleware -#07-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/18)(on child branch 31-20-controllers -#10-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/19)(on child branch 32-21-views -#11-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/21)(on child branch 33-22-Razor-syntax -#12-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/22)(on child branch 34-23-Layouts -#13-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/23)(on child branch 35-24-Partial-Views -#17-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/24)(on child branch 36-25-Static-files -#18-08-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/25)(on child branch 37-26-Mini-Assignment -#19-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/6)(on child branch 06---Arrays-&-Collections -22-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/7)(on child branch 18-07-classes-objects -23-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/8)(on child branch 19-08-encapsulation-properties -24-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/9)(on child branch 20-09-inheritance-polymorphism -27-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/10)(on child branch 21-10-interfaces-abstraction -29-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/11)(on child branch 22-11-linq-basics -30-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/12)(on child branch 23-12-advanced-linq -31-07-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/13)(on child branch Update Readme -03-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/15)(on child branch 25-14-mini-project-student-management-system -04-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/16)(on child branch 26-15-project-setup -06-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/20)(on child branch 29-18-Configuration -11-08-2026) 
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/17)(on child branch 30-19-middleware -07-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/18)(on child branch 31-20-controllers -10-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/19)(on child branch 32-21-views -11-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/21)(on child branch 33-22-Razor-syntax -12-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/22)(on child branch 34-23-Layouts -13-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/23)(on child branch 35-24-Partial-Views -17-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/24)(on child branch 36-25-Static-files -18-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/25)(on child branch 37-26-Mini-Assignment -19-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/26)(on child branch 59-48-repository-pattern -24-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/27)(on child branch 60-49-Unit-of-Work -31-08-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/30)(on child branch 61-50-Weekly-Assignment -01-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/31)(on child branch 62-51-UI-Improvements -02-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/32)(on child branch 64-53-Refactoring -04-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/33)(on child branch 65-54-Code-cleanup -07-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/34)(on child branch 66-55-Testing -08-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/35)(on child branch 63-IdentityUser-IdentityRole -08-09-2026)
 
 
 ## Project Structure
@@ -245,97 +313,94 @@ cmintern1/
 │   ├── appsettings.json      # Configuration
 │   └── MvcFeatures.csproj
 │
+├── 📁RepositoryPattern/
+│	├── 📁 Connected Services/       # Connected external services
+│	├── 📁 Dependencies/             # Project dependencies and NuGet packages
+│	├── 📁 Properties/               # Project configuration and launch settings
+│	├── 📁 wwwroot/                  # Static Files (CSS, JS, Images)
+│	├── 📁 Controllers/              # MVC Controllers
+│	├── 📁 Data/                     # Data Seeders
+│	├── 📁 Filters/                  # Custom MVC Filters
+│	├── 📁 Middlewares/              # Custom Middleware Components
+│	├── 📁 Models/                   # Domain Models
+│	├── 📁 Repositories/             # Repository Pattern Implementation
+│	├── 📁 Services/                 # Service Implementations
+│	├── 📁 ViewModels/               # View-Specific Models
+│	├── 📁 Views/                    # Razor Views
+│	├── 📄 appsettings.json          # Application Configuration
+│	└── 📄 Program.cs                # Application Entry Point
+├── 📄 RepositoryPattern.slnx              # Solution File
+│
+├── 📁 WeeklyAssignment/
+│	├── 📁Connected Services/
+│	├── 📁 Dependencies/
+│	├── 📁 Properties/
+│	├── 📁 wwwroot/
+│	├── 📁 Controllers/
+│	│		├── EmployeeController.cs
+│	│		└── ErrorController.cs
+│	├──📁 Data/
+│	│		├── InMemoryDataStore.cs
+│	│		├── EmployeeSeedData.cs
+│	│		└── DesignationSeedData.cs
+│	├── 📁 Filters/
+│	│		└── ActionExecutionLoggingFilter.cs
+│	├── 📁 Middlewares/
+│	│		└── ExceptionHandlingMiddleware.cs
+│	├── 📁 Models/
+│	│		├── Employee.cs
+│	│		└── Designation.cs
+│	├── 📁 Repositories/		
+│	│		├──  📁	Interfaces/
+│	│		│		├── IEmployeeRepository.cs
+│	│		│		├── IDesignationRepository.cs
+│	│		│		└── IUnitOfWork.cs
+│	│		│
+│	│		└──  📁 Implementations/
+│	│				├── EmployeeRepository.cs
+│	│				├── DesignationRepository.cs
+│	│				└── UnitOfWork.cs
+│	├── 📁 Services/
+│	│		│
+│	│		├──  📁 Interfaces/
+│	│		│		└── IEmployeeService.cs
+│	│		│
+│	│		└──  📁 Implementations/
+│	│				└── EmployeeService.cs
+│	├── 📁 ViewModels/		
+│	│		└──  📁 Employees/
+│	│				├── EmployeeListVM.cs
+│	│				├── EmployeeCreateVM.cs
+│	│				├── EmployeeEditVM.cs
+│	│				└── EmployeeDetailsVM.cs
+│	│				└── DesignationSummaryVM.cs
+│	│				└── EmployeeInputVM.cs
+│	│				└── EmployeeListItemVM.cs
+│	├── 📁 Views/		
+│	│		├──  📁 Employee/
+│	│		│   ├── _EmployeeFormFields.cshtml
+│	│		│   ├── _EmployeeInformation.cshtml
+│	│		│   ├── Index.cshtml
+│	│		│   ├── Details.cshtml
+│	│		│   ├── Create.cshtml
+│	│		│   ├── Edit.cshtml
+│	│		│   └── Delete.cshtml
+│	│		├──  📁 Error/
+│	│		│   └── Index.cshtml
+│	│		├──  📁 Shared/
+│	│		├── _ViewImports.cshtml
+│	│		└── _ViewStart.cshtml
+│	├── 📄 appsettings.json
+│	├── 📄 appsettings.Development.json
+│	├── 📄 Program.cs
+├── 📁 WeeklyAssignment.Tests/
+│	│		├──  📁 Dependencies/
+│	│		│		├── 📁 Projects/
+│	│		│		│	├── 📄 WeeklyAssignment
+│	│		├──  📁 Services/
+│	│		│			├──  EmployeeServiceTests.cs
+│	├── 📄 WeeklyAssignment.slnx
 
 ├── 📄 README.md
 └── 📄 .gitignore
 ```
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
