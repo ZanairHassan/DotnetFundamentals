@@ -1,5 +1,6 @@
 ﻿using AuthenticationAutherizationAPI.DTOs.Roles;
 using AuthenticationAutherizationAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationAutherizationAPI.Controllers;
@@ -28,7 +29,7 @@ public class RolesController : ControllerBase
 
         return Ok(response);
     }
-
+    [Authorize]
     [HttpPost("createRole")]
     public async Task<IActionResult> CreateRole(CreateRoleRequest request)
     {

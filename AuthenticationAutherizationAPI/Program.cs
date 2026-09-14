@@ -1,6 +1,8 @@
 using AuthenticationAutherizationAPI.Configuration;
 using AuthenticationAutherizationAPI.Data;
 using AuthenticationAutherizationAPI.Models;
+using AuthenticationAutherizationAPI.Repositories.Implementations;
+using AuthenticationAutherizationAPI.Repositories.Interfaces;
 using AuthenticationAutherizationAPI.Services.Implementations;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -58,12 +60,13 @@ builder.Services
 #endregion
 
 #region Dependency Injection
-
+ 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IClaimService, ClaimService>();
 builder.Services.AddScoped<ISignInService, SignInService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IRefreshTokenRepository,RefreshTokenRepository>();
 
 #endregion
 var app = builder.Build();

@@ -9,14 +9,16 @@ public class SignInService : ISignInService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly ITokenService _tokenService;
 
-    public SignInService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+    public SignInService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITokenService tokenService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _tokenService = tokenService;
     }
 
-    public async Task<ApplicationUser?> ValidateCredentialsAsync(LoginRequest request)
+    public async Task<AuthenticationResponse?> SignInAsync(LoginRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
 
@@ -32,6 +34,16 @@ public class SignInService : ISignInService
             return null;
         }
 
-        return user;
+        return await _tokenService.GenerateTokensAsync(user);
+    }
+
+    public async Task<AuthenticationResponse?> RefreshTokenAsync(RefreshTokenRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.RefreshToken))
+        {
+            return null;
+        }
+
+        return await _tokenService.RotateRefreshTokenAsync(request.RefreshToken);
     }
 }

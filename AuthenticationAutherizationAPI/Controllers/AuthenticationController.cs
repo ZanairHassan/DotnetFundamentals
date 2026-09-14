@@ -20,9 +20,9 @@ public class AuthenticationController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var user = await _signInService.ValidateCredentialsAsync(request);
+        var response = await _signInService.SignInAsync(request);
 
-        if (user is null)
+        if (response is null)
         {
             return Unauthorized(new
             {
@@ -30,16 +30,22 @@ public class AuthenticationController : ControllerBase
             });
         }
 
-        var accessToken = await _tokenService.GenerateAccessTokenAsync(user);
+        return Ok(response);
+    }
 
-        var refreshToken = await _tokenService.GenerateAndStoreRefreshTokenAsync(user);
+    [HttpPost("refresh")]
+    public async Task<IActionResult> RefreshToken(RefreshTokenRequest request)
+    {
+        var response = await _signInService.RefreshTokenAsync(request);
 
-        return Ok(new AuthenticationResponse
+        if (response is null)
         {
-            AccessToken = accessToken,
-            RefreshToken = refreshToken,
-            AccessTokenExpiresAtUtc = DateTime.UtcNow.AddMinutes(15),
-            RefreshTokenExpiresAtUtc = DateTime.UtcNow.AddDays(7)
-        });
+            return Unauthorized(new
+            {
+                Message = "Invalid or expired refresh token."
+            });
+        }
+
+        return Ok(response);
     }
 }

@@ -5,8 +5,9 @@ public class AuthenticationResponse
     public string AccessToken { get; set; } = string.Empty;
 
     public string RefreshToken { get; set; } = string.Empty;
+    public string UserID { get; set; } = string.Empty;
 
-    public DateTime AccessTokenExpiresAtUtc { get; set; }
+    public DateTime AccessTokenExpiresAt { get; set; }
 
-    public DateTime RefreshTokenExpiresAtUtc { get; set; }
+    public DateTime RefreshTokenExpiresAt { get; set; }
 }
