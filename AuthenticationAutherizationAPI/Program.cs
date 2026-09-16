@@ -55,12 +55,20 @@ builder.Services
 
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
         };
+    })
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration[
+            "Authentication:Google:ClientId"]!;
+
+        options.ClientSecret = builder.Configuration[
+            "Authentication:Google:ClientSecret"]!;
     });
 
 #endregion
 
 #region Dependency Injection
- 
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IClaimService, ClaimService>();

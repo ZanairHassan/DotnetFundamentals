@@ -9,12 +9,10 @@ namespace AuthenticationAutherizationAPI.Controllers;
 public class AuthenticationController : ControllerBase
 {
     private readonly ISignInService _signInService;
-    private readonly ITokenService _tokenService;
 
-    public AuthenticationController(ISignInService signInService, ITokenService tokenService)
+    public AuthenticationController(ISignInService signInService)
     {
         _signInService = signInService;
-        _tokenService = tokenService;
     }
 
     [HttpPost("login")]
@@ -43,6 +41,37 @@ public class AuthenticationController : ControllerBase
             return Unauthorized(new
             {
                 Message = "Invalid or expired refresh token."
+            });
+        }
+
+        return Ok(response);
+    }
+
+    [HttpGet("GoogleLogin")]
+    public IActionResult ExternalLogin([FromQuery] string provider, string returnUrl = "/")
+    {
+        var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Authentication",
+            new
+            {
+                returnUrl,
+                provider
+            });
+
+        var properties =  _signInService.ConfigureExternalLoginAsync(provider, redirectUrl!);
+
+        return Challenge(properties, provider);
+    }
+
+    [HttpGet("GoogleLoginCallback")]
+    public async Task<IActionResult> ExternalLoginCallback(string provider, string returnUrl = "/")
+    {
+        var response = await _signInService.HandleExternalLoginAsync(provider);
+
+        if (response is null)
+        {
+            return Unauthorized(new
+            {
+                Message = "External authentication failed."
             });
         }
 
