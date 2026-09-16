@@ -254,6 +254,12 @@ Source Code Repository for Intern 1
 - Added functionality to consume the generated token for role creation/assignment.
 - Updated the authentication flow to properly handle token generation and rotation.
 
+## 66. External Providers & OIDC
+- Added the Google Authentication.
+- Register through the  google cloud, add a project there and create client credentials there to use them to add a user using the google signup UI.
+- Added a endpoint into the authentication controller "GoogleLogin" to handle the google login authentication.
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -16-07-2026)
@@ -288,6 +294,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/34)(on child branch 66-55-Testing -08-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/35)(on child branch 63-IdentityUser-IdentityRole -09-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/36)(on child branch 64-Claims-Managers -10-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/37)(on child branch 66-External-Providers-&-OIDC -15-09-2026)
 
 
 ## Project Structure
