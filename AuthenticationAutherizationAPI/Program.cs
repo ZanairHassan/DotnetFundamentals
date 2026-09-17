@@ -26,6 +26,8 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DB_Connection")));
 
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
+
 #region JWT Authentication
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
@@ -75,6 +77,7 @@ builder.Services.AddScoped<IClaimService, ClaimService>();
 builder.Services.AddScoped<ISignInService, SignInService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRefreshTokenRepository,RefreshTokenRepository>();
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>(); 
 
 #endregion
 var app = builder.Build();
