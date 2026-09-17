@@ -259,6 +259,11 @@ Source Code Repository for Intern 1
 - Register through the  google cloud, add a project there and create client credentials there to use them to add a user using the google signup UI.
 - Added a endpoint into the authentication controller "GoogleLogin" to handle the google login authentication.
 
+## 67. Multi-Factor Authentication
+- (Implemented Email Service) Added an SMTP-based email service for sending emails to users.
+- (Implemented Email-Based MFA Service) Added an MFA service to generate, send, and verify OTPs using ASP.NET Core Identity.
+- (Added MFA Login Flow) When a user with MFA enabled logs in, the system generates a pendingMfaToken and sends an OTP to the user's registered email address.
+- (Added MFA Verification) The user must provide the pendingMfaToken and OTP to complete authentication. After successful verification, the system generates and returns the access token, refresh token and other user details.
 
 ## Collaborate with team
 
@@ -295,6 +300,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/35)(on child branch 63-IdentityUser-IdentityRole -09-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/36)(on child branch 64-Claims-Managers -10-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/37)(on child branch 66-External-Providers-&-OIDC -15-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/38)(on child branch 67-Multi-Factor-Authentication -17-09-2026)
 
 
 ## Project Structure
