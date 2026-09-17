@@ -77,8 +77,8 @@ builder.Services.AddScoped<IClaimService, ClaimService>();
 builder.Services.AddScoped<ISignInService, SignInService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRefreshTokenRepository,RefreshTokenRepository>();
-builder.Services.AddScoped<IEmailSender, SmtpEmailSender>(); 
-
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
+builder.Services.AddScoped<IMfaService, MfaService>();
 #endregion
 var app = builder.Build();
 
