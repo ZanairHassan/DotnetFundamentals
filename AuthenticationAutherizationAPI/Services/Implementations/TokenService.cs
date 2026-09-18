@@ -126,7 +126,7 @@ public class TokenService : ITokenService
             issuer: _jwtSettings.Issuer,
             audience: _jwtSettings.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(5),
+            expires: DateTime.UtcNow.AddMinutes(59),
             signingCredentials: credentials);
 
         return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));

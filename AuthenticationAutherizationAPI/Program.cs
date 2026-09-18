@@ -6,6 +6,7 @@ using AuthenticationAutherizationAPI.Repositories.Interfaces;
 using AuthenticationAutherizationAPI.Services.Implementations;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -55,7 +56,8 @@ builder.Services
             ValidIssuer = jwtSettings!.Issuer,
             ValidAudience = jwtSettings.Audience,
 
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
+            ClockSkew = TimeSpan.Zero
         };
     })
     .AddGoogle(options =>
@@ -68,6 +70,12 @@ builder.Services
     });
 
 #endregion
+
+builder.Services.AddAuthorizationBuilder()
+    .SetFallbackPolicy(new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build())
+    .AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
 
 #region Dependency Injection
 

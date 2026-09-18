@@ -5,7 +5,7 @@ namespace AuthenticationAutherizationAPI.Services.Interfaces;
 
 public interface ISignInService
 {
-    Task<AuthSignInResult?> SignInAsync(LoginRequest request);
+    Task<AuthSignInResult> SignInAsync(LoginRequest request);
 
     Task<AuthenticationResponse?> RefreshTokenAsync(RefreshTokenRequest request);
 

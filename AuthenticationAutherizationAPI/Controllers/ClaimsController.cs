@@ -1,11 +1,13 @@
 ﻿using AuthenticationAutherizationAPI.DTOs.Claims;
 using AuthenticationAutherizationAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationAutherizationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Policy = "AdminOnly")]
 public class ClaimsController : ControllerBase
 {
     private readonly IClaimService _claimService;
