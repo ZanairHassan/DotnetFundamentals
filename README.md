@@ -276,6 +276,13 @@ Source Code Repository for Intern 1
 - Implement the policy in the ROles controller to authorize that only user with the role manager can only get all the available roles.
 - Make the create role endpoint as AllowAnonymous, now anyone can add new roles.
 
+## 71. UserManager customization
+- Customized UserService with UserManager-based user-management methods.
+- Added APIs to update a user’s username and delete a user.
+- Added role assignment, role replacement, and role removal functionality.
+- Added validation for users, roles, duplicate assignments, and existing role membership.
+- Added required DTOs and verified the project builds successfully without warnings or errors.
+
 
 ## Collaborate with team
 
@@ -314,7 +321,8 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/37)(on child branch 66-External-Providers-&-OIDC -15-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/38)(on child branch 67-Multi-Factor-Authentication -17-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/39)(on child branch 68-WebAPI-Authentication -18-09-2026)
-- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/34)(on child branch 69-Role-based-policies -21-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/40)(on child branch 69-Role-based-policies -21-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/41)(on child branch 71-UserManager-customization -21-09-2026)
 
 
 ## Project Structure
