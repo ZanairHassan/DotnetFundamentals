@@ -1,5 +1,6 @@
 using AuthenticationAutherizationAPI.Configuration;
 using AuthenticationAutherizationAPI.Data;
+using AuthenticationAutherizationAPI.Middlewares;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Repositories.Implementations;
 using AuthenticationAutherizationAPI.Repositories.Interfaces;
@@ -90,6 +91,8 @@ builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<IMfaService, MfaService>();
 #endregion
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
