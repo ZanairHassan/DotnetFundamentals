@@ -1,4 +1,4 @@
-﻿using AuthenticationAutherizationAPI.DTOs.Authentication;
+using AuthenticationAutherizationAPI.DTOs.Authentication;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +28,7 @@ public class AuthenticationController : ControllerBase
             AuthSignInResult.RequiresMfa m => Ok(new { requiresMfa = true, pendingMfaToken = m.PendingMfaToken }),
             AuthSignInResult.Failed f => Unauthorized(new { Message = f.Reason }),
             AuthSignInResult.LockedOut l => Unauthorized(new { Message = l.Reason }),
+            AuthSignInResult.NotAllowed n => StatusCode(StatusCodes.Status403Forbidden, new { Message = n.Reason }),
             _ => StatusCode(500)
         };
     }

@@ -1,4 +1,4 @@
-﻿using AuthenticationAutherizationAPI.DTOs.Authentication;
+using AuthenticationAutherizationAPI.DTOs.Authentication;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -25,7 +25,7 @@ public class SignInService : ISignInService
 
     public async Task<AuthSignInResult> SignInAsync(LoginRequest request)
     {
-        var user = await _userManager.FindByNameAsync(request.UserName);
+        var user = await _userManager.FindByNameAsync(request.UserName) ?? await _userManager.FindByEmailAsync(request.UserName);
 
         if (user is null)
         {
@@ -38,6 +38,11 @@ public class SignInService : ISignInService
         {
             // Same message as Failed, deliberately - avoids leaking whether the username exists
             return new AuthSignInResult.LockedOut("Invalid username or password.");
+        }
+
+        if (result.IsNotAllowed)
+        {
+            return new AuthSignInResult.NotAllowed("Sign-in is not allowed for this account. Please verify account status or confirm your email.");
         }
 
         if (!result.Succeeded)
