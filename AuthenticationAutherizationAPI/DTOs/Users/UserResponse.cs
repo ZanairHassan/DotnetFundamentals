@@ -1,4 +1,4 @@
-﻿namespace AuthenticationAutherizationAPI.DTOs.Users;
+namespace AuthenticationAutherizationAPI.DTOs.Users;
 
 public class UserResponse
 {
@@ -9,4 +9,6 @@ public class UserResponse
     public string Email { get; set; } = string.Empty;
 
     public bool EmailConfirmed { get; set; }
+
+    public bool LockoutEnabled { get; set; }
 }
