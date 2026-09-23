@@ -291,6 +291,10 @@ Source Code Repository for Intern 1
 - Added global ExceptionHandlingMiddleware for centralized unhandled exception logging and standard Problem Details responses.
 - Registered the custom sign-in manager and middleware in Program.cs, and verified the project builds successfully without warnings or errors.
 
+## 73. RoleManager customization
+- Customized RoleManager with a CustomRoleManager implementation featuring custom role validation, duplicate role checks, and role deletion restrictions.
+- Added three end points into the roles controller to update, delete and get the assigned roles.
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -16-07-2026)
@@ -331,6 +335,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/40)(on child branch 69-Role-based-policies -21-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/41)(on child branch 71-UserManager-customization -21-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/42)(on child branch 72-SignInManager-customization -22-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/43)(on child branch 73-RoleManager-customization -23-09-2026)
 
 
 ## Project Structure
