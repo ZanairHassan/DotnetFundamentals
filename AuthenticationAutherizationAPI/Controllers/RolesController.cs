@@ -1,4 +1,4 @@
-﻿using AuthenticationAutherizationAPI.DTOs.Roles;
+using AuthenticationAutherizationAPI.DTOs.Roles;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,5 +49,69 @@ public class RolesController : ControllerBase
         {
             Message = "Role created successfully."
         });
+    }
+
+    [HttpPut("updateRole/{roleId}")]
+    public async Task<IActionResult> UpdateRole(string roleId, [FromBody] UpdateRoleRequest request)
+    {
+        var result = await _roleService.UpdateRoleAsync(roleId, request.NewRoleName);
+
+        if (!result.Succeeded)
+        {
+            if (result.Errors.Any(error => error.Code == "RoleNotFound"))
+            {
+                return NotFound(new
+                {
+                    Message = "Role was not found."
+                });
+            }
+
+            return BadRequest(new
+            {
+                Message = "Unable to update role.",
+                Errors = result.Errors
+            });
+        }
+
+        return Ok(new
+        {
+            Message = "Role updated successfully."
+        });
+    }
+
+    [HttpDelete("deleteRole/{roleId}")]
+    public async Task<IActionResult> DeleteRole(string roleId)
+    {
+        var result = await _roleService.DeleteRoleAsync(roleId);
+
+        if (!result.Succeeded)
+        {
+            if (result.Errors.Any(error => error.Code == "RoleNotFound"))
+            {
+                return NotFound(new
+                {
+                    Message = "Role was not found."
+                });
+            }
+
+            return BadRequest(new
+            {
+                Message = "Unable to delete role.",
+                Errors = result.Errors
+            });
+        }
+
+        return Ok(new
+        {
+            Message = "Role deleted successfully."
+        });
+    }
+
+    [HttpGet("getAssignedRoles")]
+    public async Task<IActionResult> GetAssignedRoles()
+    {
+        var roles = await _roleService.GetAssignedRolesAsync();
+
+        return Ok(roles);
     }
 }
