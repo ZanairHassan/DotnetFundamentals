@@ -28,6 +28,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddRoleManager<CustomRoleManager>()
     .AddSignInManager<CustomSignInManager>()
     .AddDefaultTokenProviders();
 
@@ -86,6 +87,7 @@ builder.Services.AddAuthorizationBuilder()
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<CustomRoleManager>();
 builder.Services.AddScoped<IClaimService, ClaimService>();
 builder.Services.AddScoped<ISignInService, SignInService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
