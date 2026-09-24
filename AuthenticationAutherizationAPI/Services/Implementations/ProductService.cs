@@ -82,4 +82,61 @@ public class ProductService : IProductService
 
         return true;
     }
+    public async Task<PurchaseProductResponse?> PurchaseProductAsync(int id)
+    {
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+
+        try
+        {
+            var product = await _context.Products
+                .FromSqlInterpolated($"""
+                SELECT *
+                FROM Products WITH (UPDLOCK, ROWLOCK)
+                WHERE Id = {id}
+                """)
+                .SingleOrDefaultAsync();
+
+            if (product == null)
+            {
+                await transaction.RollbackAsync();
+
+                return null;
+            }
+
+            if (product.StockQuantity <= 0)
+            {
+                await transaction.RollbackAsync();
+
+                return new PurchaseProductResponse
+                {
+                    ProductId = product.Id,
+                    ProductName = product.Name,
+                    RemainingStock = product.StockQuantity,
+                    Purchased = false,
+                    Message = "Product is out of stock."
+                };
+            }
+
+            product.StockQuantity--;
+            product.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+
+            await transaction.CommitAsync();
+
+            return new PurchaseProductResponse
+            {
+                ProductId = product.Id,
+                ProductName = product.Name,
+                RemainingStock = product.StockQuantity,
+                Purchased = true,
+                Message = "Product purchased successfully."
+            };
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+    }
 }

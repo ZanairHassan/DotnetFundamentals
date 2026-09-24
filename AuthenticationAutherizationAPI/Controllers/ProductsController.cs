@@ -89,4 +89,25 @@ public class ProductsController : ControllerBase
 
         return Content("Product Successfully deleted");
     }
+
+    [HttpPost("purchaseProduct/{id}")]
+    public async Task<IActionResult> PurchaseProduct(int id)
+    {
+        var result = await _productService.PurchaseProductAsync(id);
+
+        if (result == null)
+        {
+            return NotFound(new
+            {
+                message = "Product not found."
+            });
+        }
+
+        if (!result.Purchased)
+        {
+            return Conflict(result);
+        }
+
+        return Ok(result);
+    }
 }

@@ -14,4 +14,5 @@ public interface IProductService
     Task<Product?> UpdateProductAsync(int id, UpdateProductRequest request);
 
     Task<bool> DeleteProductAsync(int id);
+    Task<PurchaseProductResponse?> PurchaseProductAsync(int id);
 }
