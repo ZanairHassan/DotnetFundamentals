@@ -1,0 +1,85 @@
+﻿using AuthenticationAutherizationAPI.Data;
+using AuthenticationAutherizationAPI.DTOs.Products;
+using AuthenticationAutherizationAPI.Models;
+using AuthenticationAutherizationAPI.Services.Interfaces;
+using Azure.Core;
+using Microsoft.EntityFrameworkCore;
+
+namespace AuthenticationAutherizationAPI.Services.Implementations;
+
+public class ProductService : IProductService
+{
+    private readonly ApplicationDbContext _context;
+
+    public ProductService(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IList<Product>> GetAllProductsAsync()
+    {
+        return await _context.Products.AsNoTracking().ToListAsync();
+    }
+
+    public async Task<Product?> GetProductByIdAsync(int id)
+    {
+        return await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<Product> CreateProductAsync(CreateProductRequest request)
+    {
+        var product = new Product
+        {
+            Name = request.Name,
+            Price = request.Price,
+            StockQuantity = request.StockQuantity,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        _context.Products.Add(product);
+
+        await _context.SaveChangesAsync();
+
+        return product;
+    }
+
+    public async Task<Product?> UpdateProductAsync(int id, UpdateProductRequest request)
+    {
+        var existingProduct = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (existingProduct == null)
+        {
+            return null;
+        }
+
+        // Tell EF Core which version the client originally retrieved.
+        _context.Entry(existingProduct)
+            .Property(x => x.RowVersion)
+            .OriginalValue = request.RowVersion;
+
+        existingProduct.Name = request.Name;
+        existingProduct.Price = request.Price;
+        existingProduct.StockQuantity = request.StockQuantity;
+        existingProduct.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
+
+        return existingProduct;
+    }
+
+    public async Task<bool> DeleteProductAsync(int id)
+    {
+        var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (product == null)
+        {
+            return false;
+        }
+
+        _context.Products.Remove(product);
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+}
