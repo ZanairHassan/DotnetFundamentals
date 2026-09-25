@@ -1,4 +1,4 @@
-﻿namespace AuthenticationAutherizationAPI.DTOs.Products;
+namespace AuthenticationAutherizationAPI.DTOs.Products;
 
 public class PurchaseProductResponse
 {
@@ -11,4 +11,8 @@ public class PurchaseProductResponse
     public bool Purchased { get; set; }
 
     public string Message { get; set; } = string.Empty;
+
+    public string LockStrategy { get; set; } = string.Empty;
+
+    public byte[] RowVersion { get; set; } = Array.Empty<byte>();
 }
