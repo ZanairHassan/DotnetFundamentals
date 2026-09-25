@@ -5,9 +5,8 @@ namespace AuthenticationAutherizationAPI.Services.Interfaces;
 
 public interface IProductService
 {
-    Task<Product?> GetProductByIdAsync(int id);
-
-    Task<IList<Product>> GetAllProductsAsync();
+    Task<IList<ProductResponse>> GetAllProductsAsync(int pageNumber, int pageSize);
+    Task<ProductResponse?> GetProductByIdAsync(int id);
 
     Task<Product> CreateProductAsync(CreateProductRequest product);
 

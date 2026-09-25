@@ -16,14 +16,35 @@ public class ProductService : IProductService
         _context = context;
     }
 
-    public async Task<IList<Product>> GetAllProductsAsync()
+    public async Task<IList<ProductResponse>> GetAllProductsAsync(int pageNumber, int pageSize)
     {
-        return await _context.Products.AsNoTracking().ToListAsync();
+        return await _context.Products
+            .AsNoTracking()
+            .OrderBy(p => p.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => new ProductResponse
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                StockQuantity = p.StockQuantity
+            })
+            .ToListAsync();
     }
-
-    public async Task<Product?> GetProductByIdAsync(int id)
+    public async Task<ProductResponse?> GetProductByIdAsync(int id)
     {
-        return await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        return await _context.Products
+            .AsNoTracking()
+            .Where(p => p.Id == id)
+            .Select(p => new ProductResponse
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                StockQuantity = p.StockQuantity
+            })
+            .FirstOrDefaultAsync();
     }
 
     public async Task<Product> CreateProductAsync(CreateProductRequest request)
