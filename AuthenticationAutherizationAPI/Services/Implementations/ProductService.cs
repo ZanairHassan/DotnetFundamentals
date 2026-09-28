@@ -4,6 +4,7 @@ using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Azure.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AuthenticationAutherizationAPI.Services.Implementations;
 
@@ -18,23 +19,24 @@ public class ProductService : IProductService
 
     public async Task<IList<ProductResponse>> GetAllProductsAsync(int pageNumber, int pageSize)
     {
-        return await _context.Products
-            .AsNoTracking()
-            .OrderBy(p => p.Id)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .Select(p => new ProductResponse
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                StockQuantity = p.StockQuantity
-            })
-            .ToListAsync();
+        var query = _context.Products
+             .AsNoTracking()
+             .OrderBy(p => p.Id)
+             .Skip((pageNumber - 1) * pageSize)
+             .Take(pageSize)
+             .Select(p => new ProductResponse
+             {
+                 Id = p.Id,
+                 Name = p.Name,
+                 Price = p.Price,
+                 StockQuantity = p.StockQuantity
+             });
+        Console.WriteLine(query.ToQueryString());
+        return await query.ToListAsync();
     }
     public async Task<ProductResponse?> GetProductByIdAsync(int id)
     {
-        return await _context.Products
+        var query = _context.Products
             .AsNoTracking()
             .Where(p => p.Id == id)
             .Select(p => new ProductResponse
@@ -43,8 +45,11 @@ public class ProductService : IProductService
                 Name = p.Name,
                 Price = p.Price,
                 StockQuantity = p.StockQuantity
-            })
-            .FirstOrDefaultAsync();
+            });
+
+        Console.WriteLine(query.ToQueryString());
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<Product> CreateProductAsync(CreateProductRequest request)
