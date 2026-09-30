@@ -11,6 +11,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -38,9 +39,36 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
+        builder.Entity<Tenant>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+
+            entity.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            entity.Property(x => x.TenantKey)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.HasIndex(x => x.TenantKey)
+                .IsUnique();
+        });
+
+        builder.Entity<ApplicationUser>(entity =>
+        {
+            entity.HasOne(x => x.Tenant)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.TenantId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
         builder.Entity<Product>(entity =>
         {
             entity.HasKey(x => x.Id);
+
+            entity.Property(x => x.TenantId)
+                .IsRequired();
 
             entity.Property(x => x.Name)
                 .IsRequired()
@@ -57,6 +85,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
 
             entity.Property(x => x.UpdatedAt)
                 .IsRequired();
+
+            entity.HasOne(x => x.Tenant)
+                .WithMany(x => x.Products)
+                .HasForeignKey(x => x.TenantId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasIndex(x => x.TenantId);
         });
     }
 }
