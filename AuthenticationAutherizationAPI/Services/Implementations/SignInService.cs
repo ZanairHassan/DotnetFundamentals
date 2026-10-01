@@ -1,8 +1,10 @@
+using AuthenticationAutherizationAPI.Data;
 using AuthenticationAutherizationAPI.DTOs.Authentication;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -14,18 +16,29 @@ public class SignInService : ISignInService
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ITokenService _tokenService;
     private readonly IMfaService _mfaService;
+    private readonly ApplicationDbContext _context;
 
-    public SignInService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITokenService tokenService, IMfaService mfaService)
+    public SignInService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITokenService tokenService, IMfaService mfaService, ApplicationDbContext context)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _tokenService = tokenService;
         _mfaService = mfaService;
+        _context = context;
     }
-
     public async Task<AuthSignInResult> SignInAsync(LoginRequest request)
     {
-        var user = await _userManager.FindByNameAsync(request.UserName) ?? await _userManager.FindByEmailAsync(request.UserName);
+        var tenant = await _context.Tenants.SingleOrDefaultAsync(x => x.TenantKey == request.TenantKey);
+
+        if (tenant is null)
+        {
+            return new AuthSignInResult.Failed("Invalid username or password.");
+        }
+
+        var user = await _context.Users.SingleOrDefaultAsync(x =>
+                x.TenantId == tenant.Id &&
+                (x.UserName == request.UserName ||
+                 x.Email == request.UserName));
 
         if (user is null)
         {

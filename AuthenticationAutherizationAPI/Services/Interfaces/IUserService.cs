@@ -9,7 +9,7 @@ public interface IUserService
 
     Task<ApplicationUser?> GetUserByIdAsync(string userId);
 
-    Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password);
+    Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password, string tenantKey);
 
     Task<IdentityResult> AddToRoleAsync(string userId, string roleName);
 
@@ -26,4 +26,6 @@ public interface IUserService
     Task<IdentityResult> SetLockoutEnabledAsync(string userId, bool enabled);
 
     Task<bool> GetLockoutEnabledAsync(string userId);
+
+    Task<bool> AssignTenantAsync(string userId, string tenantKey);
 }

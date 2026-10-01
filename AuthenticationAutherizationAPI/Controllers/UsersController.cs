@@ -64,13 +64,21 @@ public class UsersController : ControllerBase
         {
             UserName = request.UserName.Trim(),
             Email = request.Email.Trim(),
-            TwoFactorEnabled = request.TwoFactorEnabled
+            TwoFactorEnabled = request.TwoFactorEnabled           
         };
 
-        var result = await _userService.CreateUserAsync(user, request.Password);
+        var result = await _userService.CreateUserAsync(user, request.Password, request.TenantKey);
 
         if (!result.Succeeded)
         {
+            if (result.Errors.Any(error => error.Code == "TenantNotFound"))
+            {
+                return BadRequest(new
+                {
+                    Message = "The specified tenant does not exist."
+                });
+            }
+
             return BadRequest(result.Errors);
         }
 
@@ -187,6 +195,25 @@ public class UsersController : ControllerBase
                 Message = "User was not found."
             });
         }
+    }
+
+    [HttpPut("{userId}/tenant")]
+    public async Task<IActionResult> AssignTenant(string userId, AssignTenantRequest request)
+    {
+        var assigned = await _userService.AssignTenantAsync(userId, request.TenantKey);
+
+        if (!assigned)
+        {
+            return BadRequest(new
+            {
+                Message = "Unable to assign tenant. User or tenant was not found."
+            });
+        }
+
+        return Ok(new
+        {
+            Message = "Tenant assigned successfully."
+        });
     }
 
     private IActionResult ToUserManagementResult(IdentityResult result, string successMessage)

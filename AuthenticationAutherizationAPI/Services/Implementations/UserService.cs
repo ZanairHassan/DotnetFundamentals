@@ -1,3 +1,4 @@
+using AuthenticationAutherizationAPI.Data;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -9,11 +10,13 @@ public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<ApplicationRole> _roleManager;
+    private readonly ApplicationDbContext _context;
 
-    public UserService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+    public UserService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, ApplicationDbContext context)
     {
         _userManager = userManager;
         _roleManager = roleManager;
+        _context = context;
     }
 
     public async Task<IList<ApplicationUser>> GetAllUsersAsync()
@@ -26,8 +29,22 @@ public class UserService : IUserService
         return await _userManager.FindByIdAsync(userId);
     }
 
-    public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password)
+    public async Task<IdentityResult> CreateUserAsync(ApplicationUser user,string password, string tenantKey)
     {
+        var tenant = await _context.Tenants
+            .SingleOrDefaultAsync(x => x.TenantKey == tenantKey.Trim());
+
+        if (tenant is null)
+        {
+            return IdentityResult.Failed(new IdentityError
+            {
+                Code = "TenantNotFound",
+                Description = "The specified tenant does not exist."
+            });
+        }
+
+        user.TenantId = tenant.Id;
+
         return await _userManager.CreateAsync(user, password);
     }
 
@@ -168,6 +185,30 @@ public class UserService : IUserService
         var user = await _userManager.FindByIdAsync(userId);
 
         return user is not null && await _userManager.GetLockoutEnabledAsync(user);
+    }
+
+    public async Task<bool> AssignTenantAsync(string userId, string tenantKey)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user is null)
+        {
+            return false;
+        }
+
+        var tenant = await _context.Tenants
+            .SingleOrDefaultAsync(x => x.TenantKey == tenantKey.Trim());
+
+        if (tenant is null)
+        {
+            return false;
+        }
+
+        user.TenantId = tenant.Id;
+
+        var result = await _userManager.UpdateAsync(user);
+
+        return result.Succeeded;
     }
 
     private static IdentityResult UserNotFound()

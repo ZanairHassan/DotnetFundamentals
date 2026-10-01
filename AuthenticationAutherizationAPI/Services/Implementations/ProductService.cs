@@ -1,4 +1,4 @@
-﻿using AuthenticationAutherizationAPI.Data;
+using AuthenticationAutherizationAPI.Data;
 using AuthenticationAutherizationAPI.DTOs.Products;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
@@ -29,7 +29,8 @@ public class ProductService : IProductService
                  Id = p.Id,
                  Name = p.Name,
                  Price = p.Price,
-                 StockQuantity = p.StockQuantity
+                 StockQuantity = p.StockQuantity,
+                 TenantId = p.TenantId
              });
         Console.WriteLine(query.ToQueryString());
         return await query.ToListAsync();
@@ -44,7 +45,8 @@ public class ProductService : IProductService
                 Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
-                StockQuantity = p.StockQuantity
+                StockQuantity = p.StockQuantity,
+                TenantId = p.TenantId
             });
 
         Console.WriteLine(query.ToQueryString());
@@ -52,13 +54,21 @@ public class ProductService : IProductService
         return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<Product> CreateProductAsync(CreateProductRequest request)
+    public async Task<Product?> CreateProductAsync(CreateProductRequest request)
     {
+        var tenant = await _context.Tenants.SingleOrDefaultAsync(x => x.TenantKey == request.TenantKey.Trim());
+
+        if (tenant is null)
+        {
+            return null;
+        }
+
         var product = new Product
         {
-            Name = request.Name,
+            Name = request.Name.Trim(),
             Price = request.Price,
             StockQuantity = request.StockQuantity,
+            TenantId = tenant.Id,
             UpdatedAt = DateTime.UtcNow
         };
 
