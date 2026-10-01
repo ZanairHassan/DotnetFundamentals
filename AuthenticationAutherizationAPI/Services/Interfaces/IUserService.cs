@@ -1,3 +1,4 @@
+using AuthenticationAutherizationAPI.DTOs.Users;
 using AuthenticationAutherizationAPI.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -5,9 +6,9 @@ namespace AuthenticationAutherizationAPI.Services.Interfaces;
 
 public interface IUserService
 {
-    Task<IList<ApplicationUser>> GetAllUsersAsync();
+    Task<IReadOnlyList<UserResponse>> GetAllUsersAsync();
 
-    Task<ApplicationUser?> GetUserByIdAsync(string userId);
+    Task<UserResponse?> GetUserByIdAsync(string userId);
 
     Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password, string tenantKey);
 
@@ -25,7 +26,7 @@ public interface IUserService
 
     Task<IdentityResult> SetLockoutEnabledAsync(string userId, bool enabled);
 
-    Task<bool> GetLockoutEnabledAsync(string userId);
+    Task<bool?> GetLockoutEnabledAsync(string userId);
 
     Task<bool> AssignTenantAsync(string userId, string tenantKey);
 }

@@ -1,4 +1,5 @@
 using AuthenticationAutherizationAPI.Data;
+using AuthenticationAutherizationAPI.DTOs.Users;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -19,22 +20,48 @@ public class UserService : IUserService
         _context = context;
     }
 
-    public async Task<IList<ApplicationUser>> GetAllUsersAsync()
+    public async Task<IReadOnlyList<UserResponse>> GetAllUsersAsync()
     {
-        return await _userManager.Users.ToListAsync();
+        return await _userManager.Users
+            .AsNoTracking()
+            .Select(user => new UserResponse
+            {
+                Id = user.Id,
+                UserName = user.UserName ?? string.Empty,
+                Email = user.Email ?? string.Empty,
+                EmailConfirmed = user.EmailConfirmed,
+                LockoutEnabled = user.LockoutEnabled
+            })
+            .ToListAsync();
     }
 
-    public async Task<ApplicationUser?> GetUserByIdAsync(string userId)
+    public async Task<UserResponse?> GetUserByIdAsync(string userId)
     {
-        return await _userManager.FindByIdAsync(userId);
+        return await _userManager.Users
+            .AsNoTracking()
+            .Where(user => user.Id == userId)
+            .Select(user => new UserResponse
+            {
+                Id = user.Id,
+                UserName = user.UserName ?? string.Empty,
+                Email = user.Email ?? string.Empty,
+                EmailConfirmed = user.EmailConfirmed,
+                LockoutEnabled = user.LockoutEnabled
+            })
+            .SingleOrDefaultAsync();
     }
 
     public async Task<IdentityResult> CreateUserAsync(ApplicationUser user,string password, string tenantKey)
     {
-        var tenant = await _context.Tenants
-            .SingleOrDefaultAsync(x => x.TenantKey == tenantKey.Trim());
+        var normalizedTenantKey = tenantKey.Trim();
 
-        if (tenant is null)
+        var tenantId = await _context.Tenants
+            .AsNoTracking()
+            .Where(tenant => tenant.TenantKey == normalizedTenantKey)
+            .Select(tenant => (Guid?)tenant.Id)
+            .SingleOrDefaultAsync();
+
+        if (tenantId is null)
         {
             return IdentityResult.Failed(new IdentityError
             {
@@ -43,23 +70,20 @@ public class UserService : IUserService
             });
         }
 
-        user.TenantId = tenant.Id;
+        user.TenantId = tenantId.Value;
 
         return await _userManager.CreateAsync(user, password);
     }
 
-    public async Task<IdentityResult> AddToRoleAsync(string userId, string roleName)
+    public async Task<IdentityResult> AddToRoleAsync(
+        string userId,
+        string roleName)
     {
         var user = await _userManager.FindByIdAsync(userId);
 
         if (user is null)
         {
-            return IdentityResult.Failed(
-                new IdentityError
-                {
-                    Code = "UserNotFound",
-                    Description = "User was not found."
-                });
+            return UserNotFound();
         }
 
         if (!await _roleManager.RoleExistsAsync(roleName))
@@ -180,11 +204,13 @@ public class UserService : IUserService
         return user is null ? UserNotFound() : await _userManager.SetLockoutEnabledAsync(user, enabled);
     }
 
-    public async Task<bool> GetLockoutEnabledAsync(string userId)
+    public async Task<bool?> GetLockoutEnabledAsync(string userId)
     {
-        var user = await _userManager.FindByIdAsync(userId);
-
-        return user is not null && await _userManager.GetLockoutEnabledAsync(user);
+        return await _userManager.Users
+            .AsNoTracking()
+            .Where(user => user.Id == userId)
+            .Select(user => (bool?)user.LockoutEnabled)
+            .SingleOrDefaultAsync();
     }
 
     public async Task<bool> AssignTenantAsync(string userId, string tenantKey)
@@ -196,15 +222,20 @@ public class UserService : IUserService
             return false;
         }
 
-        var tenant = await _context.Tenants
-            .SingleOrDefaultAsync(x => x.TenantKey == tenantKey.Trim());
+        var normalizedTenantKey = tenantKey.Trim();
 
-        if (tenant is null)
+        var tenantId = await _context.Tenants
+            .AsNoTracking()
+            .Where(tenant => tenant.TenantKey == normalizedTenantKey)
+            .Select(tenant => (Guid?)tenant.Id)
+            .SingleOrDefaultAsync();
+
+        if (tenantId is null)
         {
             return false;
         }
 
-        user.TenantId = tenant.Id;
+        user.TenantId = tenantId.Value;
 
         var result = await _userManager.UpdateAsync(user);
 

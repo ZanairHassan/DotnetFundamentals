@@ -24,16 +24,7 @@ public class UsersController : ControllerBase
     {
         var users = await _userService.GetAllUsersAsync();
 
-        var response = users.Select(user => new UserResponse
-        {
-            Id = user.Id,
-            UserName = user.UserName ?? string.Empty,
-            Email = user.Email ?? string.Empty,
-            EmailConfirmed = user.EmailConfirmed,
-            LockoutEnabled = user.LockoutEnabled
-        });
-
-        return Ok(response);
+        return Ok(users);
     }
 
     [HttpGet("{userId}")]
@@ -46,14 +37,7 @@ public class UsersController : ControllerBase
             return NotFound(new { Message = "User was not found." });
         }
 
-        return Ok(new UserResponse
-        {
-            Id = user.Id,
-            UserName = user.UserName ?? string.Empty,
-            Email = user.Email ?? string.Empty,
-            EmailConfirmed = user.EmailConfirmed,
-            LockoutEnabled = user.LockoutEnabled
-        });
+        return Ok(user);
     }
 
     [AllowAnonymous]
@@ -64,7 +48,7 @@ public class UsersController : ControllerBase
         {
             UserName = request.UserName.Trim(),
             Email = request.Email.Trim(),
-            TwoFactorEnabled = request.TwoFactorEnabled           
+            TwoFactorEnabled = request.TwoFactorEnabled
         };
 
         var result = await _userService.CreateUserAsync(user, request.Password, request.TenantKey);
@@ -90,7 +74,7 @@ public class UsersController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("assignRoles/{userId}")]
-    public async Task<IActionResult> AssignRole(string userId, AssignRoleRequest request)   
+    public async Task<IActionResult> AssignRole(string userId, AssignRoleRequest request)
     {
         var result = await _userService.AddToRoleAsync(userId, request.RoleName.Trim());
 
@@ -137,7 +121,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{userId}/lockoutEnabled")]
-    public async Task<IActionResult> SetLockoutEnabled(string userId, [FromBody] SetLockoutEnabledRequest request)
+    public async Task<IActionResult> SetLockoutEnabled(string userId, SetLockoutEnabledRequest request)
     {
         var result = await _userService.SetLockoutEnabledAsync(userId, request.Enabled);
 
@@ -147,26 +131,24 @@ public class UsersController : ControllerBase
     [HttpGet("{userId}/lockoutEnabled")]
     public async Task<IActionResult> GetLockoutEnabled(string userId)
     {
-        var user = await _userService.GetUserByIdAsync(userId);
+        var isEnabled = await _userService.GetLockoutEnabledAsync(userId);
 
-        if (user is null)
+        if (isEnabled is null)
         {
             return NotFound(new { Message = "User was not found." });
         }
 
-        var isEnabled = await _userService.GetLockoutEnabledAsync(userId);
-
         return Ok(new
         {
             UserId = userId,
-            LockoutEnabled = isEnabled
+            LockoutEnabled = isEnabled.Value
         });
     }
 
     [HttpDelete("{userId}/roles/{roleName}")]
     public async Task<IActionResult> RemoveRole(string userId, string roleName)
     {
-        var result = await _userService.RemoveFromRoleAsync(userId, roleName);
+        var result = await _userService.RemoveFromRoleAsync(userId, roleName.Trim());
 
         return ToUserManagementResult(result, "Role removed successfully.");
     }
@@ -182,19 +164,22 @@ public class UsersController : ControllerBase
     [HttpGet("getAssignedRoles/{userId}")]
     public async Task<IActionResult> GetRoles(string userId)
     {
-        try
-        {
-            var roles = await _userService.GetRolesAsync(userId);
+        var roles = await _userService.GetRolesAsync(userId);
 
-            return Ok(roles);
-        }
-        catch (KeyNotFoundException)
+        if (roles.Count == 0)
         {
-            return NotFound(new
+            var user = await _userService.GetUserByIdAsync(userId);
+
+            if (user is null)
             {
-                Message = "User was not found."
-            });
+                return NotFound(new
+                {
+                    Message = "User was not found."
+                });
+            }
         }
+
+        return Ok(roles);
     }
 
     [HttpPut("{userId}/tenant")]
