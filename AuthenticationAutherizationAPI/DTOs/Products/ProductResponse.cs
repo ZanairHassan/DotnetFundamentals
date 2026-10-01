@@ -1,4 +1,4 @@
-﻿namespace AuthenticationAutherizationAPI.DTOs.Products;
+namespace AuthenticationAutherizationAPI.DTOs.Products;
 
 public class ProductResponse
 {
@@ -9,4 +9,6 @@ public class ProductResponse
     public decimal Price { get; set; }
 
     public int StockQuantity { get; set; }
+
+    public Guid TenantId { get; set; }
 }

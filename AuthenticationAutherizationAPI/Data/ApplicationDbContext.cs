@@ -1,4 +1,5 @@
 ﻿using AuthenticationAutherizationAPI.Models;
+using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,8 +7,11 @@ namespace AuthenticationAutherizationAPI.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    private readonly ITenantContext _tenantContext;
+
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ITenantContext tenantContext) : base(options)
     {
+        _tenantContext = tenantContext;
     }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Product> Products { get; set; }
@@ -92,6 +96,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
                 .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasIndex(x => x.TenantId);
+            builder.Entity<Product>()
+            .HasQueryFilter(x => x.TenantId == _tenantContext.TenantId);
         });
     }
 }
