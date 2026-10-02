@@ -20,10 +20,13 @@ public class UserService : IUserService
         _context = context;
     }
 
-    public async Task<IReadOnlyList<UserResponse>> GetAllUsersAsync()
+    public async Task<IReadOnlyList<UserResponse>> GetAllUsersAsync(int pageNumber, int pageSize)
     {
-        return await _userManager.Users
+        var query = _userManager.Users
             .AsNoTracking()
+            .OrderBy(user => user.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Select(user => new UserResponse
             {
                 Id = user.Id,
@@ -31,8 +34,11 @@ public class UserService : IUserService
                 Email = user.Email ?? string.Empty,
                 EmailConfirmed = user.EmailConfirmed,
                 LockoutEnabled = user.LockoutEnabled
-            })
-            .ToListAsync();
+            });
+
+        Console.WriteLine(query.ToQueryString());
+
+        return await query.ToListAsync();
     }
 
     public async Task<UserResponse?> GetUserByIdAsync(string userId)

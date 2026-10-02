@@ -6,7 +6,7 @@ namespace AuthenticationAutherizationAPI.Services.Interfaces;
 
 public interface IUserService
 {
-    Task<IReadOnlyList<UserResponse>> GetAllUsersAsync();
+    Task<IReadOnlyList<UserResponse>> GetAllUsersAsync(int pageNumber, int pageSize);
 
     Task<UserResponse?> GetUserByIdAsync(string userId);
 

@@ -320,6 +320,10 @@ Source Code Repository for Intern 1
 - Added the tenant feature to the user (Added the endpoint to assign a user to a new tenant, using a DTO; updated the login logic to validate the tenant key as well).
 - Associate a product with a user based on the tenant key (updated the application DB context class to add the global tenant filter on products; updated the token service to add the tenantId claim).
 
+## 80. EF Core performance tuning
+- Optimised the EF Core LINQ queries for the user in the user service.
+- Applied projection and reduced the fetching cost.
+- Add pagination to user listing.
 
 ## Collaborate with team
 
@@ -365,6 +369,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/44)(on child branch 75-76-Advanced-concurrency -25-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/45)(on child branch 77-Query-optimization -28-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/46)(on child branch 78-Execution-plans -30-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/47)(on child branch 80-EF-Core-performance-tuning -01-10-2026)
 
 
 ## Project Structure

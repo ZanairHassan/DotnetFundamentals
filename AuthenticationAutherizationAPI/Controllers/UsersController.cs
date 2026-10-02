@@ -20,9 +20,9 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("getAllUsers")]
-    public async Task<IActionResult> GetAllUsers()
+    public async Task<IActionResult> GetAllUsers(int pageNumber = 1, int pageSize = 10)
     {
-        var users = await _userService.GetAllUsersAsync();
+        var users = await _userService.GetAllUsersAsync(pageNumber, pageSize);
 
         return Ok(users);
     }
