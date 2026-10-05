@@ -325,6 +325,11 @@ Source Code Repository for Intern 1
 - Applied projection and reduced the fetching cost.
 - Add pagination to user listing.
 
+## 81. Lazy vs. eager loading
+- Implemented eager loading using Include() to load related tenant data with products.
+- Implemented lazy loading using EF Core lazy-loading proxies for product-tenant relationships.
+- Tested and compared both loading strategies while preserving multi-tenant query filtering.
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -16-07-2026)
@@ -370,6 +375,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/45)(on child branch 77-Query-optimization -28-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/46)(on child branch 78-Execution-plans -30-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/47)(on child branch 80-EF-Core-performance-tuning -01-10-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/48)(on child branch 81-Lazy vs. eager loading -05-10-2026)
 
 
 ## Project Structure

@@ -24,7 +24,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DB_Connection")));
+{
+    options.UseLazyLoadingProxies();
+
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DB_Connection"));
+});
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()

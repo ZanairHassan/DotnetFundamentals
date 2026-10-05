@@ -8,7 +8,7 @@ public class Tenant
 
     public string TenantKey { get; set; } = string.Empty;
 
-    public ICollection<ApplicationUser> Users { get; set; } = new List<ApplicationUser>();
+    public virtual ICollection<ApplicationUser> Users { get; set; } = new List<ApplicationUser>();
 
-    public ICollection<Product> Products { get; set; } = new List<Product>();
+    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }
