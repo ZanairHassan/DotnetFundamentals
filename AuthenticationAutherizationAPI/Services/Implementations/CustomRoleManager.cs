@@ -11,6 +11,21 @@ public class CustomRoleManager : RoleManager<ApplicationRole>
     private readonly ILogger<CustomRoleManager> _customLogger;
     private readonly ApplicationDbContext _dbContext;
 
+    #region
+
+    private static readonly Func<ApplicationDbContext, string, Task<int>>
+    GetAssignedUserCountCompiled =
+        EF.CompileAsyncQuery(
+            (ApplicationDbContext context, string roleId) =>
+                context.UserRoles.Count(ur => ur.RoleId == roleId));
+
+    private static readonly Func<ApplicationDbContext, string, Task<bool>>
+        IsRoleAssignedToAnyUserCompiled =
+            EF.CompileAsyncQuery(
+                (ApplicationDbContext context, string roleId) =>
+                    context.UserRoles.Any(ur => ur.RoleId == roleId));
+
+    #endregion
     public CustomRoleManager(
         IRoleStore<ApplicationRole> store,
         IEnumerable<IRoleValidator<ApplicationRole>> roleValidators,
@@ -186,5 +201,15 @@ public class CustomRoleManager : RoleManager<ApplicationRole>
     public async Task<int> GetAssignedUserCountAsync(string roleId)
     {
         return await _dbContext.UserRoles.CountAsync(ur => ur.RoleId == roleId);
+    }
+
+    public async Task<int> GetAssignedUserCountCompiledAsync(string roleId)
+    {
+        return await GetAssignedUserCountCompiled(_dbContext, roleId);
+    }
+
+    public async Task<bool> IsRoleAssignedToAnyUserCompiledAsync(string roleId)
+    {
+        return await IsRoleAssignedToAnyUserCompiled(_dbContext, roleId);
     }
 }

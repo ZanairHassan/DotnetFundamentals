@@ -29,6 +29,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DB_Connection"));
+
+    options.EnableSensitiveDataLogging();
+    options.EnableDetailedErrors();
 });
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
