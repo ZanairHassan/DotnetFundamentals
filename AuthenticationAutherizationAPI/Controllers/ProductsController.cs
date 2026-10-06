@@ -132,4 +132,30 @@ public class ProductsController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpGet("eager/{id}")]
+    public async Task<IActionResult> GetProductWithEagerLoading(int id)
+    {
+        var product = await _productService.GetProductWithTenantEagerAsync(id);
+
+        if (product is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(product);
+    }
+
+    [HttpGet("lazy/{id}")]
+    public async Task<IActionResult> GetProductWithLazyLoading(int id)
+    {
+        var product = await _productService.GetProductWithTenantLazyAsync(id);
+
+        if (product is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(product);
+    } 
 }
