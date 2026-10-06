@@ -1,4 +1,4 @@
-﻿using AuthenticationAutherizationAPI.Models;
+using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -154,6 +154,20 @@ public class UserService : IUserService
         }
 
         return await _userManager.GetRolesAsync(user);
+    }
+
+    public async Task<IdentityResult> SetLockoutEnabledAsync(string userId, bool enabled)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        return user is null ? UserNotFound() : await _userManager.SetLockoutEnabledAsync(user, enabled);
+    }
+
+    public async Task<bool> GetLockoutEnabledAsync(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        return user is not null && await _userManager.GetLockoutEnabledAsync(user);
     }
 
     private static IdentityResult UserNotFound()

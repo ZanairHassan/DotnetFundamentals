@@ -1,4 +1,4 @@
-﻿using AuthenticationAutherizationAPI.DTOs.Users;
+using AuthenticationAutherizationAPI.DTOs.Users;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -29,7 +29,8 @@ public class UsersController : ControllerBase
             Id = user.Id,
             UserName = user.UserName ?? string.Empty,
             Email = user.Email ?? string.Empty,
-            EmailConfirmed = user.EmailConfirmed
+            EmailConfirmed = user.EmailConfirmed,
+            LockoutEnabled = user.LockoutEnabled
         });
 
         return Ok(response);
@@ -50,7 +51,8 @@ public class UsersController : ControllerBase
             Id = user.Id,
             UserName = user.UserName ?? string.Empty,
             Email = user.Email ?? string.Empty,
-            EmailConfirmed = user.EmailConfirmed
+            EmailConfirmed = user.EmailConfirmed,
+            LockoutEnabled = user.LockoutEnabled
         });
     }
 
@@ -124,6 +126,33 @@ public class UsersController : ControllerBase
             request.NewRoleName.Trim());
 
         return ToUserManagementResult(result, "Role updated successfully.");
+    }
+
+    [HttpPut("{userId}/lockoutEnabled")]
+    public async Task<IActionResult> SetLockoutEnabled(string userId, [FromBody] SetLockoutEnabledRequest request)
+    {
+        var result = await _userService.SetLockoutEnabledAsync(userId, request.Enabled);
+
+        return ToUserManagementResult(result, $"Lockout has been {(request.Enabled ? "enabled" : "disabled")} successfully.");
+    }
+
+    [HttpGet("{userId}/lockoutEnabled")]
+    public async Task<IActionResult> GetLockoutEnabled(string userId)
+    {
+        var user = await _userService.GetUserByIdAsync(userId);
+
+        if (user is null)
+        {
+            return NotFound(new { Message = "User was not found." });
+        }
+
+        var isEnabled = await _userService.GetLockoutEnabledAsync(userId);
+
+        return Ok(new
+        {
+            UserId = userId,
+            LockoutEnabled = isEnabled
+        });
     }
 
     [HttpDelete("{userId}/roles/{roleName}")]

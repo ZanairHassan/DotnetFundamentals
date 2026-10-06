@@ -283,6 +283,13 @@ Source Code Repository for Intern 1
 - Added validation for users, roles, duplicate assignments, and existing role membership.
 - Added required DTOs and verified the project builds successfully without warnings or errors.
 
+## 72. SignInManager customization
+- Customized SignInManager with a CustomSignInManager implementation featuring custom sign-in validation, lockout checks, and IP-based audit logging.
+- Added support to sign in using either username or email address.
+- Added handling for NotAllowed sign-in status returning an appropriate 403 Forbidden response.
+- Added APIs and service methods to retrieve and update user lockout enablement (LockoutEnabled).
+- Added global ExceptionHandlingMiddleware for centralized unhandled exception logging and standard Problem Details responses.
+- Registered the custom sign-in manager and middleware in Program.cs, and verified the project builds successfully without warnings or errors.
 
 ## Collaborate with team
 
@@ -323,6 +330,7 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/39)(on child branch 68-WebAPI-Authentication -18-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/40)(on child branch 69-Role-based-policies -21-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/41)(on child branch 71-UserManager-customization -21-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/42)(on child branch 72-SignInManager-customization -22-09-2026)
 
 
 ## Project Structure

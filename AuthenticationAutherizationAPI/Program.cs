@@ -1,5 +1,6 @@
 using AuthenticationAutherizationAPI.Configuration;
 using AuthenticationAutherizationAPI.Data;
+using AuthenticationAutherizationAPI.Middlewares;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Repositories.Implementations;
 using AuthenticationAutherizationAPI.Repositories.Interfaces;
@@ -20,12 +21,15 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DB_Connection")));
+
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddSignInManager<CustomSignInManager>()
+    .AddDefaultTokenProviders();
 
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
 
@@ -90,6 +94,8 @@ builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<IMfaService, MfaService>();
 #endregion
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

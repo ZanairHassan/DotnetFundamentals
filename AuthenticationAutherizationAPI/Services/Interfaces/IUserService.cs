@@ -1,4 +1,4 @@
-﻿using AuthenticationAutherizationAPI.Models;
+using AuthenticationAutherizationAPI.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace AuthenticationAutherizationAPI.Services.Interfaces;
@@ -22,4 +22,8 @@ public interface IUserService
     Task<IdentityResult> DeleteUserAsync(string userId);
 
     Task<IList<string>> GetRolesAsync(string userId);
+
+    Task<IdentityResult> SetLockoutEnabledAsync(string userId, bool enabled);
+
+    Task<bool> GetLockoutEnabledAsync(string userId);
 }
