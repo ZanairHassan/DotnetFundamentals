@@ -77,7 +77,7 @@ public class UsersController : ControllerBase
         });
     }
 
-    [HttpPost("{userId}/roles")]
+    [HttpPost("assignRoles/{userId}")]
     public async Task<IActionResult> AssignRole(string userId, AssignRoleRequest request)
     {
         var result = await _userService.AddToRoleAsync(userId, request.RoleName.Trim());
@@ -105,7 +105,7 @@ public class UsersController : ControllerBase
         });
     }
 
-    [HttpGet("{userId}/roles")]
+    [HttpGet("getAssignedRoles/{userId}")]
     public async Task<IActionResult> GetRoles(string userId)
     {
         try

@@ -265,6 +265,18 @@ Source Code Repository for Intern 1
 - (Added MFA Login Flow) When a user with MFA enabled logs in, the system generates a pendingMfaToken and sends an OTP to the user's registered email address.
 - (Added MFA Verification) The user must provide the pendingMfaToken and OTP to complete authentication. After successful verification, the system generates and returns the access token, refresh token and other user details.
 
+## 68. WebAPI Authentication
+- Added an endpoint to get the user by id.
+- Added the autherization policy
+- Validate each endpoint based on the functionality
+- Use the [AllowAnonymous] for authentication related endpoints.
+
+## 69. Role-based policies
+- Added a new policy (ManagerOnly) into the program.cs file.
+- Implement the policy in the ROles controller to authorize that only user with the role manager can only get all the available roles.
+- Make the create role endpoint as AllowAnonymous, now anyone can add new roles.
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -16-07-2026)
@@ -301,6 +313,8 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/36)(on child branch 64-Claims-Managers -10-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/37)(on child branch 66-External-Providers-&-OIDC -15-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/38)(on child branch 67-Multi-Factor-Authentication -17-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/39)(on child branch 68-WebAPI-Authentication -18-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/34)(on child branch 69-Role-based-policies -21-09-2026)
 
 
 ## Project Structure
