@@ -18,14 +18,26 @@ public class AuthenticationController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var response = await _signInService.SignInAsync(request);
+        var result = await _signInService.SignInAsync(request);
+
+        return result switch
+        {
+            AuthSignInResult.Success s => Ok(s.Tokens),
+            AuthSignInResult.RequiresMfa m => Ok(new { requiresMfa = true, pendingMfaToken = m.PendingMfaToken }),
+            AuthSignInResult.Failed f => Unauthorized(new { Message = f.Reason }),
+            AuthSignInResult.LockedOut l => Unauthorized(new { Message = l.Reason }),
+            _ => StatusCode(500)
+        };
+    }
+
+    [HttpPost("mfaVerify")]
+    public async Task<IActionResult> VerifyMfa(VerifyMfaRequest request)
+    {
+        var response = await _signInService.VerifyMfaAsync(request);
 
         if (response is null)
         {
-            return Unauthorized(new
-            {
-                Message = "Invalid username or password."
-            });
+            return Unauthorized(new { Message = "Invalid or expired code." });
         }
 
         return Ok(response);

@@ -110,17 +110,70 @@ public class TokenService : ITokenService
         };
     }
 
+    public Task<string> GeneratePendingMfaTokenAsync(ApplicationUser user)
+    {
+        var claims = new List<Claim>
+    {
+        new(JwtRegisteredClaimNames.Sub, user.Id),
+        new("purpose", "mfa_pending"),
+        new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _jwtSettings.Issuer,
+            audience: _jwtSettings.Audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddMinutes(5),
+            signingCredentials: credentials);
+
+        return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
+    }
+
+    public ClaimsPrincipal? ValidatePendingMfaToken(string token)
+    {
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
+
+        var validationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = _jwtSettings.Issuer,
+            ValidAudience = _jwtSettings.Audience,
+            IssuerSigningKey = key,
+            ClockSkew = TimeSpan.Zero
+        };
+
+        try
+        {
+            var principal = new JwtSecurityTokenHandler().ValidateToken(token, validationParameters, out _);
+
+            var purpose = principal.FindFirst("purpose")?.Value;
+
+            return purpose == "mfa_pending" ? principal : null;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     #region Private Methods
 
     private async Task<string> GenerateAccessTokenAsync(ApplicationUser user, DateTime expiresAt)
     {
-        var claims = new List<Claim>
+        var claims = new List<Claim> 
         {
-           new(JwtRegisteredClaimNames.Sub, user.Id),
-           new(JwtRegisteredClaimNames.UniqueName, user.UserName ?? string.Empty),
-           new(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
-           new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-           };
+            new(JwtRegisteredClaimNames.Sub, user.Id),
+            new(ClaimTypes.NameIdentifier, user.Id),
+            new(ClaimTypes.Name, user.UserName ?? string.Empty),
+            new(ClaimTypes.Email, user.Email ?? string.Empty),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
 
         var roles = await _userManager.GetRolesAsync(user);
 

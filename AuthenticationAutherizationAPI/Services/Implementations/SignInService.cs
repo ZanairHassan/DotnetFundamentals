@@ -3,6 +3,7 @@ using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace AuthenticationAutherizationAPI.Services.Implementations;
@@ -12,31 +13,55 @@ public class SignInService : ISignInService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ITokenService _tokenService;
+    private readonly IMfaService _mfaService;
 
-    public SignInService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITokenService tokenService)
+    public SignInService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITokenService tokenService, IMfaService mfaService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _tokenService = tokenService;
+        _mfaService = mfaService;
     }
 
-    public async Task<AuthenticationResponse?> SignInAsync(LoginRequest request)
+    public async Task<AuthSignInResult> SignInAsync(LoginRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
 
         if (user is null)
         {
-            return null;
+            return new AuthSignInResult.Failed("Invalid username or password.");
         }
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: true);
 
-        if (!result.Succeeded)
+        if (result.IsLockedOut)
         {
-            return null;
+            // Same message as Failed, deliberately - avoids leaking whether the username exists
+            return new AuthSignInResult.LockedOut("Invalid username or password.");
         }
 
-        return await _tokenService.GenerateTokensAsync(user);
+        if (!result.Succeeded)
+        {
+            return new AuthSignInResult.Failed("Invalid username or password.");
+        }
+
+        if (await _userManager.GetTwoFactorEnabledAsync(user))
+        {
+            if (string.IsNullOrWhiteSpace(user.Email))
+            {
+                return new AuthSignInResult.Failed("MFA is enabled but the account does not have an email address.");
+            }
+
+            var pendingToken = await _tokenService.GeneratePendingMfaTokenAsync(user);
+
+            await _mfaService.SendOtpAsync(user);
+
+            return new AuthSignInResult.RequiresMfa(pendingToken);
+        }
+
+        var tokens = await _tokenService.GenerateTokensAsync(user);
+
+        return new AuthSignInResult.Success(tokens);
     }
 
     public async Task<AuthenticationResponse?> RefreshTokenAsync(RefreshTokenRequest request)
@@ -133,5 +158,28 @@ public class SignInService : ISignInService
         }
 
         return await _tokenService.GenerateTokensAsync(user);
+    }
+
+    public async Task<AuthenticationResponse?> VerifyMfaAsync(VerifyMfaRequest request)
+    {
+        var principal = _tokenService.ValidatePendingMfaToken(request.PendingMfaToken);
+
+        var userId = principal?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (userId is null)
+        {
+            return null;
+        }
+
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user is null)
+        {
+            return null;
+        }
+
+        var isValid = await _mfaService.VerifyOtpAsync(user, request.Code);
+
+        return isValid ? await _tokenService.GenerateTokensAsync(user) : null;
     }
 }
