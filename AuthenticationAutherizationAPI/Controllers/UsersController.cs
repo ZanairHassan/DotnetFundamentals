@@ -2,6 +2,7 @@
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationAutherizationAPI.Controllers;
@@ -77,8 +78,9 @@ public class UsersController : ControllerBase
         });
     }
 
+    [AllowAnonymous]
     [HttpPost("assignRoles/{userId}")]
-    public async Task<IActionResult> AssignRole(string userId, AssignRoleRequest request)
+    public async Task<IActionResult> AssignRole(string userId, AssignRoleRequest request)   
     {
         var result = await _userService.AddToRoleAsync(userId, request.RoleName.Trim());
 
@@ -105,6 +107,41 @@ public class UsersController : ControllerBase
         });
     }
 
+    [HttpPut("{userId}/userName")]
+    public async Task<IActionResult> UpdateUserName(string userId, UpdateUserNameRequest request)
+    {
+        var result = await _userService.UpdateUserNameAsync(userId, request.UserName.Trim());
+
+        return ToUserManagementResult(result, "Username updated successfully.");
+    }
+
+    [HttpPut("{userId}/roles")]
+    public async Task<IActionResult> ReplaceRole(string userId, ReplaceUserRoleRequest request)
+    {
+        var result = await _userService.ReplaceRoleAsync(
+            userId,
+            request.CurrentRoleName.Trim(),
+            request.NewRoleName.Trim());
+
+        return ToUserManagementResult(result, "Role updated successfully.");
+    }
+
+    [HttpDelete("{userId}/roles/{roleName}")]
+    public async Task<IActionResult> RemoveRole(string userId, string roleName)
+    {
+        var result = await _userService.RemoveFromRoleAsync(userId, roleName);
+
+        return ToUserManagementResult(result, "Role removed successfully.");
+    }
+
+    [HttpDelete("{userId}")]
+    public async Task<IActionResult> DeleteUser(string userId)
+    {
+        var result = await _userService.DeleteUserAsync(userId);
+
+        return ToUserManagementResult(result, "User deleted successfully.");
+    }
+
     [HttpGet("getAssignedRoles/{userId}")]
     public async Task<IActionResult> GetRoles(string userId)
     {
@@ -121,5 +158,24 @@ public class UsersController : ControllerBase
                 Message = "User was not found."
             });
         }
+    }
+
+    private IActionResult ToUserManagementResult(IdentityResult result, string successMessage)
+    {
+        if (result.Succeeded)
+        {
+            return Ok(new { Message = successMessage });
+        }
+
+        if (result.Errors.Any(error => error.Code == "UserNotFound"))
+        {
+            return NotFound(new { Message = "User was not found." });
+        }
+
+        return BadRequest(new
+        {
+            Message = "The user operation could not be completed.",
+            Errors = result.Errors
+        });
     }
 }
