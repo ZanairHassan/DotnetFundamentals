@@ -221,33 +221,52 @@ public class UserService : IUserService
 
     public async Task<bool> AssignTenantAsync(string userId, string tenantKey)
     {
-        var user = await _userManager.FindByIdAsync(userId);
+        await using var transaction = await _context.Database.BeginTransactionAsync();
 
-        if (user is null)
+        try
         {
-            return false;
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user is null)
+            {
+                await transaction.RollbackAsync();
+                return false;
+            }
+
+            var normalizedTenantKey = tenantKey.Trim();
+
+            var tenantId = await _context.Tenants
+                .AsNoTracking()
+                .Where(tenant => tenant.TenantKey == normalizedTenantKey)
+                .Select(tenant => (Guid?)tenant.Id)
+                .SingleOrDefaultAsync();
+
+            if (tenantId is null)
+            {
+                await transaction.RollbackAsync();
+                return false;
+            }
+
+            user.TenantId = tenantId.Value;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                await transaction.RollbackAsync();
+                return false;
+            }
+
+            await transaction.CommitAsync();
+
+            return true;
         }
-
-        var normalizedTenantKey = tenantKey.Trim();
-
-        var tenantId = await _context.Tenants
-            .AsNoTracking()
-            .Where(tenant => tenant.TenantKey == normalizedTenantKey)
-            .Select(tenant => (Guid?)tenant.Id)
-            .SingleOrDefaultAsync();
-
-        if (tenantId is null)
+        catch
         {
-            return false;
+            await transaction.RollbackAsync();
+            throw;
         }
-
-        user.TenantId = tenantId.Value;
-
-        var result = await _userManager.UpdateAsync(user);
-
-        return result.Succeeded;
     }
-
     private static IdentityResult UserNotFound()
     {
         return IdentityResult.Failed(new IdentityError
