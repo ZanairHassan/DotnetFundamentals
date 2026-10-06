@@ -7,6 +7,8 @@ public interface IUserService
 {
     Task<IList<ApplicationUser>> GetAllUsersAsync();
 
+    Task<ApplicationUser?> GetUserByIdAsync(string userId);
+
     Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password);
 
     Task<IdentityResult> AddToRoleAsync(string userId, string roleName);

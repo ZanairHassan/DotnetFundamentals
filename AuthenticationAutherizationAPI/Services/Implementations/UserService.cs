@@ -18,6 +18,12 @@ public class UserService : IUserService
     {
         return await _userManager.Users.ToListAsync();
     }
+
+    public async Task<ApplicationUser?> GetUserByIdAsync(string userId)
+    {
+        return await _userManager.FindByIdAsync(userId);
+    }
+
     public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password)
     {
         return await _userManager.CreateAsync(user, password);

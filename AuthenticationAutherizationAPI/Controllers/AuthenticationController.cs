@@ -1,5 +1,6 @@
 ﻿using AuthenticationAutherizationAPI.DTOs.Authentication;
 using AuthenticationAutherizationAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationAutherizationAPI.Controllers;
@@ -15,6 +16,7 @@ public class AuthenticationController : ControllerBase
         _signInService = signInService;
     }
 
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
@@ -30,6 +32,7 @@ public class AuthenticationController : ControllerBase
         };
     }
 
+    [AllowAnonymous]
     [HttpPost("mfaVerify")]
     public async Task<IActionResult> VerifyMfa(VerifyMfaRequest request)
     {
@@ -43,6 +46,7 @@ public class AuthenticationController : ControllerBase
         return Ok(response);
     }
 
+    [AllowAnonymous]
     [HttpPost("refresh")]
     public async Task<IActionResult> RefreshToken(RefreshTokenRequest request)
     {
@@ -59,6 +63,7 @@ public class AuthenticationController : ControllerBase
         return Ok(response);
     }
 
+    [AllowAnonymous]
     [HttpGet("GoogleLogin")]
     public IActionResult ExternalLogin([FromQuery] string provider, string returnUrl = "/")
     {
@@ -74,6 +79,7 @@ public class AuthenticationController : ControllerBase
         return Challenge(properties, provider);
     }
 
+    [AllowAnonymous]
     [HttpGet("GoogleLoginCallback")]
     public async Task<IActionResult> ExternalLoginCallback(string provider, string returnUrl = "/")
     {

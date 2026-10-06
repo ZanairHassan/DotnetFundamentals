@@ -7,6 +7,7 @@ namespace AuthenticationAutherizationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Policy = "AdminOnly")]
 public class RolesController : ControllerBase
 {
     private readonly IRoleService _roleService;
@@ -29,7 +30,6 @@ public class RolesController : ControllerBase
 
         return Ok(response);
     }
-    [Authorize]
     [HttpPost("createRole")]
     public async Task<IActionResult> CreateRole(CreateRoleRequest request)
     {
