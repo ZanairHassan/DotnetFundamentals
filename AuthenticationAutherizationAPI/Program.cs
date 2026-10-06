@@ -94,6 +94,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRefreshTokenRepository,RefreshTokenRepository>();
 builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<IMfaService, MfaService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 #endregion
 var app = builder.Build();
 
