@@ -20,9 +20,19 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("allProducts")]
-    public async Task<IActionResult> GetAllProducts()
+    public async Task<IActionResult> GetAllProducts(int pageNumber = 1, int pageSize = 7)
     {
-        var products = await _productService.GetAllProductsAsync();
+        if (pageNumber < 1)
+        {
+            return BadRequest("Page number must be greater than 0.");
+        }
+
+        if (pageSize < 1 || pageSize > 8)
+        {
+            return BadRequest("Page size must be between 1 and 8.");
+        }
+
+        var products = await _productService.GetAllProductsAsync(pageNumber, pageSize);
 
         return Ok(products);
     }
