@@ -15,4 +15,12 @@ public interface IRoleService
     Task<IdentityResult> DeleteRoleAsync(string roleId);
 
     Task<IList<AssignedRoleResponse>> GetAssignedRolesAsync();
+
+    Task<int> GetAssignedUserCountAsync(string roleId);
+
+    Task<bool> IsRoleAssignedToAnyUserAsync(string roleId);
+
+    Task<int> GetNormalAssignedUserCountAsync(string roleId);
+
+    Task<bool> IsRoleNormalAssignedToAnyUserAsync(string roleId);
 }

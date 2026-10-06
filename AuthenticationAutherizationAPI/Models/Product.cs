@@ -11,5 +11,5 @@ public class Product
     public byte[] RowVersion { get; set; } = Array.Empty<byte>();
     public DateTime UpdatedAt { get; set; }
     public Guid TenantId { get; set; }
-    public Tenant Tenant { get; set; } = null!;
-}
+    public virtual Tenant Tenant { get; set; } = null!;
+} 

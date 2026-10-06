@@ -175,4 +175,49 @@ public class ProductService : IProductService
             throw;
         }
     }
+
+    public async Task<ProductWithTenantResponse?> GetProductWithTenantEagerAsync(int id)
+    {
+        var query = _context.Products
+            .Include(p => p.Tenant)
+            .AsNoTracking()
+            .Where(p => p.Id == id)
+            .Select(p => new ProductWithTenantResponse
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                StockQuantity = p.StockQuantity,
+                TenantId = p.TenantId,
+                TenantName = p.Tenant.Name,
+                TenantKey = p.Tenant.TenantKey
+            });
+
+        Console.WriteLine(query.ToQueryString());
+
+        return await query.FirstOrDefaultAsync();
+    }
+
+    public async Task<ProductWithTenantResponse?> GetProductWithTenantLazyAsync(int id)
+    {
+        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+
+        if (product is null)
+        {
+            return null;
+        }
+
+        var tenant = product.Tenant;
+
+        return new ProductWithTenantResponse
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            StockQuantity = product.StockQuantity,
+            TenantId = product.TenantId,
+            TenantName = tenant.Name,
+            TenantKey = tenant.TenantKey
+        };
+    }
 }

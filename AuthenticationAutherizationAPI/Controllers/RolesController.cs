@@ -114,4 +114,52 @@ public class RolesController : ControllerBase
 
         return Ok(roles);
     }
+
+    [HttpGet("getAssignedUserCount/{roleId}")]
+    public async Task<IActionResult> GetAssignedUserCount(string roleId)
+    {
+        var count = await _roleService.GetAssignedUserCountAsync(roleId);
+
+        return Ok(new
+        {
+            RoleId = roleId,
+            AssignedUsersCount = count
+        });
+    }
+
+    [HttpGet("isNormalRoleAssigned/{roleId}")]
+    public async Task<IActionResult> IsNormalRoleAssigned(string roleId)
+    {
+        var isAssigned = await _roleService.IsRoleAssignedToAnyUserAsync(roleId);
+
+        return Ok(new
+        {
+            RoleId = roleId,
+            IsAssigned = isAssigned
+        });
+    }
+
+    [HttpGet("getNormalAssignedUserCount/{roleId}")]
+    public async Task<IActionResult> GetNormalAssignedUserCount(string roleId)
+    {
+        var count = await _roleService.GetAssignedUserCountAsync(roleId);
+
+        return Ok(new
+        {
+            RoleId = roleId,
+            AssignedUsersCount = count
+        });
+    }
+
+    [HttpGet("isRoleAssigned/{roleId}")]
+    public async Task<IActionResult> IsRoleAssigned(string roleId)
+    {
+        var isAssigned = await _roleService.IsRoleAssignedToAnyUserAsync(roleId);
+
+        return Ok(new
+        {
+            RoleId = roleId,
+            IsAssigned = isAssigned
+        });
+    }
 }
