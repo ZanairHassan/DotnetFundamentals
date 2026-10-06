@@ -6,5 +6,5 @@ public class ApplicationUser : IdentityUser
 {
     public Guid TenantId { get; set; }
 
-    public Tenant Tenant { get; set; } = null!;
+    public virtual Tenant Tenant { get; set; } = null!;
 }

@@ -8,7 +8,7 @@ public class RefreshToken
 
     public string UserId { get; set; } = string.Empty;
 
-    public ApplicationUser User { get; set; } = null!;
+    public virtual ApplicationUser User { get; set; } = null!;
 
     public DateTime CreatedAtUtc { get; set; }
 

@@ -75,4 +75,24 @@ public class RoleService : IRoleService
             AssignedUsersCount = x.UserCount
         }).ToList();
     }
+
+    public async Task<int> GetAssignedUserCountAsync(string roleId)
+    {
+        return await _roleManager.GetAssignedUserCountCompiledAsync(roleId);
+    }
+
+    public async Task<bool> IsRoleAssignedToAnyUserAsync(string roleId)
+    {
+        return await _roleManager.IsRoleAssignedToAnyUserCompiledAsync(roleId);
+    }
+
+    public async Task<int> GetNormalAssignedUserCountAsync(string roleId)
+    {
+        return await _roleManager.GetAssignedUserCountAsync(roleId);
+    }
+
+    public async Task<bool> IsRoleNormalAssignedToAnyUserAsync(string roleId)
+    {
+        return await _roleManager.IsRoleAssignedToAnyUserAsync(roleId);
+    }
 }
