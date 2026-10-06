@@ -18,4 +18,10 @@ public interface IProductService
     Task<ProductWithTenantResponse?> GetProductWithTenantEagerAsync(int id);
 
     Task<ProductWithTenantResponse?> GetProductWithTenantLazyAsync(int id);
+
+    Task<int> BulkUpdatePricesAsync();
+
+    Task<int> BulkDeleteProductsAsync(IReadOnlyCollection<int> productIds);
+
+    Task<int> BulkCreateProductsAsync(IReadOnlyCollection<CreateProductRequest> requests);
 }

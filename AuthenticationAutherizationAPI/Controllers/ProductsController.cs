@@ -157,5 +157,79 @@ public class ProductsController : ControllerBase
         }
 
         return Ok(product);
-    } 
+    }
+
+    #region Bulk Actions
+
+    [HttpPost("bulkCreateProducts")]
+    public async Task<IActionResult> BulkCreateProducts(IReadOnlyCollection<CreateProductRequest> requests)
+    {
+        if (requests.Count == 0)
+        {
+            return BadRequest(new
+            {
+                Message = "At least one product is required."
+            });
+        }
+
+        try
+        {
+            var createdCount = await _productService.BulkCreateProductsAsync(requests);
+
+            return Ok(new
+            {
+                Message = "Products created successfully.",
+                CreatedProducts = createdCount
+            });
+        }
+        catch (InvalidOperationException exception)
+        {
+            return BadRequest(new
+            {
+                Message = exception.Message
+            });
+        }
+    }
+
+    [HttpPut("bulkUpdatePrices")]
+    public async Task<IActionResult> BulkUpdatePrices()
+    {
+        var affectedRows = await _productService.BulkUpdatePricesAsync();
+
+        return Ok(new
+        {
+            Message = "Product prices updated successfully.",
+            AffectedProducts = affectedRows
+        });
+    }
+
+    [HttpDelete("bulkDeleteProducts")]
+    public async Task<IActionResult> BulkDeleteProducts(BulkDeleteProductsRequest request)
+    {
+        if (request.ProductIds.Count == 0)
+        {
+            return BadRequest(new
+            {
+                Message = "At least one product ID is required."
+            });
+        }
+
+        var deletedCount = await _productService.BulkDeleteProductsAsync(request.ProductIds);
+
+        if (deletedCount == 0)
+        {
+            return NotFound(new
+            {
+                Message = "No matching products were found."
+            });
+        }
+
+        return Ok(new
+        {
+            Message = "Products deleted successfully.",
+            DeletedProducts = deletedCount
+        });
+    }
+
+    #endregion
 }
