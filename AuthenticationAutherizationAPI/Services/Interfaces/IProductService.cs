@@ -14,4 +14,14 @@ public interface IProductService
 
     Task<bool> DeleteProductAsync(int id);
     Task<PurchaseProductResponse?> PurchaseProductAsync(int id);
+
+    Task<ProductWithTenantResponse?> GetProductWithTenantEagerAsync(int id);
+
+    Task<ProductWithTenantResponse?> GetProductWithTenantLazyAsync(int id);
+
+    Task<int> BulkUpdatePricesAsync();
+
+    Task<int> BulkDeleteProductsAsync(IReadOnlyCollection<int> productIds);
+
+    Task<int> BulkCreateProductsAsync(IReadOnlyCollection<CreateProductRequest> requests);
 }
