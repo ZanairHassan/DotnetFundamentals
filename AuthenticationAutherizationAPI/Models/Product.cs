@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AuthenticationAutherizationAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
 public class Product
 {
@@ -9,4 +10,6 @@ public class Product
     [Timestamp]
     public byte[] RowVersion { get; set; } = Array.Empty<byte>();
     public DateTime UpdatedAt { get; set; }
+    public Guid TenantId { get; set; }
+    public Tenant Tenant { get; set; } = null!;
 }

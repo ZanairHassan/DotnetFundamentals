@@ -295,6 +295,32 @@ Source Code Repository for Intern 1
 - Customized RoleManager with a CustomRoleManager implementation featuring custom role validation, duplicate role checks, and role deletion restrictions.
 - Added three end points into the roles controller to update, delete and get the assigned roles.
 
+## 75. Advanced concurrency
+- Add migration to create a new table 'Products'
+- Concurrency Implementation using the Product entity (implement 3optimistic concurrency in the Update Product method).
+
+## 76. Optimistic vs. Pessimistic Locking
+- Implemented Optimistic Concurrency Control in the Product entity to handle concurrent updates.
+- Added a new endpoint for purchase counter in which implement the transaction to validate the user action.
+
+## 77. Query optimization
+- Implemented query optimization techniques in the Product entity to improve performance.
+- Implemented query projection using dedicated Product response DTOs.
+- Optimized read queries with AsNoTracking() and selective column retrieval.
+- Implemented pagination for product listing with bounded page size.
+- Reviewed query performance considerations including offset pagination.
+
+## 78. Execution plans
+- Update the GetProducts method using the ToQueryString method to get the SQL query from the EF LINQ logic.
+- Execute that query in SSMS, include the actual execution plan, and then display the estimated execution plan to compare the actual and estimated plans.
+- Analyzed query plan analysis using SQL Server Management Studio (SSMS) to identify potential performance.
+
+## 79. Multi-tenant filtering
+- Added the tenants endpoint (Add the interface, then implement that interface in the tenant service using the dto's).
+- Added the tenant feature to the user (Added the endpoint to assign a user to a new tenant, using a DTO; updated the login logic to validate the tenant key as well).
+- Associate a product with a user based on the tenant key (updated the application DB context class to add the global tenant filter on products; updated the token service to add the tenantId claim).
+
+
 ## Collaborate with team
 
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/1)(on child branch 02---First-Console-Application -16-07-2026)
@@ -336,11 +362,14 @@ Source Code Repository for Intern 1
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/41)(on child branch 71-UserManager-customization -21-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/42)(on child branch 72-SignInManager-customization -22-09-2026)
 - [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/43)(on child branch 73-RoleManager-customization -23-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/44)(on child branch 75-76-Advanced-concurrency -25-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/45)(on child branch 77-Query-optimization -28-09-2026)
+- [Create a new merge request](https://gitlab.vteamslabs.com/dotnet/trainings/cmintern1/-/merge_requests/46)(on child branch 78-Execution-plans -30-09-2026)
 
 
 ## Project Structure
 ```text
-cmintern1/
+cmintern1/	
 
 ├── 📁 ArithmaticOperation/
 

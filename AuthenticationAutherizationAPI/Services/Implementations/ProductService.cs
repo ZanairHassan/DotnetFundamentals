@@ -1,9 +1,10 @@
-﻿using AuthenticationAutherizationAPI.Data;
+using AuthenticationAutherizationAPI.Data;
 using AuthenticationAutherizationAPI.DTOs.Products;
 using AuthenticationAutherizationAPI.Models;
 using AuthenticationAutherizationAPI.Services.Interfaces;
 using Azure.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AuthenticationAutherizationAPI.Services.Implementations;
 
@@ -18,23 +19,25 @@ public class ProductService : IProductService
 
     public async Task<IList<ProductResponse>> GetAllProductsAsync(int pageNumber, int pageSize)
     {
-        return await _context.Products
-            .AsNoTracking()
-            .OrderBy(p => p.Id)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .Select(p => new ProductResponse
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                StockQuantity = p.StockQuantity
-            })
-            .ToListAsync();
+        var query = _context.Products
+             .AsNoTracking()
+             .OrderBy(p => p.Id)
+             .Skip((pageNumber - 1) * pageSize)
+             .Take(pageSize)
+             .Select(p => new ProductResponse
+             {
+                 Id = p.Id,
+                 Name = p.Name,
+                 Price = p.Price,
+                 StockQuantity = p.StockQuantity,
+                 TenantId = p.TenantId
+             });
+        Console.WriteLine(query.ToQueryString());
+        return await query.ToListAsync();
     }
     public async Task<ProductResponse?> GetProductByIdAsync(int id)
     {
-        return await _context.Products
+        var query = _context.Products
             .AsNoTracking()
             .Where(p => p.Id == id)
             .Select(p => new ProductResponse
@@ -42,18 +45,30 @@ public class ProductService : IProductService
                 Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
-                StockQuantity = p.StockQuantity
-            })
-            .FirstOrDefaultAsync();
+                StockQuantity = p.StockQuantity,
+                TenantId = p.TenantId
+            });
+
+        Console.WriteLine(query.ToQueryString());
+
+        return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<Product> CreateProductAsync(CreateProductRequest request)
+    public async Task<Product?> CreateProductAsync(CreateProductRequest request)
     {
+        var tenant = await _context.Tenants.SingleOrDefaultAsync(x => x.TenantKey == request.TenantKey.Trim());
+
+        if (tenant is null)
+        {
+            return null;
+        }
+
         var product = new Product
         {
-            Name = request.Name,
+            Name = request.Name.Trim(),
             Price = request.Price,
             StockQuantity = request.StockQuantity,
+            TenantId = tenant.Id,
             UpdatedAt = DateTime.UtcNow
         };
 

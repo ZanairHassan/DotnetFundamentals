@@ -17,4 +17,6 @@ public class CreateUserRequest
     public string Password { get; set; } = string.Empty;
     [Required]
     public bool TwoFactorEnabled { get; set; }
+    [Required]
+    public string TenantKey { get; set; } = string.Empty;
 }

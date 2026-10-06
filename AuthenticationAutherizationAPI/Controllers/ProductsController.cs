@@ -53,13 +53,25 @@ public class ProductsController : ControllerBase
     [HttpPost("createProduct")]
     public async Task<IActionResult> CreateProduct(CreateProductRequest product)
     {
-        var createdProduct =
-            await _productService.CreateProductAsync(product);
+        var createdProduct = await _productService.CreateProductAsync(product);
+        if (createdProduct != null)
+        {
+            var response= new ProductResponse
+            {
+                Id = createdProduct.Id,
+                Name = createdProduct.Name,
+                Price = createdProduct.Price,
+                StockQuantity = createdProduct.StockQuantity,
+                TenantId = createdProduct.TenantId
+            };
 
-        return CreatedAtAction(
-            nameof(GetProduct),
-            new { id = createdProduct.Id },
-            createdProduct);
+            return Ok(response);
+        }
+
+        return BadRequest(new
+        {
+            Message = "The User did not created due to invalid input."
+        });
     }
 
     [HttpPut("updateProduct/{id}")]
